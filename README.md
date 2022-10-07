@@ -2,8 +2,8 @@
 
 ## Informacje
 
-**Nazwa projektu:** Dobra Konieczne: The Dungeon-crawling Videogame
-**Użyte technologie:** C++ + libtcod
+**Nazwa projektu:** Dobra Konieczne: The Dungeon-crawling Videogame  
+**Użyte technologie:** C++ + libtcod  
 
 ## Opis
 
