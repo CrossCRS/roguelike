@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "ResourceManager.hpp"
+
 class Game {
     public:
         Game();
@@ -11,7 +13,8 @@ class Game {
     private:
         sf::RenderWindow m_window;
 
-        sf::Font m_font_default;
+        ResourceManager m_resourceManager;
+        
         sf::Text m_text_test;
 
         void update();

@@ -7,6 +7,7 @@ project(Roguelike)
 find_package(SFML COMPONENTS system graphics window audio CONFIG REQUIRED)
 
 set(sources
+    "src/ResourceManager.cpp"
     "src/Game.cpp"
 	"src/main.cpp"
 )

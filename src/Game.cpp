@@ -1,17 +1,16 @@
 #include "Game.hpp"
 
 #define GAME_NAME "Roguelike"
+#define GAME_DATA_DIR "data"
 #define GAME_WIDTH 1280
 #define GAME_HEIGHT 640
 
-Game::Game() : m_window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), GAME_NAME, sf::Style::Titlebar | sf::Style::Close) {
+Game::Game() : m_window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), GAME_NAME, sf::Style::Titlebar | sf::Style::Close), m_resourceManager(GAME_DATA_DIR) {
     m_window.setFramerateLimit(60);
 
-    if (!m_font_default.loadFromFile("data/fonts/alagard_by_pix3m.ttf")) {
-        exit(1);
-    }
+    m_resourceManager.loadResources();
 
-    m_text_test.setFont(m_font_default);
+    m_text_test.setFont(m_resourceManager.getFont("default"));
     m_text_test.setCharacterSize(24);
     m_text_test.setFillColor(sf::Color::White);
     m_text_test.setPosition(100, 100);
