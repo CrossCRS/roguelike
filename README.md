@@ -27,7 +27,7 @@ Rozgrywka turowa, gracz oraz przeciwnicy poruszają się po planszy złożonej z
 
 ```
 $ git clone --recurse-submodules https://umcs.schneiderp.ovh/norbert.budzynski/roguelike.git
-$ cd chip8cpp
+$ cd roguelike
 $ ./extern/vcpkg/bootstrap-vcpkg.sh
 $ cmake -G Ninja -B build -S . -DCMAKE_TOOLCHAIN_FILE=extern/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE:STRING=Release
 $ cmake --build build/
