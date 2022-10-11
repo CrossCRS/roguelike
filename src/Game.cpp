@@ -22,11 +22,11 @@ Game::Game() : m_window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), GAME_NAME, sf::S
     m_text_test.setPosition(10, 10);
     m_text_test.setString("Test test test!");
 
-    m_player = std::make_unique<Player>(0, m_resourceManager);
-    m_player->setPosition(0, 0);
+    m_entityManager.insertEntity(std::make_shared<Player>(0, m_resourceManager));
 
     // Center camera on player
-    m_worldView.setCenter(sf::Vector2f(m_player->getPosition().x + 16.f, m_player->getPosition().y + 16.f));
+    auto player = m_entityManager.getEntity(0);
+    m_worldView.setCenter(sf::Vector2f(player->getPosition().x + 16.f, player->getPosition().y + 16.f));
 }
 
 void Game::run() {
@@ -34,8 +34,12 @@ void Game::run() {
         sf::Event event;
 
         while (m_window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                m_window.close();
+            switch (event.type) {
+                case sf::Event::Closed:
+                    m_window.close();
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -54,7 +58,7 @@ void Game::draw() {
 
     // WORLD
     m_window.setView(m_worldView);
-    m_window.draw(*m_player);
+    m_window.draw(*(m_entityManager.getEntity(0)));
 
     // GUI
     m_window.setView(m_window.getDefaultView());

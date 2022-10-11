@@ -10,8 +10,6 @@ class Entity : public sf::Drawable, public sf::Transformable {
             m_vertices.setPrimitiveType(sf::TriangleStrip);
             m_vertices.resize(4);
 
-            dimmed = false;
-
             // All sprites are 32x32
             m_vertices[0].position = sf::Vector2f(32.f, 0.f);
             m_vertices[1].position = sf::Vector2f(0.f, 0.f);
@@ -23,6 +21,16 @@ class Entity : public sf::Drawable, public sf::Transformable {
             m_vertices[2].texCoords = sf::Vector2f(32.f, 32.f);
             m_vertices[3].texCoords = sf::Vector2f(0.f, 32.f);
 
+            setDimmed(false);
+        }
+
+        inline int getId() { return id; }
+        inline void setId(int _id) { id = _id; }
+
+        inline bool isDimmed() { return dimmed; }
+        inline void setDimmed(bool _dimmed) { 
+            dimmed = _dimmed;
+
             // Might be useful for FOV? Eventually...
             if (dimmed) {
                 m_vertices[0].color = sf::Color(64, 64, 64);
@@ -31,12 +39,6 @@ class Entity : public sf::Drawable, public sf::Transformable {
                 m_vertices[3].color = sf::Color(64, 64, 64);
             }
         }
-
-        inline int getId() { return id; }
-        inline void setId(int _id) { id = _id; }
-
-        inline bool isDimmed() { return dimmed; }
-        inline void setDimmed(bool _dimmed) { dimmed = _dimmed; }
 
         virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const {
             states.transform *= getTransform();

@@ -10,8 +10,10 @@ ResourceManager::ResourceManager(const std::string& dataDirectory) : m_dataDir(d
 void ResourceManager::loadResources() {
     printf("[ResourceManager] Loading fonts\n");
     this->loadFonts();
+    printf("[ResourceManager] Loaded %d fonts\n", m_fonts.size());
     printf("[ResourceManager] Loading textures\n");
     this->loadTextures();
+    printf("[ResourceManager] Loaded %d textures\n", m_textures.size());
 }
 
 // FONTS

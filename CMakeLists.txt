@@ -7,9 +7,10 @@ project(Roguelike)
 find_package(SFML COMPONENTS system graphics window audio CONFIG REQUIRED)
 
 set(sources
+    "src/EntityManager.cpp"
     "src/ResourceManager.cpp"
     "src/Game.cpp"
-	"src/main.cpp"
+    "src/main.cpp"
 )
 
 add_executable(${PROJECT_NAME} ${sources})
