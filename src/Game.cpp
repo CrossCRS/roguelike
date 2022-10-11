@@ -50,7 +50,7 @@ void Game::update() {
 }
 
 void Game::draw() {
-    m_window.clear();
+    m_window.clear(sf::Color(64, 64, 64));
 
     // WORLD
     m_window.setView(m_worldView);

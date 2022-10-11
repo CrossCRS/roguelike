@@ -7,19 +7,19 @@ class Entity : public sf::Drawable, public sf::Transformable {
     public:
         Entity(int id, const std::string& textureName, ResourceManager& resourceManager) : m_resourceManager(resourceManager), id(id) { 
             m_texture = m_resourceManager.getTexture(textureName);
-            m_vertices.setPrimitiveType(sf::Quads);
+            m_vertices.setPrimitiveType(sf::TriangleStrip);
             m_vertices.resize(4);
 
             dimmed = false;
 
             // All sprites are 32x32
-            m_vertices[0].position = sf::Vector2f(0.f, 0.f);
-            m_vertices[1].position = sf::Vector2f(32.f, 0.f);
+            m_vertices[0].position = sf::Vector2f(32.f, 0.f);
+            m_vertices[1].position = sf::Vector2f(0.f, 0.f);
             m_vertices[2].position = sf::Vector2f(32.f, 32.f);
             m_vertices[3].position = sf::Vector2f(0.f, 32.f);
 
-            m_vertices[0].texCoords = sf::Vector2f(0.f, 0.f);
-            m_vertices[1].texCoords = sf::Vector2f(32.f, 0.f);
+            m_vertices[0].texCoords = sf::Vector2f(32.f, 0.f);
+            m_vertices[1].texCoords = sf::Vector2f(0.f, 0.f);
             m_vertices[2].texCoords = sf::Vector2f(32.f, 32.f);
             m_vertices[3].texCoords = sf::Vector2f(0.f, 32.f);
 
