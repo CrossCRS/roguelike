@@ -1,9 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+#include <filesystem>
 #include <unordered_map>
 #include <string>
 #include <memory>
+
+#include <iostream>
 
 class ResourceManager {
     public:
@@ -11,14 +14,18 @@ class ResourceManager {
 
         void loadResources();
 
-        sf::Font& getFont(const std::string& name);
+        std::shared_ptr<sf::Font> getFont(const std::string& name);
+        std::shared_ptr<sf::Texture> getTexture(const std::string& name);
 
     private:
-        std::string m_dataDir;
+        const std::string m_dataDir;
 
         void loadFonts();
+        void loadTextures();
         
         bool addFont(const std::string& name, const std::string& path);
+        bool addTexture(const std::string& name, const std::string& path);
 
-        std::unordered_map<std::string, std::unique_ptr<sf::Font>> m_fonts;
+        std::unordered_map<std::string, std::shared_ptr<sf::Font>> m_fonts;
+        std::unordered_map<std::string, std::shared_ptr<sf::Texture>> m_textures;
 };
