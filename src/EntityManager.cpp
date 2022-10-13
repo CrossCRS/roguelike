@@ -37,3 +37,7 @@ void EntityManager::removeEntity(int id) {
 int EntityManager::count() {
     return m_entities.size();
 }
+
+const std::unordered_map<int, std::shared_ptr<Entity>>& EntityManager::getAllEntities() {
+    return m_entities;
+}

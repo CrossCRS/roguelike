@@ -5,7 +5,7 @@
 
 class Entity : public sf::Drawable, public sf::Transformable {
     public:
-        Entity(int id, const std::string& textureName, ResourceManager& resourceManager) : m_resourceManager(resourceManager), id(id) { 
+        Entity(int id, const std::string& textureName, ResourceManager& resourceManager) : id(id), m_resourceManager(resourceManager) { 
             m_texture = m_resourceManager.getTexture(textureName);
             m_vertices.setPrimitiveType(sf::TriangleStrip);
             m_vertices.resize(4);

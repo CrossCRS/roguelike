@@ -9,6 +9,8 @@ class EntityManager {
         void removeEntity(std::shared_ptr<Entity> entity);
         void removeEntity(int id);
 
+        const std::unordered_map<int, std::shared_ptr<Entity>>& getAllEntities();
+
         int count();
     private:
         std::unordered_map<int, std::shared_ptr<Entity>> m_entities;

@@ -58,7 +58,10 @@ void Game::draw() {
 
     // WORLD
     m_window.setView(m_worldView);
-    m_window.draw(*(m_entityManager.getEntity(0)));
+
+    for (auto const& [id, entity] : m_entityManager.getAllEntities()) {
+        m_window.draw(*(entity));
+    }
 
     // GUI
     m_window.setView(m_window.getDefaultView());

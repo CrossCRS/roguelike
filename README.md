@@ -34,5 +34,5 @@ $ cmake --build build/
 ```
 
 ## Licencje
-Użyty font: [Alagard by Pix3M](https://www.deviantart.com/pix3m/art/Bitmap-font-Alagard-381110713) - CC BY 3.0
-[Dungeon Crawl Stone Soup](http://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental)
+Użyty font: [Alagard by Pix3M](https://www.deviantart.com/pix3m/art/Bitmap-font-Alagard-381110713) - CC BY 3.0  
+Tekstury: [Dungeon Crawl Stone Soup](http://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental)
