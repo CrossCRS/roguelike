@@ -10,10 +10,10 @@ ResourceManager::ResourceManager(const std::string& dataDirectory) : m_dataDir(d
 void ResourceManager::loadResources() {
     printf("[ResourceManager] Loading fonts\n");
     this->loadFonts();
-    printf("[ResourceManager] Loaded %d fonts\n", m_fonts.size());
+    printf("[ResourceManager] Loaded %lu fonts\n", m_fonts.size());
     printf("[ResourceManager] Loading textures\n");
     this->loadTextures();
-    printf("[ResourceManager] Loaded %d textures\n", m_textures.size());
+    printf("[ResourceManager] Loaded %lu textures\n", m_textures.size());
 }
 
 // FONTS
@@ -62,7 +62,7 @@ void ResourceManager::loadTextures() {
     for (const auto& dir_entry : fs::recursive_directory_iterator(m_dataDir + "/textures/")) {
         if (dir_entry.is_regular_file() && dir_entry.path().extension() == ".png") {
             auto path = dir_entry.path();
-            this->addTexture(path.filename().replace_extension(""), path);
+            this->addTexture(path.filename().replace_extension("").u8string(), path.u8string());
         }
     }
 }
