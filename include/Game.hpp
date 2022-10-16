@@ -1,12 +1,11 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-
-#include <iostream>
-
+#include "Entities/Player.hpp"
 #include "System/EntityManager.hpp"
 #include "System/ResourceManager.hpp"
-#include "Entities/Player.hpp"
 #include "TileMap.hpp"
+
+#include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Game {
     public:

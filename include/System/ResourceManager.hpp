@@ -1,12 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
 #include <filesystem>
-#include <unordered_map>
-#include <string>
-#include <memory>
-
 #include <iostream>
+#include <memory>
+#include <string>
+#include <unordered_map>
 
 class ResourceManager {
     public:

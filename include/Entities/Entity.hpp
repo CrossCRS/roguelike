@@ -1,6 +1,6 @@
 #pragma once
-
 #include "System/ResourceManager.hpp"
+
 #include <SFML/Graphics.hpp>
 
 // TODO: Pass texture shared_ptr instead of ResourceManager?
