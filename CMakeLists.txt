@@ -9,6 +9,7 @@ find_package(SFML COMPONENTS system graphics window audio CONFIG REQUIRED)
 set(sources
     "src/EntityManager.cpp"
     "src/ResourceManager.cpp"
+    "src/TileMap.cpp"
     "src/Game.cpp"
     "src/main.cpp"
 )

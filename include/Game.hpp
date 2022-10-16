@@ -3,9 +3,10 @@
 
 #include <iostream>
 
-#include "EntityManager.hpp"
-#include "ResourceManager.hpp"
-#include "Player.hpp"
+#include "System/EntityManager.hpp"
+#include "System/ResourceManager.hpp"
+#include "Entities/Player.hpp"
+#include "TileMap.hpp"
 
 class Game {
     public:
@@ -16,11 +17,14 @@ class Game {
         sf::RenderWindow m_window;
         sf::View m_worldView;
 
-        EntityManager m_entityManager;
-        ResourceManager m_resourceManager;
+        std::unique_ptr<EntityManager> m_entityManager;
+        std::unique_ptr<ResourceManager> m_resourceManager;
         
+        std::unique_ptr<TileMap> m_tilemap;
+
         sf::Text m_text_test;
 
         void update();
+        void processTurn();
         void draw();
 };

@@ -1,4 +1,4 @@
-#include "EntityManager.hpp"
+#include "System/EntityManager.hpp"
 
 void EntityManager::insertEntity(std::shared_ptr<Entity> entity) {
     auto it = m_entities.find(entity->getId());
