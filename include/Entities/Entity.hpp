@@ -29,10 +29,10 @@ class Entity : public sf::Drawable, public sf::Transformable {
             setDimmed(false);
         }
 
-        inline int getId() { return id; }
+        inline int getId() const { return id; }
         inline void setId(int _id) { id = _id; }
 
-        inline bool isDimmed() { return dimmed; }
+        inline bool isDimmed() const { return dimmed; }
         inline void setDimmed(bool _dimmed) { 
             dimmed = _dimmed;
 
@@ -45,7 +45,7 @@ class Entity : public sf::Drawable, public sf::Transformable {
             }
         }
 
-        virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const {
+        void draw(sf::RenderTarget &target, sf::RenderStates states) const override {
             states.transform *= getTransform();
             states.texture = m_texture.get();
             target.draw(m_vertices, states);

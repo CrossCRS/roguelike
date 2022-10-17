@@ -5,14 +5,14 @@ TileMap::TileMap(std::shared_ptr<sf::Texture> tileset) : m_tileset(tileset) {
 }
 
 // Load a simple map from int array (for testing)
-void TileMap::loadFromArray(const int* map, uint width, uint height) {
-    this->width = width;
-    this->height = height;
+void TileMap::loadFromArray(const int* map, unsigned int _width, unsigned int _height) {
+    this->width = _width;
+    this->height = _height;
 
     m_tiles.resize(width * height);
 
-    for (uint i = 0; i < width; ++i) {
-        for (uint j = 0; j < height; ++j) {
+    for (unsigned int i = 0; i < width; ++i) {
+        for (unsigned int j = 0; j < height; ++j) {
             std::unique_ptr<Tile> tile = nullptr;
             
             switch (map[i + j * width]) {
@@ -35,15 +35,15 @@ void TileMap::updateVertexArray() {
     m_vertices.setPrimitiveType(sf::Triangles);
     m_vertices.resize(width * height * 6);
 
-    for (uint i = 0; i < width; ++i) {
-        for (uint j = 0; j < height; ++j) {
+    for (unsigned int i = 0; i < width; ++i) {
+        for (unsigned int j = 0; j < height; ++j) {
             if (m_tiles[i + j * width] == nullptr) {
                 continue;
             }
 
             // Get texture position
-            uint tu = m_tiles[i + j * width]->getTextureId() % (m_tileset->getSize().x / 32);
-            uint tv = m_tiles[i + j * width]->getTextureId() / (m_tileset->getSize().x / 32);
+            unsigned int tu = m_tiles[i + j * width]->getTextureId() % (m_tileset->getSize().x / 32);
+            unsigned int tv = m_tiles[i + j * width]->getTextureId() / (m_tileset->getSize().x / 32);
 
             sf::Vertex* triangle = &m_vertices[(i + j * width) * 6];
 

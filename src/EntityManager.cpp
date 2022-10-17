@@ -10,7 +10,7 @@ void EntityManager::insertEntity(std::shared_ptr<Entity> entity) {
     m_entities.emplace(entity->getId(), std::move(entity));
 }
 
-std::shared_ptr<Entity> EntityManager::getEntity(int id) {
+std::shared_ptr<Entity> EntityManager::getEntity(int id) const {
     auto it = m_entities.find(id);
 
     if (it == m_entities.end()) {
@@ -20,7 +20,7 @@ std::shared_ptr<Entity> EntityManager::getEntity(int id) {
     return it->second;
 }
 
-void EntityManager::removeEntity(std::shared_ptr<Entity> entity) {
+void EntityManager::removeEntity(const std::shared_ptr<Entity>& entity) {
     removeEntity(entity->getId());
 }
 
@@ -34,10 +34,10 @@ void EntityManager::removeEntity(int id) {
     m_entities.erase(id);
 }
 
-int EntityManager::count() {
+size_t EntityManager::count() {
     return m_entities.size();
 }
 
-const std::unordered_map<int, std::shared_ptr<Entity>>& EntityManager::getAllEntities() {
+const std::unordered_map<int, std::shared_ptr<Entity>>& EntityManager::getAllEntities() const {
     return m_entities;
 }

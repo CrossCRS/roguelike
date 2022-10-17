@@ -3,7 +3,7 @@
 namespace fs = std::filesystem;
 
 // TODO: Templates?
-ResourceManager::ResourceManager(const std::string& dataDirectory) : m_dataDir(dataDirectory) {
+ResourceManager::ResourceManager(std::string dataDirectory) : m_dataDir(std::move(dataDirectory)) {
 
 }
 
@@ -34,7 +34,7 @@ void ResourceManager::loadFonts() {
     this->addFont("default", "alagard_by_pix3m.ttf");
 }
 
-std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string& name) {
+std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string& name) const {
     auto it = m_fonts.find(name);
 
     if (it == m_fonts.end()) {
@@ -61,13 +61,13 @@ bool ResourceManager::addTexture(const std::string& name, const std::string& pat
 void ResourceManager::loadTextures() {
     for (const auto& dir_entry : fs::recursive_directory_iterator(m_dataDir + "/textures/")) {
         if (dir_entry.is_regular_file() && dir_entry.path().extension() == ".png") {
-            auto path = dir_entry.path();
-            this->addTexture(path.filename().replace_extension("").u8string(), path.u8string());
+            const auto& path = dir_entry.path();
+            this->addTexture(path.filename().replace_extension("").string(), path.string());
         }
     }
 }
 
-std::shared_ptr<sf::Texture> ResourceManager::getTexture(const std::string& name) {
+std::shared_ptr<sf::Texture> ResourceManager::getTexture(const std::string& name) const {
     auto it = m_textures.find(name);
 
     if (it == m_textures.end()) {

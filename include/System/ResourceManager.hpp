@@ -8,12 +8,12 @@
 
 class ResourceManager {
     public:
-        ResourceManager(const std::string& dataDirectory);
+        ResourceManager(std::string dataDirectory);
 
         void loadResources();
 
-        std::shared_ptr<sf::Font> getFont(const std::string& name);
-        std::shared_ptr<sf::Texture> getTexture(const std::string& name);
+        std::shared_ptr<sf::Font> getFont(const std::string& name) const;
+        std::shared_ptr<sf::Texture> getTexture(const std::string& name) const;
 
     private:
         const std::string m_dataDir;
