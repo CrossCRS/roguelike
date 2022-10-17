@@ -38,6 +38,9 @@ Game::Game() : m_window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), GAME_NAME, sf::S
     m_text_test.setString("Test test test!");
 
     m_entityManager->insertEntity(std::make_shared<Player>(0, *m_resourceManager));
+
+    m_player = std::dynamic_pointer_cast<Player>(m_entityManager->getEntity(0));
+    m_player->setPosition(160.f, 64.f);
 }
 
 void Game::run() {
@@ -48,6 +51,9 @@ void Game::run() {
             switch (event.type) {
                 case sf::Event::Closed:
                     m_window.close();
+                    break;
+                case sf::Event::KeyPressed:
+                    handleInput(event.key.code);
                     break;
                 default:
                     break;
@@ -62,12 +68,25 @@ void Game::run() {
 
 void Game::update() {
     // Center camera on player
-    auto player = m_entityManager->getEntity(0);
-    m_worldView.setCenter(sf::Vector2f(player->getPosition().x + 16.f, player->getPosition().y + 16.f));
+    m_worldView.setCenter(sf::Vector2f(m_player->getPosition().x + 16.f, m_player->getPosition().y + 16.f));
+
+    // Show testing stuff (std::format when?)
+    snprintf(m_text_test_buff, sizeof(m_text_test_buff), "POS: [x=%.1f, y=%.1f]\nENT: %zu\nMAP: %dx%d [V=%zu]",
+             m_player->getPosition().x, m_player->getPosition().y,
+             m_entityManager->count(),
+             m_tilemap->getWidth(), m_tilemap->getHeight(), m_tilemap->getVertices());
+    m_text_test.setString(m_text_test_buff);
 }
 
 void Game::processTurn() {
 
+}
+
+void Game::handleInput(sf::Keyboard::Key key) {
+    switch (key) {
+        default:
+            break;
+    }
 }
 
 void Game::draw() {

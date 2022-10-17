@@ -21,9 +21,13 @@ class Game {
         
         std::unique_ptr<TileMap> m_tilemap;
 
+        std::shared_ptr<Player> m_player;
+
+        char m_text_test_buff[255];
         sf::Text m_text_test;
 
         void update();
         void processTurn();
+        void handleInput(sf::Keyboard::Key key);
         void draw();
 };
