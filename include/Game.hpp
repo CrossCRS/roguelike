@@ -1,4 +1,5 @@
 #pragma once
+#include "Constants.hpp"
 #include "Entities/Player.hpp"
 #include "System/EntityManager.hpp"
 #include "System/ResourceManager.hpp"

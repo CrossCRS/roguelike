@@ -1,10 +1,5 @@
 #include "Game.hpp"
 
-#define GAME_NAME "Roguelike"
-#define GAME_DATA_DIR "data"
-#define GAME_WIDTH 1280
-#define GAME_HEIGHT 640
-
 const int map[] = {
     0, 0, 0, 1, 1, 1, 1, 1,
     0, 0, 0, 1, 0, 0, 0, 1,
@@ -13,12 +8,12 @@ const int map[] = {
     1, 1, 1, 1, 1, 1, 1, 1,
 };
 
-Game::Game() : m_window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), GAME_NAME, sf::Style::Titlebar | sf::Style::Close) {
+Game::Game() : m_window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEIGHT), Constants::GAME_NAME, sf::Style::Titlebar | sf::Style::Close) {
     m_window.setFramerateLimit(60);
 
     m_entityManager = std::make_unique<EntityManager>();
 
-    m_resourceManager = std::make_unique<ResourceManager>(GAME_DATA_DIR);
+    m_resourceManager = std::make_unique<ResourceManager>(Constants::GAME_DATA_DIR);
     m_resourceManager->loadResources();
 
     // Setup map
@@ -27,7 +22,7 @@ Game::Game() : m_window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), GAME_NAME, sf::S
     m_tilemap->updateVertexArray();
 
     // Setup world camera
-    m_worldView.reset(sf::FloatRect(0.f, 0.f, GAME_WIDTH, GAME_HEIGHT));
+    m_worldView.reset(sf::FloatRect(0.f, 0.f, Constants::GAME_WIDTH, Constants::GAME_HEIGHT));
     m_worldView.zoom(0.5f);
     m_window.setView(m_worldView);
 
@@ -40,7 +35,7 @@ Game::Game() : m_window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), GAME_NAME, sf::S
     m_entityManager->insertEntity(std::make_shared<Player>(0, *m_resourceManager));
 
     m_player = std::dynamic_pointer_cast<Player>(m_entityManager->getEntity(0));
-    m_player->setPosition(160.f, 64.f);
+    m_player->setGridPosition(5, 2);
 }
 
 void Game::run() {
@@ -68,11 +63,12 @@ void Game::run() {
 
 void Game::update() {
     // Center camera on player
-    m_worldView.setCenter(sf::Vector2f(m_player->getPosition().x + 16.f, m_player->getPosition().y + 16.f));
+    m_worldView.setCenter(sf::Vector2f(m_player->getPosition().x + (Constants::GRID_SIZE / 2), m_player->getPosition().y + (Constants::GRID_SIZE / 2)));
 
     // Show testing stuff (std::format when?)
-    snprintf(m_text_test_buff, sizeof(m_text_test_buff), "POS: [x=%.1f, y=%.1f]\nENT: %zu\nMAP: %dx%d [V=%zu]",
+    snprintf(m_text_test_buff, sizeof(m_text_test_buff), "POS: [x=%.1f, y=%.1f] [gx=%d, gy=%d]\nENT: %zu\nMAP: %dx%d [V=%zu]",
              m_player->getPosition().x, m_player->getPosition().y,
+             m_player->getGridPosition().x, m_player->getGridPosition().y,
              m_entityManager->count(),
              m_tilemap->getWidth(), m_tilemap->getHeight(), m_tilemap->getVertices());
     m_text_test.setString(m_text_test_buff);

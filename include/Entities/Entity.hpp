@@ -1,4 +1,5 @@
 #pragma once
+#include "Constants.hpp"
 #include "System/ResourceManager.hpp"
 
 #include <SFML/Graphics.hpp>
@@ -6,28 +7,7 @@
 // TODO: Pass texture shared_ptr instead of ResourceManager?
 class Entity : public sf::Drawable, public sf::Transformable {
     public:
-        Entity(int id, const std::string& textureName, ResourceManager& resourceManager) : id(id), m_resourceManager(resourceManager) { 
-            m_texture = m_resourceManager.getTexture(textureName);
-            m_vertices.setPrimitiveType(sf::Triangles);
-            m_vertices.resize(6);
-
-            // All sprites are 32x32
-            m_vertices[0].position = sf::Vector2f(0.f, 0.f);
-            m_vertices[1].position = sf::Vector2f(32.f, 0.f);
-            m_vertices[2].position = sf::Vector2f(32.f, 32.f);
-            m_vertices[3].position = sf::Vector2f(0.f, 0.f);
-            m_vertices[4].position = sf::Vector2f(0.f, 32.f);
-            m_vertices[5].position = sf::Vector2f(32.f, 32.f);
-
-            m_vertices[0].texCoords = sf::Vector2f(0.f, 0.f);
-            m_vertices[1].texCoords = sf::Vector2f(32.f, 0.f);
-            m_vertices[2].texCoords = sf::Vector2f(32.f, 32.f);
-            m_vertices[3].texCoords = sf::Vector2f(0.f, 0.f);
-            m_vertices[4].texCoords = sf::Vector2f(0.f, 32.f);
-            m_vertices[5].texCoords = sf::Vector2f(32.f, 32.f);
-
-            setDimmed(false);
-        }
+        Entity(int id, const std::string& textureName, ResourceManager& resourceManager);
 
         inline int getId() const { return id; }
         inline void setId(int _id) { id = _id; }
@@ -45,11 +25,11 @@ class Entity : public sf::Drawable, public sf::Transformable {
             }
         }
 
-        void draw(sf::RenderTarget &target, sf::RenderStates states) const override {
-            states.transform *= getTransform();
-            states.texture = m_texture.get();
-            target.draw(m_vertices, states);
-        }
+        void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+
+        sf::Vector2i getGridPosition() const;
+        void setGridPosition(const sf::Vector2i& pos);
+        void setGridPosition(int x, int y);
 
     protected:
         int id;
