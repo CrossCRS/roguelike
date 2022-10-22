@@ -1,13 +1,5 @@
 #include "Game.hpp"
 
-const int map[] = {
-    0, 0, 0, 1, 1, 1, 1, 1,
-    0, 0, 0, 1, 0, 0, 0, 1,
-    0, 0, 0, 0, 0, 0, 0, 1,
-    0, 0, 0, 1, 0, 0, 0, 1,
-    1, 1, 1, 1, 1, 1, 1, 1,
-};
-
 Game::Game() : m_window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEIGHT), Constants::GAME_NAME, sf::Style::Titlebar | sf::Style::Close) {
     m_window.setFramerateLimit(60);
 
@@ -18,7 +10,15 @@ Game::Game() : m_window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEI
 
     // Setup map
     m_tilemap = std::make_unique<TileMap>(m_resourceManager->getTexture("tilemap0"));
-    m_tilemap->loadFromArray(map, 8, 5);
+    const int map_w = 15;
+    const int map_h = 7;
+    int map_empty[map_w * map_h];
+    for (int i = 0; i < map_w; i++) {
+        for (int j = 0; j < map_h; j++) {
+            map_empty[i + j * map_w] = (i == 0 || i == map_w - 1 || j == 0 || j == map_h - 1) ? 1 : 0;
+        }
+    }
+    m_tilemap->loadFromArray(map_empty, map_w, map_h);
     m_tilemap->updateVertexArray();
 
     // Setup world camera
@@ -35,7 +35,7 @@ Game::Game() : m_window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEI
     m_entityManager->insertEntity(std::make_shared<Player>(0, *m_resourceManager));
 
     m_player = std::dynamic_pointer_cast<Player>(m_entityManager->getEntity(0));
-    m_player->setGridPosition(5, 2);
+    m_player->setGridPosition(map_w / 2, map_h / 2);
 }
 
 void Game::run() {
