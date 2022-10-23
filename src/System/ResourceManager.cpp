@@ -32,6 +32,7 @@ bool ResourceManager::addFont(const std::string& name, const std::string& filena
 
 void ResourceManager::loadFonts() {
     this->addFont("default", "alagard_by_pix3m.ttf");
+    this->addFont("mono", "NotoMono-Regular.ttf");
 }
 
 std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string& name) const {

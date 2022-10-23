@@ -26,8 +26,8 @@ Game::Game() : m_window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEI
     m_worldView.zoom(0.5f);
     m_window.setView(m_worldView);
 
-    m_text_test.setFont(*m_resourceManager->getFont("default"));
-    m_text_test.setCharacterSize(16);
+    m_text_test.setFont(*m_resourceManager->getFont("mono"));
+    m_text_test.setCharacterSize(15);
     m_text_test.setFillColor(sf::Color::White);
     m_text_test.setPosition(10, 10);
     m_text_test.setString("Test test test!");
