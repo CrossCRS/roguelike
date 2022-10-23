@@ -2,11 +2,11 @@
 
 class Tile {
     public:
-        Tile(unsigned int textureId, bool isImpenetrable = false) : m_textureId(textureId), m_isImpenetrable(isImpenetrable) { }
+        explicit Tile(unsigned int textureId, bool isImpenetrable = false) : m_textureId(textureId), m_isImpenetrable(isImpenetrable) { }
         
-        unsigned int getTextureId() const { return m_textureId; }
-        bool isImpenetrable() const { return m_isImpenetrable; }
-        bool isVisible() const { return true; } // Może kiedyś
+        inline unsigned int getTextureId() const { return m_textureId; }
+        inline bool isImpenetrable() const { return m_isImpenetrable; }
+        inline bool isVisible() const { return true; } // Może kiedyś
     private:
         unsigned int m_textureId;
         bool m_isImpenetrable;

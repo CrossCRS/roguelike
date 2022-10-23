@@ -8,7 +8,7 @@
 
 class ResourceManager {
     public:
-        ResourceManager(std::string dataDirectory);
+        explicit ResourceManager(std::string dataDirectory);
 
         void loadResources();
 

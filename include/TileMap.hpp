@@ -7,12 +7,14 @@
 
 class TileMap : public sf::Drawable, public sf::Transformable {
     public:
-        TileMap(std::shared_ptr<sf::Texture> tileset);
+        explicit TileMap(std::shared_ptr<sf::Texture> tileset);
+
         void loadFromArray(const int* map, unsigned int _width, unsigned int _height);
         void updateVertexArray();
-        unsigned int getWidth() const { return width; }
-        unsigned int getHeight() const { return height; }
-        size_t getVertices() const { return m_vertices.getVertexCount(); }
+
+        inline unsigned int getWidth() const { return width; }
+        inline unsigned int getHeight() const { return height; }
+        inline size_t getVertices() const { return m_vertices.getVertexCount(); }
 
     private:
         unsigned int width;
