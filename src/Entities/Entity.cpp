@@ -38,5 +38,5 @@ void Entity::setGridPosition(const sf::Vector2i& pos) {
 }
 
 void Entity::setGridPosition(int x, int y) {
-    this->setPosition(sf::Vector2f(x * Constants::GRID_SIZE, y * Constants::GRID_SIZE));
+    this->setPosition(sf::Vector2f((float)(x * Constants::GRID_SIZE), (float)(y * Constants::GRID_SIZE)));
 }

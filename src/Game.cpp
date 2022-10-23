@@ -80,6 +80,9 @@ void Game::processTurn() {
 
 void Game::handleInput(sf::Keyboard::Key key) {
     switch (key) {
+        case sf::Keyboard::Escape:
+            m_window.close();
+            break;
         default:
             break;
     }
