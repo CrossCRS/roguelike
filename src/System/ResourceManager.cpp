@@ -1,6 +1,7 @@
 #include "System/ResourceManager.hpp"
 
 namespace fs = std::filesystem;
+using json = nlohmann::json;
 
 // TODO: Templates?
 ResourceManager::ResourceManager(std::string dataDirectory) : m_dataDir(std::move(dataDirectory)) {
@@ -31,8 +32,17 @@ bool ResourceManager::addFont(const std::string& name, const std::string& filena
 }
 
 void ResourceManager::loadFonts() {
-    this->addFont("default", "alagard_by_pix3m.ttf");
-    this->addFont("mono", "NotoMono-Regular.ttf");
+    std::ifstream fontsConfig(m_dataDir + "/fonts/fonts.json");
+    if (!fontsConfig.good()) {
+        printf("[ResourceManager] Couldn't load fonts.json\n");
+        return;
+    }
+
+    json data = json::parse(fontsConfig);
+
+    for (auto& fontEntry : data) {
+        this->addFont(fontEntry["name"].get<std::string>(), fontEntry["filename"].get<std::string>());
+    }
 }
 
 std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string& name) const {
