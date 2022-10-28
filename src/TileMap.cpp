@@ -73,6 +73,9 @@ void TileMap::updateVertexArray() {
 }
 
 Tile &TileMap::getTile(sf::Vector2i pos) const {
+    if (pos.x < 0 || pos.y < 0 || static_cast<unsigned int>(pos.x) > width - 1 || static_cast<unsigned int>(pos.y) > height - 1) {
+        throw std::invalid_argument("Map position out of bounds");
+    }
     return *tiles[pos.x + pos.y * width];
 }
 
