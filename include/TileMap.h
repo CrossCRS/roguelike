@@ -14,9 +14,9 @@ public:
 
     void updateVertexArray();
 
-    inline unsigned int getWidth() const { return width; }
-    inline unsigned int getHeight() const { return height; }
-    inline size_t getVertices() const { return vertices.getVertexCount(); }
+    unsigned int getWidth() const { return width; }
+    unsigned int getHeight() const { return height; }
+    size_t getVertices() const { return vertices.getVertexCount(); }
 
 private:
     unsigned int width;

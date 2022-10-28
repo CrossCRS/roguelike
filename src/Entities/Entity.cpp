@@ -30,7 +30,7 @@ void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 }
 
 sf::Vector2i Entity::getGridPosition() const {
-    return {(int) (this->getPosition().x / Constants::GRID_SIZE), (int) (this->getPosition().y / Constants::GRID_SIZE)};
+    return {static_cast<int>(this->getPosition().x / Constants::GRID_SIZE), static_cast<int>(this->getPosition().y / Constants::GRID_SIZE)};
 }
 
 void Entity::setGridPosition(const sf::Vector2i &pos) {
@@ -38,5 +38,5 @@ void Entity::setGridPosition(const sf::Vector2i &pos) {
 }
 
 void Entity::setGridPosition(int x, int y) {
-    this->setPosition(sf::Vector2f((float) (x * Constants::GRID_SIZE), (float) (y * Constants::GRID_SIZE)));
+    this->setPosition(sf::Vector2f(static_cast<float>(x * Constants::GRID_SIZE), static_cast<float>(y * Constants::GRID_SIZE)));
 }

@@ -10,8 +10,8 @@ Game::Game() : window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEIGH
 
     // Setup map
     tilemap = std::make_unique<TileMap>(resourceManager->getTexture("tilemap0"));
-    const int map_w = 15;
-    const int map_h = 7;
+    constexpr int map_w = 15;
+    constexpr int map_h = 7;
     int map_empty[map_w * map_h];
     for (int i = 0; i < map_w; i++) {
         for (int j = 0; j < map_h; j++) {

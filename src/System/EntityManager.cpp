@@ -34,7 +34,7 @@ void EntityManager::removeEntity(int id) {
     entities.erase(id);
 }
 
-size_t EntityManager::count() {
+size_t EntityManager::count() const {
     return entities.size();
 }
 

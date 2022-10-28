@@ -47,16 +47,16 @@ void TileMap::updateVertexArray() {
 
             sf::Vertex *triangle = &vertices[(i + j * width) * 6];
 
-            triangle[0].position = sf::Vector2f((float) (i * Constants::GRID_SIZE), (float) (j * Constants::GRID_SIZE));
-            triangle[1].position = sf::Vector2f((float) ((i + 1) * Constants::GRID_SIZE),
-                                                (float) (j * Constants::GRID_SIZE));
-            triangle[2].position = sf::Vector2f((float) ((i + 1) * Constants::GRID_SIZE),
-                                                (float) ((j + 1) * Constants::GRID_SIZE));
-            triangle[3].position = sf::Vector2f((float) (i * Constants::GRID_SIZE), (float) (j * Constants::GRID_SIZE));
-            triangle[4].position = sf::Vector2f((float) (i * Constants::GRID_SIZE),
-                                                (float) ((j + 1) * Constants::GRID_SIZE));
-            triangle[5].position = sf::Vector2f((float) ((i + 1) * Constants::GRID_SIZE),
-                                                (float) ((j + 1) * Constants::GRID_SIZE));
+            triangle[0].position = sf::Vector2f(static_cast<float>(i * Constants::GRID_SIZE), static_cast<float>(j * Constants::GRID_SIZE));
+            triangle[1].position = sf::Vector2f(static_cast<float>((i + 1) * Constants::GRID_SIZE),
+                                                static_cast<float>(j * Constants::GRID_SIZE));
+            triangle[2].position = sf::Vector2f(static_cast<float>((i + 1) * Constants::GRID_SIZE),
+                                                static_cast<float>((j + 1) * Constants::GRID_SIZE));
+            triangle[3].position = sf::Vector2f(static_cast<float>(i * Constants::GRID_SIZE), static_cast<float>(j * Constants::GRID_SIZE));
+            triangle[4].position = sf::Vector2f(static_cast<float>(i * Constants::GRID_SIZE),
+                                                static_cast<float>((j + 1) * Constants::GRID_SIZE));
+            triangle[5].position = sf::Vector2f(static_cast<float>((i + 1) * Constants::GRID_SIZE),
+                                                static_cast<float>((j + 1) * Constants::GRID_SIZE));
 
             triangle[0].texCoords = sf::Vector2f(tu * Constants::GRID_SIZE, tv * Constants::GRID_SIZE);
             triangle[1].texCoords = sf::Vector2f((tu + 1) * Constants::GRID_SIZE, tv * Constants::GRID_SIZE);

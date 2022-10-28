@@ -12,7 +12,7 @@ public:
     void removeEntity(int id);
 
     const std::unordered_map<int, std::shared_ptr<Entity>> &getAllEntities() const;
-    size_t count();
+    size_t count() const;
 
 private:
     std::unordered_map<int, std::shared_ptr<Entity>> entities;

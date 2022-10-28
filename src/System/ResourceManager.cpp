@@ -15,7 +15,7 @@ void ResourceManager::loadResources() {
 
 // FONTS
 bool ResourceManager::addFont(const std::string &name, const std::string &filename) {
-    std::shared_ptr<sf::Font> font = std::make_shared<sf::Font>();
+    auto font = std::make_shared<sf::Font>();
 
     if (font->loadFromFile(dataDir + "/fonts/" + filename)) {
         fonts.emplace(name, std::move(font));
@@ -29,6 +29,7 @@ bool ResourceManager::addFont(const std::string &name, const std::string &filena
 
 void ResourceManager::loadFonts() {
     std::ifstream fontsConfig(dataDir + "/fonts/fonts.json");
+
     if (!fontsConfig.good()) {
         printf("[ResourceManager] Couldn't load fonts.json\n");
         return;
@@ -53,7 +54,7 @@ std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string &name) cons
 
 // TEXTURES
 bool ResourceManager::addTexture(const std::string &name, const std::string &path) {
-    std::shared_ptr<sf::Texture> texture = std::make_shared<sf::Texture>();
+    auto texture = std::make_shared<sf::Texture>();
 
     if (texture->loadFromFile(path)) {
         textures.emplace(name, std::move(texture));

@@ -24,7 +24,7 @@ private:
     void loadFonts();
     void loadTextures();
 
-    bool addFont(const std::string &name, const std::string &path);
+    bool addFont(const std::string &name, const std::string &filename);
     bool addTexture(const std::string &name, const std::string &path);
 
     std::unordered_map<std::string, std::shared_ptr<sf::Font>> fonts;
