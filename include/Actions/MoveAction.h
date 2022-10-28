@@ -2,6 +2,7 @@
 
 #include "Action.h"
 #include "Entities/Entity.h"
+#include "TileMap.h"
 
 #include <SFML/Graphics.hpp>
 #include <utility>

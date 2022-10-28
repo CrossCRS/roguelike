@@ -2,6 +2,10 @@
 
 #include <utility>
 
+TileMap::TileMap(std::shared_ptr<sf::Texture> tileset) : tileset(std::move(tileset)) {
+    this->entityManager = std::make_unique<EntityManager>();
+}
+
 // Load a simple map from int array (for testing)
 void TileMap::loadFromArray(const int *map, unsigned int _width, unsigned int _height) {
     this->width = _width;
@@ -66,6 +70,14 @@ void TileMap::updateVertexArray() {
             triangle[5].texCoords = sf::Vector2f((tu + 1) * Constants::GRID_SIZE, (tv + 1) * Constants::GRID_SIZE);
         }
     }
+}
+
+Tile &TileMap::getTile(sf::Vector2i pos) const {
+    return *tiles[pos.x + pos.y * width];
+}
+
+bool TileMap::canWalk(sf::Vector2i pos) const {
+    return !getTile(pos).isImpenetrable();
 }
 
 void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {

@@ -3,8 +3,6 @@
 Game::Game() : window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEIGHT), Constants::GAME_NAME, sf::Style::Titlebar | sf::Style::Close) {
     window.setFramerateLimit(60);
 
-    entityManager = std::make_unique<EntityManager>();
-
     resourceManager = std::make_unique<ResourceManager>(Constants::GAME_DATA_DIR);
     resourceManager->loadResources();
 
@@ -32,9 +30,10 @@ Game::Game() : window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEIGH
     text_test.setPosition(10, 10);
     text_test.setString("Test test test!");
 
-    entityManager->insertEntity(std::make_shared<Player>(0, *resourceManager));
+    tilemap->getEntityManager().insertEntity(std::make_shared<Player>(0, *resourceManager, *tilemap));
+    text_test.setString("Test test test!");
 
-    player = std::dynamic_pointer_cast<Player>(entityManager->getEntity(0));
+    player = std::dynamic_pointer_cast<Player>(tilemap->getEntityManager().getEntity(0));
     player->setGridPosition(map_w / 2, map_h / 2);
 }
 
@@ -69,7 +68,7 @@ void Game::update() {
     snprintf(text_test_buff, sizeof(text_test_buff), "POS: [x=%.1f, y=%.1f] [gx=%d, gy=%d]\nENT: %zu\nMAP: %dx%d [V=%zu]",
              player->getPosition().x, player->getPosition().y,
              player->getGridPosition().x, player->getGridPosition().y,
-             entityManager->count(),
+             tilemap->getEntityManager().count(),
              tilemap->getWidth(), tilemap->getHeight(), tilemap->getVertices());
     text_test.setString(text_test_buff);
 }
@@ -109,7 +108,7 @@ void Game::draw() {
     // Map
     window.draw(*tilemap);
     // Entities
-    for (auto const& [id, entity] : entityManager->getAllEntities()) {
+    for (auto const& [id, entity] : tilemap->getEntityManager().getAllEntities()) {
         window.draw(*entity);
     }
 

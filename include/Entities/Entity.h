@@ -5,16 +5,20 @@
 
 #include <SFML/Graphics.hpp>
 
+class TileMap; // Forward declaration
+
 // TODO: Pass texture shared_ptr instead of ResourceManager?
 class Entity : public sf::Drawable, public sf::Transformable {
 public:
-    Entity(int id, const std::string &textureName, ResourceManager &resourceManager);
+    Entity(int id, const std::string &textureName, ResourceManager &resourceManager, TileMap &tilemap);
 
-    inline int getId() const { return id; }
-    inline void setId(int _id) { id = _id; }
+    int getId() const { return id; }
+    void setId(int _id) { id = _id; }
 
-    inline bool isDimmed() const { return dimmed; }
-    inline void setDimmed(bool _dimmed) {
+    TileMap& getTileMap() const { return tilemap; }
+
+    bool isDimmed() const { return dimmed; }
+    void setDimmed(bool _dimmed) {
         dimmed = _dimmed;
 
         // Might be useful for FOV? Eventually...
@@ -37,6 +41,7 @@ protected:
     bool dimmed;
 
     ResourceManager &resourceManager;
+    TileMap &tilemap;
     sf::VertexArray vertices;
     std::shared_ptr<sf::Texture> texture;
 };

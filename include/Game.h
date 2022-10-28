@@ -19,8 +19,7 @@ public:
 private:
     sf::RenderWindow window;
     sf::View worldView;
-
-    std::unique_ptr<EntityManager> entityManager;
+    
     std::unique_ptr<ResourceManager> resourceManager;
 
     std::unique_ptr<TileMap> tilemap;

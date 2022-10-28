@@ -1,8 +1,8 @@
 #include "Entities/Entity.h"
 
-Entity::Entity(int id, const std::string &textureName, ResourceManager &resourceManager)
-        : id(id), resourceManager(resourceManager) {
-    texture = resourceManager.getTexture(textureName);
+Entity::Entity(int id, const std::string &textureName, ResourceManager &resourceManager, TileMap &tilemap)
+        : id(id), resourceManager(resourceManager), tilemap(tilemap) {
+    texture = this->resourceManager.getTexture(textureName);
     vertices.setPrimitiveType(sf::Triangles);
     vertices.resize(6);
 

@@ -1,8 +1,10 @@
 #pragma once
 
+#include <utility>
+
 #include "Entity.h"
 
 class Player : public Entity {
 public:
-    Player(int id, ResourceManager &resourceManager) : Entity(id, "player", resourceManager) {}
+    Player(int id, ResourceManager &resourceManager, TileMap &tilemap) : Entity(id, "player", resourceManager, tilemap) { }
 };
