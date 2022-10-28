@@ -1,4 +1,4 @@
-#include "Game.hpp"
+#include "Game.h"
 
 Game::Game() : m_window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEIGHT), Constants::GAME_NAME, sf::Style::Titlebar | sf::Style::Close) {
     m_window.setFramerateLimit(60);
@@ -40,7 +40,7 @@ Game::Game() : m_window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEI
 
 void Game::run() {
     while (m_window.isOpen()) {
-        sf::Event event;
+        sf::Event event {};
 
         while (m_window.pollEvent(event)) {
             switch (event.type) {

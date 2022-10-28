@@ -1,7 +1,7 @@
-#include "Entities/Entity.hpp"
+#include "Entities/Entity.h"
 
 Entity::Entity(int id, const std::string &textureName, ResourceManager &resourceManager)
-    : id(id), m_resourceManager(resourceManager) {
+        : id(id), m_resourceManager(resourceManager) {
     m_texture = m_resourceManager.getTexture(textureName);
     m_vertices.setPrimitiveType(sf::Triangles);
     m_vertices.resize(6);
@@ -30,13 +30,13 @@ void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 }
 
 sf::Vector2i Entity::getGridPosition() const {
-    return { (int)(this->getPosition().x / Constants::GRID_SIZE), (int)(this->getPosition().y / Constants::GRID_SIZE) };
+    return {(int) (this->getPosition().x / Constants::GRID_SIZE), (int) (this->getPosition().y / Constants::GRID_SIZE)};
 }
 
-void Entity::setGridPosition(const sf::Vector2i& pos) {
+void Entity::setGridPosition(const sf::Vector2i &pos) {
     this->setGridPosition(pos.x, pos.y);
 }
 
 void Entity::setGridPosition(int x, int y) {
-    this->setPosition(sf::Vector2f((float)(x * Constants::GRID_SIZE), (float)(y * Constants::GRID_SIZE)));
+    this->setPosition(sf::Vector2f((float) (x * Constants::GRID_SIZE), (float) (y * Constants::GRID_SIZE)));
 }

@@ -1,4 +1,4 @@
-#include "System/ResourceManager.hpp"
+#include "System/ResourceManager.h"
 
 namespace fs = std::filesystem;
 using json = nlohmann::json;
@@ -18,7 +18,7 @@ void ResourceManager::loadResources() {
 }
 
 // FONTS
-bool ResourceManager::addFont(const std::string& name, const std::string& filename) {
+bool ResourceManager::addFont(const std::string &name, const std::string &filename) {
     std::shared_ptr<sf::Font> font = std::make_shared<sf::Font>();
 
     if (font->loadFromFile(m_dataDir + "/fonts/" + filename)) {
@@ -40,12 +40,12 @@ void ResourceManager::loadFonts() {
 
     json data = json::parse(fontsConfig);
 
-    for (auto& fontEntry : data) {
+    for (auto &fontEntry: data) {
         this->addFont(fontEntry["name"].get<std::string>(), fontEntry["filename"].get<std::string>());
     }
 }
 
-std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string& name) const {
+std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string &name) const {
     auto it = m_fonts.find(name);
 
     if (it == m_fonts.end()) {
@@ -56,7 +56,7 @@ std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string& name) cons
 }
 
 // TEXTURES
-bool ResourceManager::addTexture(const std::string& name, const std::string& path) {
+bool ResourceManager::addTexture(const std::string &name, const std::string &path) {
     std::shared_ptr<sf::Texture> texture = std::make_shared<sf::Texture>();
 
     if (texture->loadFromFile(path)) {
@@ -70,15 +70,15 @@ bool ResourceManager::addTexture(const std::string& name, const std::string& pat
 }
 
 void ResourceManager::loadTextures() {
-    for (const auto& dir_entry : fs::recursive_directory_iterator(m_dataDir + "/textures/")) {
+    for (const auto &dir_entry: fs::recursive_directory_iterator(m_dataDir + "/textures/")) {
         if (dir_entry.is_regular_file() && dir_entry.path().extension() == ".png") {
-            const auto& path = dir_entry.path();
+            const auto &path = dir_entry.path();
             this->addTexture(path.filename().replace_extension("").string(), path.string());
         }
     }
 }
 
-std::shared_ptr<sf::Texture> ResourceManager::getTexture(const std::string& name) const {
+std::shared_ptr<sf::Texture> ResourceManager::getTexture(const std::string &name) const {
     auto it = m_textures.find(name);
 
     if (it == m_textures.end()) {

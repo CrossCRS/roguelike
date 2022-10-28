@@ -1,4 +1,4 @@
-#include "System/EntityManager.hpp"
+#include "System/EntityManager.h"
 
 void EntityManager::insertEntity(std::shared_ptr<Entity> entity) {
     auto it = m_entities.find(entity->getId());
@@ -20,7 +20,7 @@ std::shared_ptr<Entity> EntityManager::getEntity(int id) const {
     return it->second;
 }
 
-void EntityManager::removeEntity(const std::shared_ptr<Entity>& entity) {
+void EntityManager::removeEntity(const std::shared_ptr<Entity> &entity) {
     removeEntity(entity->getId());
 }
 
@@ -38,6 +38,6 @@ size_t EntityManager::count() {
     return m_entities.size();
 }
 
-const std::unordered_map<int, std::shared_ptr<Entity>>& EntityManager::getAllEntities() const {
+const std::unordered_map<int, std::shared_ptr<Entity>> &EntityManager::getAllEntities() const {
     return m_entities;
 }
