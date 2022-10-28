@@ -79,31 +79,25 @@ void Game::processTurn() {
 }
 
 void Game::handleInput(sf::Keyboard::Key key) {
-    MOVE_DIRECTION moveDirection = MOVE_DIRECTION::NONE;
-
+    // TODO: Action handler?
     switch (key) {
         case sf::Keyboard::Escape:
             window.close();
             break;
         case sf::Keyboard::Up:
-            moveDirection = MOVE_DIRECTION::UP;
+            MoveAction(player, sf::Vector2i(0, -1)).execute();
             break;
         case sf::Keyboard::Right:
-            moveDirection = MOVE_DIRECTION::RIGHT;
+            MoveAction(player, sf::Vector2i(1, 0)).execute();
             break;
         case sf::Keyboard::Down:
-            moveDirection = MOVE_DIRECTION::DOWN;
+            MoveAction(player, sf::Vector2i(0, 1)).execute();
             break;
         case sf::Keyboard::Left:
-            moveDirection = MOVE_DIRECTION::LEFT;
+            MoveAction(player, sf::Vector2i(-1, 0)).execute();
             break;
         default:
             break;
-    }
-
-    if (moveDirection != MOVE_DIRECTION::NONE) {
-        // TODO: Action handler?
-        (new MoveAction(player, moveDirection))->execute();
     }
 }
 
