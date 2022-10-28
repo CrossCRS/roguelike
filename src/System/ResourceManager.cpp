@@ -4,25 +4,21 @@ namespace fs = std::filesystem;
 using json = nlohmann::json;
 
 // TODO: Templates?
-ResourceManager::ResourceManager(std::string dataDirectory) : m_dataDir(std::move(dataDirectory)) {
-
-}
-
 void ResourceManager::loadResources() {
     printf("[ResourceManager] Loading fonts\n");
     this->loadFonts();
-    printf("[ResourceManager] Loaded %lu fonts\n", m_fonts.size());
+    printf("[ResourceManager] Loaded %lu fonts\n", fonts.size());
     printf("[ResourceManager] Loading textures\n");
     this->loadTextures();
-    printf("[ResourceManager] Loaded %lu textures\n", m_textures.size());
+    printf("[ResourceManager] Loaded %lu textures\n", textures.size());
 }
 
 // FONTS
 bool ResourceManager::addFont(const std::string &name, const std::string &filename) {
     std::shared_ptr<sf::Font> font = std::make_shared<sf::Font>();
 
-    if (font->loadFromFile(m_dataDir + "/fonts/" + filename)) {
-        m_fonts.emplace(name, std::move(font));
+    if (font->loadFromFile(dataDir + "/fonts/" + filename)) {
+        fonts.emplace(name, std::move(font));
         printf("[ResourceManager] Loaded font '%s' as '%s'\n", filename.c_str(), name.c_str());
         return true;
     } else {
@@ -32,7 +28,7 @@ bool ResourceManager::addFont(const std::string &name, const std::string &filena
 }
 
 void ResourceManager::loadFonts() {
-    std::ifstream fontsConfig(m_dataDir + "/fonts/fonts.json");
+    std::ifstream fontsConfig(dataDir + "/fonts/fonts.json");
     if (!fontsConfig.good()) {
         printf("[ResourceManager] Couldn't load fonts.json\n");
         return;
@@ -46,9 +42,9 @@ void ResourceManager::loadFonts() {
 }
 
 std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string &name) const {
-    auto it = m_fonts.find(name);
+    auto it = fonts.find(name);
 
-    if (it == m_fonts.end()) {
+    if (it == fonts.end()) {
         throw std::invalid_argument("Font '" + name + "' is not loaded");
     }
 
@@ -60,7 +56,7 @@ bool ResourceManager::addTexture(const std::string &name, const std::string &pat
     std::shared_ptr<sf::Texture> texture = std::make_shared<sf::Texture>();
 
     if (texture->loadFromFile(path)) {
-        m_textures.emplace(name, std::move(texture));
+        textures.emplace(name, std::move(texture));
         printf("[ResourceManager] Loaded texture '%s' as '%s'\n", path.c_str(), name.c_str());
         return true;
     } else {
@@ -70,7 +66,7 @@ bool ResourceManager::addTexture(const std::string &name, const std::string &pat
 }
 
 void ResourceManager::loadTextures() {
-    for (const auto &dir_entry: fs::recursive_directory_iterator(m_dataDir + "/textures/")) {
+    for (const auto &dir_entry: fs::recursive_directory_iterator(dataDir + "/textures/")) {
         if (dir_entry.is_regular_file() && dir_entry.path().extension() == ".png") {
             const auto &path = dir_entry.path();
             this->addTexture(path.filename().replace_extension("").string(), path.string());
@@ -79,9 +75,9 @@ void ResourceManager::loadTextures() {
 }
 
 std::shared_ptr<sf::Texture> ResourceManager::getTexture(const std::string &name) const {
-    auto it = m_textures.find(name);
+    auto it = textures.find(name);
 
-    if (it == m_textures.end()) {
+    if (it == textures.end()) {
         throw std::invalid_argument("Texture '" + name + "' is not loaded");
     }
 

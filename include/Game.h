@@ -16,18 +16,18 @@ public:
     void run();
 
 private:
-    sf::RenderWindow m_window;
-    sf::View m_worldView;
+    sf::RenderWindow window;
+    sf::View worldView;
 
-    std::unique_ptr<EntityManager> m_entityManager;
-    std::unique_ptr<ResourceManager> m_resourceManager;
+    std::unique_ptr<EntityManager> entityManager;
+    std::unique_ptr<ResourceManager> resourceManager;
 
-    std::unique_ptr<TileMap> m_tilemap;
+    std::unique_ptr<TileMap> tilemap;
 
-    std::shared_ptr<Player> m_player;
+    std::shared_ptr<Player> player;
 
-    char m_text_test_buff[255];
-    sf::Text m_text_test;
+    char text_test_buff[255];
+    sf::Text text_test;
 
     void update();
 

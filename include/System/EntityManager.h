@@ -15,5 +15,5 @@ public:
     size_t count();
 
 private:
-    std::unordered_map<int, std::shared_ptr<Entity>> m_entities;
+    std::unordered_map<int, std::shared_ptr<Entity>> entities;
 };

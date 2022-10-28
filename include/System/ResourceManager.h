@@ -11,7 +11,7 @@
 
 class ResourceManager {
 public:
-    explicit ResourceManager(std::string dataDirectory);
+    explicit ResourceManager(std::string dataDirectory) : dataDir(std::move(dataDirectory)) {}
 
     void loadResources();
 
@@ -19,7 +19,7 @@ public:
     std::shared_ptr<sf::Texture> getTexture(const std::string &name) const;
 
 private:
-    const std::string m_dataDir;
+    const std::string dataDir;
 
     void loadFonts();
     void loadTextures();
@@ -27,6 +27,6 @@ private:
     bool addFont(const std::string &name, const std::string &path);
     bool addTexture(const std::string &name, const std::string &path);
 
-    std::unordered_map<std::string, std::shared_ptr<sf::Font>> m_fonts;
-    std::unordered_map<std::string, std::shared_ptr<sf::Texture>> m_textures;
+    std::unordered_map<std::string, std::shared_ptr<sf::Font>> fonts;
+    std::unordered_map<std::string, std::shared_ptr<sf::Texture>> textures;
 };

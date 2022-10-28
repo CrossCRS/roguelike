@@ -8,7 +8,7 @@
 
 class TileMap : public sf::Drawable, public sf::Transformable {
 public:
-    explicit TileMap(std::shared_ptr<sf::Texture> tileset);
+    explicit TileMap(std::shared_ptr<sf::Texture> tileset) : tileset(std::move(tileset)) {}
 
     void loadFromArray(const int *map, unsigned int _width, unsigned int _height);
 
@@ -16,14 +16,14 @@ public:
 
     inline unsigned int getWidth() const { return width; }
     inline unsigned int getHeight() const { return height; }
-    inline size_t getVertices() const { return m_vertices.getVertexCount(); }
+    inline size_t getVertices() const { return vertices.getVertexCount(); }
 
 private:
     unsigned int width;
     unsigned int height;
-    sf::VertexArray m_vertices;
-    std::shared_ptr<sf::Texture> m_tileset;
-    std::vector<std::unique_ptr<Tile>> m_tiles;
+    sf::VertexArray vertices;
+    std::shared_ptr<sf::Texture> tileset;
+    std::vector<std::unique_ptr<Tile>> tiles;
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 };

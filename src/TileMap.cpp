@@ -1,15 +1,13 @@
 #include "TileMap.h"
 
-TileMap::TileMap(std::shared_ptr<sf::Texture> tileset) : m_tileset(tileset) {
-
-}
+#include <utility>
 
 // Load a simple map from int array (for testing)
 void TileMap::loadFromArray(const int *map, unsigned int _width, unsigned int _height) {
     this->width = _width;
     this->height = _height;
 
-    m_tiles.resize(width * height);
+    tiles.resize(width * height);
 
     for (unsigned int i = 0; i < width; ++i) {
         for (unsigned int j = 0; j < height; ++j) {
@@ -26,28 +24,28 @@ void TileMap::loadFromArray(const int *map, unsigned int _width, unsigned int _h
                     break;
             }
 
-            m_tiles[i + j * width] = std::move(tile);
+            tiles[i + j * width] = std::move(tile);
         }
     }
 }
 
 void TileMap::updateVertexArray() {
-    m_vertices.setPrimitiveType(sf::Triangles);
-    m_vertices.resize(width * height * 6);
+    vertices.setPrimitiveType(sf::Triangles);
+    vertices.resize(width * height * 6);
 
     for (unsigned int i = 0; i < width; ++i) {
         for (unsigned int j = 0; j < height; ++j) {
-            if (m_tiles[i + j * width] == nullptr) {
+            if (tiles[i + j * width] == nullptr) {
                 continue;
             }
 
             // Get texture position
-            float tu = static_cast<float>(m_tiles[i + j * width]->getTextureId() %
-                                          (m_tileset->getSize().x / Constants::GRID_SIZE));
-            float tv = static_cast<float>(m_tiles[i + j * width]->getTextureId() /
-                                          (m_tileset->getSize().x / Constants::GRID_SIZE));
+            float tu = static_cast<float>(tiles[i + j * width]->getTextureId() %
+                                          (tileset->getSize().x / Constants::GRID_SIZE));
+            float tv = static_cast<float>(tiles[i + j * width]->getTextureId() /
+                                          (tileset->getSize().x / Constants::GRID_SIZE));
 
-            sf::Vertex *triangle = &m_vertices[(i + j * width) * 6];
+            sf::Vertex *triangle = &vertices[(i + j * width) * 6];
 
             triangle[0].position = sf::Vector2f((float) (i * Constants::GRID_SIZE), (float) (j * Constants::GRID_SIZE));
             triangle[1].position = sf::Vector2f((float) ((i + 1) * Constants::GRID_SIZE),
@@ -72,6 +70,6 @@ void TileMap::updateVertexArray() {
 
 void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     states.transform *= getTransform();
-    states.texture = m_tileset.get();
-    target.draw(m_vertices, states);
+    states.texture = tileset.get();
+    target.draw(vertices, states);
 }

@@ -19,10 +19,10 @@ public:
 
         // Might be useful for FOV? Eventually...
         if (dimmed) {
-            m_vertices[0].color = sf::Color(64, 64, 64);
-            m_vertices[1].color = sf::Color(64, 64, 64);
-            m_vertices[2].color = sf::Color(64, 64, 64);
-            m_vertices[3].color = sf::Color(64, 64, 64);
+            vertices[0].color = sf::Color(64, 64, 64);
+            vertices[1].color = sf::Color(64, 64, 64);
+            vertices[2].color = sf::Color(64, 64, 64);
+            vertices[3].color = sf::Color(64, 64, 64);
         }
     }
 
@@ -36,7 +36,7 @@ protected:
     int id;
     bool dimmed;
 
-    ResourceManager &m_resourceManager;
-    sf::VertexArray m_vertices;
-    std::shared_ptr<sf::Texture> m_texture;
+    ResourceManager &resourceManager;
+    sf::VertexArray vertices;
+    std::shared_ptr<sf::Texture> texture;
 };
