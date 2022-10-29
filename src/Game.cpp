@@ -13,7 +13,7 @@ Game::Game() : window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEIGH
     int map_empty[map_w * map_h];
     for (int i = 0; i < map_w; i++) {
         for (int j = 0; j < map_h; j++) {
-            map_empty[i + j * map_w] = (i == 0 || i == map_w - 1 || j == 0 || j == map_h - 1) ? 1 : 0;
+            map_empty[i + j * map_w] = (i == 0 || i == map_w - 1 || j == 0 || j == map_h - 1) ? 0 : 0;
         }
     }
     tilemap->loadFromArray(map_empty, map_w, map_h);

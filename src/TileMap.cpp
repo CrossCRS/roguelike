@@ -31,6 +31,7 @@ void TileMap::loadFromArray(const int *map, unsigned int _width, unsigned int _h
             tiles[i + j * width] = std::move(tile);
         }
     }
+    tiles[0] = nullptr;
 }
 
 void TileMap::updateVertexArray() {
@@ -76,11 +77,18 @@ Tile &TileMap::getTile(sf::Vector2i pos) const {
     if (pos.x < 0 || pos.y < 0 || static_cast<unsigned int>(pos.x) > width - 1 || static_cast<unsigned int>(pos.y) > height - 1) {
         throw std::invalid_argument("Map position out of bounds");
     }
+    if (tiles[pos.x + pos.y * width] == nullptr) {
+        throw std::invalid_argument("Map position is empty");
+    }
     return *tiles[pos.x + pos.y * width];
 }
 
 bool TileMap::canWalk(sf::Vector2i pos) const {
-    return !getTile(pos).isImpenetrable();
+    try {
+        return !getTile(pos).isImpenetrable();
+    } catch (const std::invalid_argument&) { // Invalid map position
+        return false;
+    }
 }
 
 void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
