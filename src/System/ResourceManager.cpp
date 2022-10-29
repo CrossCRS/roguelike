@@ -4,17 +4,14 @@ namespace fs = std::filesystem;
 using json = nlohmann::json;
 
 void ResourceManager::loadEssentialResources() {
-    printf("[ResourceManager] Loading fonts\n");
     this->loadFonts();
-    printf("[ResourceManager] Loaded %lu fonts\n", fonts.size());
     this->addTexture("splash_logo", dataDir + "/textures/splash_logo.png");
 }
 
 // TODO: Templates?
 void ResourceManager::loadResources() {
-    printf("[ResourceManager] Loading textures\n");
     this->loadTextures();
-    printf("[ResourceManager] Loaded %lu textures\n", textures.size());
+    printf("[ResourceManager] Loaded %lu textures, %lu fonts\n", textures.size(), fonts.size());
 }
 
 // FONTS

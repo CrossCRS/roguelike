@@ -1,11 +1,13 @@
 #pragma once
 
+#include "Constants.h"
 #include "Scene.h"
 #include "Scenes.h"
 #include "System/ResourceManager.h"
 #include "System/SceneManager.h"
 
 #include <cmath>
+#include <thread>
 #include <SFML/Graphics.hpp>
 
 class SplashScene : public Scene {
@@ -23,10 +25,15 @@ private:
 	ResourceManager& resourceManager;
 	sf::RenderWindow& window;
 
-	void centerText();
+	void centerText(sf::Text &text);
 
-	bool loaded;
+	void loadResourcesThreadFunc();
+	std::thread loadResourcesThread;
+	std::atomic_bool loadResourcesThreadFinished;
+
+	std::atomic_bool loaded;
 	
 	sf::Text text_splash;
+	sf::Text text_gamename;
 	sf::Sprite splash_logo;
 };

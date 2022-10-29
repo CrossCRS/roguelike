@@ -29,7 +29,6 @@ void GameScene::onLoad() {
     text_test.setString("Test test test!");
 
     tilemap->getEntityManager().insertEntity(std::make_shared<Player>(0, resourceManager, *tilemap));
-    text_test.setString("Test test test!");
 
     player = std::dynamic_pointer_cast<Player>(tilemap->getEntityManager().getEntity(0));
     player->setGridPosition(map_w / 2, map_h / 2);
