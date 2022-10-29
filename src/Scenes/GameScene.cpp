@@ -1,7 +1,7 @@
 #include "Scenes/GameScene.h"
 
-GameScene::GameScene(SceneManager &sceneManager, ResourceManager &resourceManager, sf::RenderWindow &window) :
-	sceneManager(sceneManager), resourceManager(resourceManager), window(window) {}
+GameScene::GameScene(SceneManager &/*sceneManager*/, ResourceManager &resourceManager, sf::RenderWindow &window) :
+	/*sceneManager(sceneManager),*/ resourceManager(resourceManager), window(window) {}
 
 void GameScene::onLoad() {
     // Setup map

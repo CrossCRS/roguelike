@@ -1,7 +1,5 @@
 #include "System/SceneManager.h"
 
-SceneManager::SceneManager() : sceneCount(0) {}
-
 void SceneManager::handleInput(sf::Keyboard::Key key) {
 	if (currentScene) currentScene->handleInput(key);
 }

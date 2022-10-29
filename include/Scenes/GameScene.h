@@ -21,7 +21,7 @@ public:
 	void draw() override;
 
 private:
-	SceneManager &sceneManager;
+	//SceneManager &sceneManager;
 	ResourceManager &resourceManager;
 	sf::RenderWindow &window;
 

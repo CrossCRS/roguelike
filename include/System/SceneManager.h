@@ -7,7 +7,7 @@
 
 class SceneManager {
 public:
-	SceneManager();
+	SceneManager() = default;
 
 	void handleInput(sf::Keyboard::Key key);
 	void update(float delta, float elapsed);
@@ -18,6 +18,5 @@ public:
 
 private:
 	std::unordered_map<unsigned int, std::shared_ptr<Scene>> scenes;
-	unsigned int sceneCount;
 	std::shared_ptr<Scene> currentScene;
 };

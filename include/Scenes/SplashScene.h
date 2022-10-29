@@ -6,6 +6,7 @@
 #include "System/ResourceManager.h"
 #include "System/SceneManager.h"
 
+#include <atomic>
 #include <cmath>
 #include <thread>
 #include <SFML/Graphics.hpp>
