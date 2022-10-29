@@ -13,6 +13,7 @@ class ResourceManager {
 public:
     explicit ResourceManager(std::string dataDirectory) : dataDir(std::move(dataDirectory)) {}
 
+    void loadEssentialResources();
     void loadResources();
 
     std::shared_ptr<sf::Font> getFont(const std::string &name) const;

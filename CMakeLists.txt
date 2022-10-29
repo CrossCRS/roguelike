@@ -9,8 +9,11 @@ find_package(SFML COMPONENTS system graphics window audio CONFIG REQUIRED)
 set(sources
         src/Actions/MoveAction.cpp
         src/Entities/Entity.cpp
+        src/Scenes/GameScene.cpp
+        src/Scenes/SplashScene.cpp
         src/System/EntityManager.cpp
         src/System/ResourceManager.cpp
+        src/System/SceneManager.cpp
         src/TileMap.cpp
         src/Game.cpp
         src/main.cpp)

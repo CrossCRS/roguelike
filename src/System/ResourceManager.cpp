@@ -3,11 +3,15 @@
 namespace fs = std::filesystem;
 using json = nlohmann::json;
 
-// TODO: Templates?
-void ResourceManager::loadResources() {
+void ResourceManager::loadEssentialResources() {
     printf("[ResourceManager] Loading fonts\n");
     this->loadFonts();
     printf("[ResourceManager] Loaded %lu fonts\n", fonts.size());
+    this->addTexture("splash_logo", dataDir + "/textures/splash_logo.png");
+}
+
+// TODO: Templates?
+void ResourceManager::loadResources() {
     printf("[ResourceManager] Loading textures\n");
     this->loadTextures();
     printf("[ResourceManager] Loaded %lu textures\n", textures.size());
@@ -16,6 +20,10 @@ void ResourceManager::loadResources() {
 // FONTS
 bool ResourceManager::addFont(const std::string &name, const std::string &filename) {
     auto font = std::make_shared<sf::Font>();
+
+    if (fonts.find(name) != fonts.end()) {
+        return false;
+    }
 
     if (font->loadFromFile(dataDir + "/fonts/" + filename)) {
         fonts.emplace(name, std::move(font));
@@ -55,6 +63,10 @@ std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string &name) cons
 // TEXTURES
 bool ResourceManager::addTexture(const std::string &name, const std::string &path) {
     auto texture = std::make_shared<sf::Texture>();
+
+    if (textures.find(name) != textures.end()) {
+        return false;
+    }
 
     if (texture->loadFromFile(path)) {
         textures.emplace(name, std::move(texture));

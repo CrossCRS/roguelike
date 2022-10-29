@@ -31,7 +31,6 @@ void TileMap::loadFromArray(const int *map, unsigned int _width, unsigned int _h
             tiles[i + j * width] = std::move(tile);
         }
     }
-    tiles[0] = nullptr;
 }
 
 void TileMap::updateVertexArray() {
