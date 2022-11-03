@@ -5,7 +5,7 @@
 #include "Scene.h"
 #include "System/ResourceManager.h"
 #include "System/SceneManager.h"
-#include "TileMap.h"
+#include "Map/TileMap.h"
 
 #include <SFML/Graphics.hpp>
 

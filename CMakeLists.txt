@@ -14,7 +14,7 @@ set(sources
         src/System/EntityManager.cpp
         src/System/ResourceManager.cpp
         src/System/SceneManager.cpp
-        src/TileMap.cpp
+        src/Map/TileMap.cpp
         src/Game.cpp
         src/main.cpp)
 
