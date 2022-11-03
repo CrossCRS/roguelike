@@ -1,15 +1,15 @@
-# Dobra Konieczne - GDD
+# The Quest for The Holy Bread - GDD
 
 ## Informacje
 
-**Nazwa projektu:** Dobra Konieczne: The Dungeon-crawling Videogame  
+**Nazwa projektu:** The Quest for The Holy Bread  
 **Użyte technologie:** C++ + SFML  
 
 ## Opis
 
 ### Cel gry
 
-Celem gry będzie przedarcie się przez **X** *(to się zmieni)* poziomów lochów pełnych przeciwników w celu dotarcia do **skrzyni zawierającej chleb, gazety i dżem śliwkowy**, czyli tytułowe **Dobra Konieczne**.
+Celem gry będzie przedarcie się przez **X** *(to się zmieni)* poziomów lochów pełnych przeciwników w celu dotarcia do **skrzyni zawierającej chleb, gazety i dżem śliwkowy**, czyli **Dobra Konieczne**.
 
 ### Świat
 
