@@ -6,12 +6,14 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <nlohmann/json.hpp>
 
 class TileMap : public sf::Drawable, public sf::Transformable {
 public:
     explicit TileMap(std::shared_ptr<sf::Texture> tileset);
 
-    void loadFromArray(const int *map, unsigned int _width, unsigned int _height);
+    void loadFromArray(const char *map, unsigned int _width, unsigned int _height);
+    void loadFromFile(const std::string &mapName);
 
     void updateVertexArray();
 

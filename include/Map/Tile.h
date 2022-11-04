@@ -1,5 +1,6 @@
 #pragma once
 
+// TODO: FloorTile, WallTile, DoorTile...?
 class Tile {
 public:
     explicit Tile(unsigned int textureId, bool isImpenetrable = false, bool isInteractive = false) : textureId(textureId),

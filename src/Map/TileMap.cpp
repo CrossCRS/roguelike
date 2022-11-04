@@ -2,12 +2,14 @@
 
 #include <utility>
 
+using json = nlohmann::json;
+
 TileMap::TileMap(std::shared_ptr<sf::Texture> tileset) : tileset(std::move(tileset)) {
     this->entityManager = std::make_unique<EntityManager>();
 }
 
-// Load a simple map from int array (for testing)
-void TileMap::loadFromArray(const int *map, unsigned int _width, unsigned int _height) {
+// Load a simple map from char array (for testing)
+void TileMap::loadFromArray(const char *map, unsigned int _width, unsigned int _height) {
     this->width = _width;
     this->height = _height;
 
@@ -18,10 +20,10 @@ void TileMap::loadFromArray(const int *map, unsigned int _width, unsigned int _h
             std::unique_ptr<Tile> tile = nullptr;
 
             switch (map[i + j * width]) {
-                case 0:
+                case '-': // Floor
                     tile = std::make_unique<Tile>(0);
                     break;
-                case 1:
+                case '#': // Walls
                     tile = std::make_unique<Tile>(22, true);
                     break;
                 default:
@@ -31,6 +33,32 @@ void TileMap::loadFromArray(const int *map, unsigned int _width, unsigned int _h
             tiles[i + j * width] = std::move(tile);
         }
     }
+}
+
+// TODO: Load spawn point
+void TileMap::loadFromFile(const std::string &mapName) {
+    std::ifstream mapConfig("data/maps/" + mapName + ".json");
+
+    if (!mapConfig.good()) {
+        printf("Couldn't load %s.json\n", mapName.c_str());
+        return;
+    }
+
+    json configData = json::parse(mapConfig);
+
+    unsigned int mapWidth = configData["width"].get<unsigned int>();
+    unsigned int mapHeight = configData["height"].get<unsigned int>();
+    std::ifstream mapData("data/maps/" + configData["data"].get<std::string>());
+
+    if (!mapData.good()) {
+        printf("Couldn't load map data file\n");
+        return;
+    }
+
+    std::string map((std::istreambuf_iterator<char>(mapData)),std::istreambuf_iterator<char>());
+    map.erase(std::remove(map.begin(), map.end(), '\n'), map.cend());
+
+    loadFromArray(map.c_str(), mapWidth, mapHeight);
 }
 
 void TileMap::updateVertexArray() {

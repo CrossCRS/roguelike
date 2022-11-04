@@ -1,0 +1,9 @@
+{
+  "width": 45,
+  "height": 25,
+  "spawn": {
+    "x": 10,
+    "y": 5
+  },
+  "data": "sample_map.txt"
+}

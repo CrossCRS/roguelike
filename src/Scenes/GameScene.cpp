@@ -6,20 +6,12 @@ GameScene::GameScene(SceneManager &/*sceneManager*/, ResourceManager &resourceMa
 void GameScene::onLoad() {
     // Setup map
     tilemap = std::make_unique<TileMap>(resourceManager.getTexture("tilemap0"));
-    constexpr int map_w = 15;
-    constexpr int map_h = 7;
-    int map_empty[map_w * map_h];
-    for (int i = 0; i < map_w; i++) {
-        for (int j = 0; j < map_h; j++) {
-            map_empty[i + j * map_w] = (i == 0 || i == map_w - 1 || j == 0 || j == map_h - 1) ? 1 : 0;
-        }
-    }
-    tilemap->loadFromArray(map_empty, map_w, map_h);
+    tilemap->loadFromFile("sample_map");
     tilemap->updateVertexArray();
 
     // Setup world camera
     worldView.reset(sf::FloatRect(0.f, 0.f, Constants::GAME_WIDTH, Constants::GAME_HEIGHT));
-    worldView.zoom(0.5f);
+    worldView.zoom(1.f);
     window.setView(worldView);
 
     text_test.setFont(*resourceManager.getFont("mono"));
@@ -31,7 +23,7 @@ void GameScene::onLoad() {
     tilemap->getEntityManager().insertEntity(std::make_shared<Player>(0, resourceManager, *tilemap));
 
     player = std::dynamic_pointer_cast<Player>(tilemap->getEntityManager().getEntity(0));
-    player->setGridPosition(map_w / 2, map_h / 2);
+    player->setGridPosition(3, 3); // TODO: Get spawn point from map
 }
 
 void GameScene::onUnload() {
@@ -68,7 +60,7 @@ void GameScene::update(float delta, float) {
 
     // Show testing stuff (std::format when?)
     snprintf(text_test_buff, sizeof(text_test_buff),
-        "POS: [x=%.1f, y=%.1f] [gx=%d, gy=%d]\nENT: %zu\nMAP: %dx%d [V=%zu]\nTIM: %.3f",
+        "POS: [x=%.1f, y=%.1f] [gx=%d, gy=%d]\nENT: %zu\nMAP: %dx%d [V=%zu]\nTIM: %.3fs",
         player->getPosition().x, player->getPosition().y,
         player->getGridPosition().x, player->getGridPosition().y,
         tilemap->getEntityManager().count(),
