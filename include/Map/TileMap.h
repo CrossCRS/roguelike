@@ -17,8 +17,11 @@ public:
 
     void updateVertexArray();
 
+    void setPlayerSpawnPoint(const sf::Vector2i &spawnPoint);
+
     unsigned int getWidth() const { return width; }
     unsigned int getHeight() const { return height; }
+    const sf::Vector2i &getPlayerSpawnPoint() const { return playerSpawnPoint; }
     size_t getVertices() const { return vertices.getVertexCount(); }
 
     EntityManager &getEntityManager() const { return *entityManager; }
@@ -28,6 +31,8 @@ public:
 private:
     unsigned int width;
     unsigned int height;
+
+    sf::Vector2i playerSpawnPoint;
 
     sf::VertexArray vertices;
     std::shared_ptr<sf::Texture> tileset;

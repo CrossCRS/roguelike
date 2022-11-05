@@ -3,7 +3,7 @@
   "height": 25,
   "spawn": {
     "x": 10,
-    "y": 5
+    "y": 6
   },
-  "data": "sample_map.txt"
+  "tiles": "sample_map.tiles"
 }

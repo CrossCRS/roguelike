@@ -23,7 +23,7 @@ void GameScene::onLoad() {
     tilemap->getEntityManager().insertEntity(std::make_shared<Player>(0, resourceManager, *tilemap));
 
     player = std::dynamic_pointer_cast<Player>(tilemap->getEntityManager().getEntity(0));
-    player->setGridPosition(3, 3); // TODO: Get spawn point from map
+    player->setGridPosition(tilemap->getPlayerSpawnPoint());
 }
 
 void GameScene::onUnload() {

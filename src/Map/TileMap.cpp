@@ -48,17 +48,19 @@ void TileMap::loadFromFile(const std::string &mapName) {
 
     unsigned int mapWidth = configData["width"].get<unsigned int>();
     unsigned int mapHeight = configData["height"].get<unsigned int>();
-    std::ifstream mapData("data/maps/" + configData["data"].get<std::string>());
+    std::ifstream mapTiles("data/maps/" + configData["tiles"].get<std::string>());
 
-    if (!mapData.good()) {
+    if (!mapTiles.good()) {
         printf("Couldn't load map data file\n");
         return;
     }
 
-    std::string map((std::istreambuf_iterator<char>(mapData)),std::istreambuf_iterator<char>());
+    std::string map((std::istreambuf_iterator<char>(mapTiles)), std::istreambuf_iterator<char>());
     map.erase(std::remove(map.begin(), map.end(), '\n'), map.cend());
 
     loadFromArray(map.c_str(), mapWidth, mapHeight);
+
+    setPlayerSpawnPoint({ configData["spawn"]["x"].get<int>(), configData["spawn"]["y"].get<int>() });
 }
 
 void TileMap::updateVertexArray() {
@@ -122,4 +124,8 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     states.transform *= getTransform();
     states.texture = tileset.get();
     target.draw(vertices, states);
+}
+
+void TileMap::setPlayerSpawnPoint(const sf::Vector2i &spawnPoint) {
+    playerSpawnPoint = spawnPoint;
 }
