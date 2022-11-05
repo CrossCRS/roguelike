@@ -1,7 +1,5 @@
 #include "Map/TileMap.h"
 
-#include <utility>
-
 using json = nlohmann::json;
 
 TileMap::TileMap(std::shared_ptr<sf::Texture> tileset) : tileset(std::move(tileset)) {
@@ -35,13 +33,12 @@ void TileMap::loadFromArray(const char *map, unsigned int _width, unsigned int _
     }
 }
 
-// TODO: Load spawn point
 void TileMap::loadFromFile(const std::string &mapName) {
     std::ifstream mapConfig("data/maps/" + mapName + ".json");
 
     if (!mapConfig.good()) {
         printf("Couldn't load %s.json\n", mapName.c_str());
-        return;
+        throw std::invalid_argument("Invalid map name");
     }
 
     json configData = json::parse(mapConfig);
@@ -52,14 +49,14 @@ void TileMap::loadFromFile(const std::string &mapName) {
 
     if (!mapTiles.good()) {
         printf("Couldn't load map data file\n");
-        return;
+        throw std::invalid_argument("Couldn't load map data file");
     }
 
+    // Remove all new lines
     std::string map((std::istreambuf_iterator<char>(mapTiles)), std::istreambuf_iterator<char>());
     map.erase(std::remove(map.begin(), map.end(), '\n'), map.cend());
 
     loadFromArray(map.c_str(), mapWidth, mapHeight);
-
     setPlayerSpawnPoint({ configData["spawn"]["x"].get<int>(), configData["spawn"]["y"].get<int>() });
 }
 
@@ -110,14 +107,6 @@ Tile &TileMap::getTile(sf::Vector2i pos) const {
         throw std::invalid_argument("Map position is empty");
     }
     return *tiles[pos.x + pos.y * width];
-}
-
-bool TileMap::canWalk(sf::Vector2i pos) const {
-    try {
-        return !getTile(pos).isImpenetrable();
-    } catch (const std::invalid_argument&) { // Invalid map position
-        return false;
-    }
 }
 
 void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {

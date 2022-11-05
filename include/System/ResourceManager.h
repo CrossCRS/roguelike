@@ -1,13 +1,12 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <nlohmann/json.hpp>
 #include <filesystem>
 #include <fstream>
-#include <iostream>
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <nlohmann/json.hpp>
+#include <SFML/Graphics.hpp>
 
 class ResourceManager {
 public:

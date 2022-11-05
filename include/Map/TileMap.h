@@ -4,9 +4,9 @@
 #include "Tile.h"
 #include "System/EntityManager.h"
 
-#include <SFML/Graphics.hpp>
 #include <memory>
 #include <nlohmann/json.hpp>
+#include <SFML/Graphics.hpp>
 
 class TileMap : public sf::Drawable, public sf::Transformable {
 public:
@@ -26,7 +26,6 @@ public:
 
     EntityManager &getEntityManager() const { return *entityManager; }
     Tile &getTile(sf::Vector2i pos) const;
-    bool canWalk(sf::Vector2i pos) const;
 
 private:
     unsigned int width;

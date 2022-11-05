@@ -1,11 +1,11 @@
 #pragma once
 
+#include "Scene.h"
 #include "Actions/MoveAction.h"
 #include "Entities/Player.h"
-#include "Scene.h"
+#include "Map/TileMap.h"
 #include "System/ResourceManager.h"
 #include "System/SceneManager.h"
-#include "Map/TileMap.h"
 
 #include <SFML/Graphics.hpp>
 

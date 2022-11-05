@@ -2,10 +2,10 @@
 
 #include "Constants.h"
 #include "Scenes/GameScene.h"
-#include "Scenes/SplashScene.h"
 #include "Scenes/Scenes.h"
-#include "System/SceneManager.h"
+#include "Scenes/SplashScene.h"
 #include "System/ResourceManager.h"
+#include "System/SceneManager.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -20,9 +20,4 @@ private:
 
     std::unique_ptr<ResourceManager> resourceManager;
     std::unique_ptr<SceneManager> sceneManager;
-
-    void update();
-    void processTurn();
-    void handleInput(sf::Keyboard::Key key);
-    void draw();
 };

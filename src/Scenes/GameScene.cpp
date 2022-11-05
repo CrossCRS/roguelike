@@ -33,23 +33,23 @@ void GameScene::onUnload() {
 void GameScene::handleInput(sf::Keyboard::Key key) {
     // TODO: Action handler?
     switch (key) {
-    case sf::Keyboard::Escape:
-        window.close();
-        break;
-    case sf::Keyboard::Up:
-        MoveAction(player, sf::Vector2i(0, -1)).execute();
-        break;
-    case sf::Keyboard::Right:
-        MoveAction(player, sf::Vector2i(1, 0)).execute();
-        break;
-    case sf::Keyboard::Down:
-        MoveAction(player, sf::Vector2i(0, 1)).execute();
-        break;
-    case sf::Keyboard::Left:
-        MoveAction(player, sf::Vector2i(-1, 0)).execute();
-        break;
-    default:
-        break;
+        case sf::Keyboard::Escape:
+            window.close();
+            break;
+        case sf::Keyboard::Up:
+            MoveAction(player, sf::Vector2i(0, -1)).execute();
+            break;
+        case sf::Keyboard::Right:
+            MoveAction(player, sf::Vector2i(1, 0)).execute();
+            break;
+        case sf::Keyboard::Down:
+            MoveAction(player, sf::Vector2i(0, 1)).execute();
+            break;
+        case sf::Keyboard::Left:
+            MoveAction(player, sf::Vector2i(-1, 0)).execute();
+            break;
+        default:
+            break;
     }
 }
 
@@ -74,9 +74,9 @@ void GameScene::draw() {
 
     // WORLD
     window.setView(worldView);
-    // Map
+    //   Map
     window.draw(*tilemap);
-    // Entities
+    //   Entities
     for (auto const& [id, entity] : tilemap->getEntityManager().getAllEntities()) {
         window.draw(*entity);
     }
