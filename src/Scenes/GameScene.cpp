@@ -38,15 +38,19 @@ void GameScene::handleInput(sf::Keyboard::Key key) {
             break;
         case sf::Keyboard::Up:
             MoveAction(player, sf::Vector2i(0, -1)).execute();
+            tilemap->updateVertexArray(); // TODO: Move to a new "process turn" function? Update after every entities' turn!
             break;
         case sf::Keyboard::Right:
             MoveAction(player, sf::Vector2i(1, 0)).execute();
+            tilemap->updateVertexArray();
             break;
         case sf::Keyboard::Down:
             MoveAction(player, sf::Vector2i(0, 1)).execute();
+            tilemap->updateVertexArray();
             break;
         case sf::Keyboard::Left:
             MoveAction(player, sf::Vector2i(-1, 0)).execute();
+            tilemap->updateVertexArray();
             break;
         default:
             break;

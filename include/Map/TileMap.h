@@ -1,7 +1,10 @@
 #pragma once
 
 #include "Constants.h"
-#include "Tile.h"
+#include "Map/BaseTile.h"
+#include "Map/DoorTile.h"
+#include "Map/FloorTile.h"
+#include "Map/WallTile.h"
 #include "System/EntityManager.h"
 
 #include <memory>
@@ -25,7 +28,7 @@ public:
     size_t getVertices() const { return vertices.getVertexCount(); }
 
     EntityManager &getEntityManager() const { return *entityManager; }
-    Tile &getTile(sf::Vector2i pos) const;
+    BaseTile &getTile(sf::Vector2i pos) const;
 
 private:
     unsigned int width;
@@ -35,7 +38,7 @@ private:
 
     sf::VertexArray vertices;
     std::shared_ptr<sf::Texture> tileset;
-    std::vector<std::unique_ptr<Tile>> tiles;
+    std::vector<std::unique_ptr<BaseTile>> tiles;
 
     std::unique_ptr<EntityManager> entityManager;
 

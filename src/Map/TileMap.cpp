@@ -15,14 +15,17 @@ void TileMap::loadFromArray(const char *map, unsigned int _width, unsigned int _
 
     for (unsigned int i = 0; i < width; ++i) {
         for (unsigned int j = 0; j < height; ++j) {
-            std::unique_ptr<Tile> tile = nullptr;
+            std::unique_ptr<BaseTile> tile = nullptr;
 
             switch (map[i + j * width]) {
                 case '-': // Floor
-                    tile = std::make_unique<Tile>(0);
+                    tile = std::make_unique<FloorTile>(0);
                     break;
                 case '#': // Walls
-                    tile = std::make_unique<Tile>(22, true);
+                    tile = std::make_unique<WallTile>(22);
+                    break;
+                case 'D': //Doors
+                    tile = std::make_unique<DoorTile>(28, 29);
                     break;
                 default:
                     break;
@@ -99,7 +102,7 @@ void TileMap::updateVertexArray() {
     }
 }
 
-Tile &TileMap::getTile(sf::Vector2i pos) const {
+BaseTile &TileMap::getTile(sf::Vector2i pos) const {
     if (pos.x < 0 || pos.y < 0 || static_cast<unsigned int>(pos.x) > width - 1 || static_cast<unsigned int>(pos.y) > height - 1) {
         throw std::invalid_argument("Map position out of bounds");
     }
