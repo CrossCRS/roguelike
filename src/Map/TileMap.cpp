@@ -18,13 +18,13 @@ void TileMap::loadFromArray(const char *map, unsigned int _width, unsigned int _
             std::unique_ptr<BaseTile> tile = nullptr;
 
             switch (map[i + j * width]) {
-                case '-': // Floor
+                case '-': // Floors
                     tile = std::make_unique<FloorTile>(0);
                     break;
                 case '#': // Walls
                     tile = std::make_unique<WallTile>(22);
                     break;
-                case 'D': //Doors
+                case 'D': // Doors
                     tile = std::make_unique<DoorTile>(28, 29);
                     break;
                 default:

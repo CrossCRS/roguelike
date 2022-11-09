@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Map/BaseTile.h"
+#include "BaseTile.h"
 
 class FloorTile : public BaseTile {
 public:

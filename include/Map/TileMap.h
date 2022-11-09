@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Constants.h"
-#include "Map/BaseTile.h"
-#include "Map/DoorTile.h"
-#include "Map/FloorTile.h"
-#include "Map/WallTile.h"
+#include "Map/Tiles/BaseTile.h"
+#include "Map/Tiles/DoorTile.h"
+#include "Map/Tiles/FloorTile.h"
+#include "Map/Tiles/WallTile.h"
 #include "System/EntityManager.h"
 
 #include <memory>

@@ -8,6 +8,7 @@
 class TileMap; // Forward declaration
 
 // TODO: Pass texture shared_ptr instead of ResourceManager?
+// TODO: New Character and GroundItem classes?
 class Entity : public sf::Drawable, public sf::Transformable {
 public:
     Entity(int id, const std::string &textureName, ResourceManager &resourceManager, TileMap &tilemap);

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Map/BaseTile.h"
+#include "BaseTile.h"
 
 class DoorTile : public BaseTile {
 public:
@@ -9,13 +9,17 @@ public:
                                                                                                       textureIdOpen(textureIdOpen),
                                                                                                       isClosed(isClosed) {}
 
-    unsigned int getTextureId() const override { return isClosed ? textureIdClosed : textureIdOpen; }
+    unsigned int getTextureId() const override {
+        return isClosed ? textureIdClosed : textureIdOpen;
+    }
 
     void interact(Entity &/*entity*/) override {
         if (isClosed) isClosed = false;
     }
 
-    bool isImpenetrable() override { return isClosed; }
+    bool isImpenetrable() override {
+        return isClosed;
+    }
 private:
     unsigned int textureIdClosed;
     unsigned int textureIdOpen;
