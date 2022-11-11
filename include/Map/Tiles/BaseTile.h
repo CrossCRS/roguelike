@@ -9,7 +9,7 @@ public:
 
     virtual unsigned int getTextureId() const { return textureId; }
 
-    virtual void interact(Entity &/*entity*/) {};
+    virtual void interact(Entity &/*entity*/) {}
 
     virtual bool isImpenetrable() = 0;
 private:

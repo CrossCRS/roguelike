@@ -32,7 +32,7 @@ private:
 	std::thread loadResourcesThread;
 	std::atomic_bool loadResourcesThreadFinished;
 
-	std::atomic_bool loaded;
+	bool loaded;
 	
 	sf::Text text_splash;
 	sf::Text text_gamename;

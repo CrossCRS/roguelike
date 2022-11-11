@@ -5,11 +5,6 @@ SplashScene::SplashScene(SceneManager &sceneManager, ResourceManager &resourceMa
 
 void SplashScene::loadResourcesThreadFunc() {
 	resourceManager.loadResources();
-
-	loaded = true;
-	text_splash.setString("Press Enter to start game!");
-	centerText(text_splash);
-
 	loadResourcesThreadFinished = true;
 }
 
@@ -56,6 +51,10 @@ void SplashScene::update(float, float elapsed) {
 	if (loadResourcesThreadFinished) {
 		loadResourcesThread.join();
 		loadResourcesThreadFinished = false;
+
+		loaded = true;
+		text_splash.setString("Press Enter to start game!");
+		centerText(text_splash);
 	}
 
 	const float scale = 0.3f * std::sin(elapsed * 4) + 1;
