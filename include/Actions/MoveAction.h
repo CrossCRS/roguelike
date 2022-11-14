@@ -8,8 +8,9 @@
 
 class MoveAction : public Action {
 public:
-    MoveAction(std::shared_ptr<Entity> entity, sf::Vector2i moveDirection) : entity(std::move(entity)),
-	                                                                         moveDirection(moveDirection) {}
+    MoveAction(std::shared_ptr<Entity> entity, sf::Vector2i moveDirection) :
+        entity(std::move(entity)),
+        moveDirection(moveDirection) {}
 
     void execute() override;
 

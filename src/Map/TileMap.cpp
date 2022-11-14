@@ -113,9 +113,15 @@ BaseTile &TileMap::getTile(sf::Vector2i pos) const {
 }
 
 void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    // Draw the map
     states.transform *= getTransform();
     states.texture = tileset.get();
     target.draw(vertices, states);
+
+    // Draw entities
+    for (auto const &element : entityManager->getAllEntities()) {
+        target.draw(*element.second);
+    }
 }
 
 void TileMap::setPlayerSpawnPoint(const sf::Vector2i &spawnPoint) {

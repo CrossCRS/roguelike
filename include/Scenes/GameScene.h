@@ -11,7 +11,10 @@
 
 class GameScene : public Scene {
 public:
-	GameScene(SceneManager &sceneManager, ResourceManager &resourceManager, sf::RenderWindow &window);
+	GameScene(SceneManager &/*sceneManager*/, ResourceManager &resourceManager, sf::RenderWindow &window) :
+		/*sceneManager(sceneManager),*/
+		resourceManager(resourceManager),
+		window(window) {}
 
 	void onLoad() override;
 	void onUnload() override;

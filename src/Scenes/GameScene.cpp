@@ -1,8 +1,5 @@
 #include "Scenes/GameScene.h"
 
-GameScene::GameScene(SceneManager &/*sceneManager*/, ResourceManager &resourceManager, sf::RenderWindow &window) :
-	/*sceneManager(sceneManager),*/ resourceManager(resourceManager), window(window) {}
-
 void GameScene::onLoad() {
     // Setup map
     tilemap = std::make_unique<TileMap>(resourceManager.getTexture("tilemap0"));
@@ -67,7 +64,7 @@ void GameScene::update(float delta, float) {
         player->getPosition().x, player->getPosition().y,
         player->getGridPosition().x, player->getGridPosition().y,
         tilemap->getEntityManager().count(),
-        tilemap->getWidth(), tilemap->getHeight(), tilemap->getVertices(),
+        tilemap->getWidth(), tilemap->getHeight(), tilemap->getVerticesCount(),
         delta);
     text_test.setString(text_test_buff);
 }
@@ -77,12 +74,7 @@ void GameScene::draw() {
 
     // WORLD
     window.setView(worldView);
-    //   Map
     window.draw(*tilemap);
-    //   Entities
-    for (auto const& [id, entity] : tilemap->getEntityManager().getAllEntities()) {
-        window.draw(*entity);
-    }
 
     // GUI
     window.setView(window.getDefaultView());

@@ -4,6 +4,8 @@
 
 class EntityManager {
 public:
+    EntityManager() = default;
+
     void insertEntity(std::shared_ptr<Entity> entity);
 
     std::shared_ptr<Entity> getEntity(int id) const;

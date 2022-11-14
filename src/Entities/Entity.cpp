@@ -19,8 +19,6 @@ Entity::Entity(int id, const std::string &textureName, ResourceManager &resource
     vertices[3].texCoords = sf::Vector2f(0.f, 0.f);
     vertices[4].texCoords = sf::Vector2f(0.f, Constants::GRID_SIZE);
     vertices[5].texCoords = sf::Vector2f(Constants::GRID_SIZE, Constants::GRID_SIZE);
-
-    setDimmed(false);
 }
 
 void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const {
@@ -30,13 +28,9 @@ void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 }
 
 sf::Vector2i Entity::getGridPosition() const {
-    return {static_cast<int>(this->getPosition().x / Constants::GRID_SIZE), static_cast<int>(this->getPosition().y / Constants::GRID_SIZE)};
+    return { static_cast<int>(this->getPosition().x / Constants::GRID_SIZE), static_cast<int>(this->getPosition().y / Constants::GRID_SIZE) };
 }
 
 void Entity::setGridPosition(const sf::Vector2i &pos) {
-    this->setGridPosition(pos.x, pos.y);
-}
-
-void Entity::setGridPosition(int x, int y) {
-    this->setPosition(sf::Vector2f(static_cast<float>(x * Constants::GRID_SIZE), static_cast<float>(y * Constants::GRID_SIZE)));
+    this->setPosition(sf::Vector2f(static_cast<float>(pos.x * Constants::GRID_SIZE), static_cast<float>(pos.y * Constants::GRID_SIZE)));
 }

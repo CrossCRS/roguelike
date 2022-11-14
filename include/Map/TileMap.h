@@ -20,12 +20,12 @@ public:
 
     void updateVertexArray();
 
+    const sf::Vector2i &getPlayerSpawnPoint() const { return playerSpawnPoint; }
     void setPlayerSpawnPoint(const sf::Vector2i &spawnPoint);
 
     unsigned int getWidth() const { return width; }
     unsigned int getHeight() const { return height; }
-    const sf::Vector2i &getPlayerSpawnPoint() const { return playerSpawnPoint; }
-    size_t getVertices() const { return vertices.getVertexCount(); }
+    size_t getVerticesCount() const { return vertices.getVertexCount(); }
 
     EntityManager &getEntityManager() const { return *entityManager; }
     BaseTile &getTile(sf::Vector2i pos) const;
