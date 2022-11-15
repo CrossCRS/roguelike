@@ -2,6 +2,8 @@
 
 #include "Entities/Entity.h"
 
+#include <unordered_map>
+
 class EntityManager {
 public:
     EntityManager() = default;

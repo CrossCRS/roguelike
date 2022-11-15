@@ -7,6 +7,7 @@
 #include "Map/Tiles/WallTile.h"
 #include "System/EntityManager.h"
 
+#include <fstream>
 #include <memory>
 #include <nlohmann/json.hpp>
 #include <SFML/Graphics.hpp>
