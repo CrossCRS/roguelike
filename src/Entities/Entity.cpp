@@ -1,8 +1,7 @@
 #include "Entities/Entity.h"
 
-Entity::Entity(int id, const std::string &textureName, ResourceManager &resourceManager, TileMap &tilemap)
-        : id(id), resourceManager(resourceManager), tilemap(tilemap) {
-    texture = this->resourceManager.getTexture(textureName);
+Entity::Entity(int id, std::shared_ptr<sf::Texture> texture, TileMap &tilemap)
+        : id(id), tilemap(tilemap), texture(std::move(texture)) {
     vertices.setPrimitiveType(sf::Triangles);
     vertices.resize(6);
 
@@ -33,4 +32,8 @@ sf::Vector2i Entity::getGridPosition() const {
 
 void Entity::setGridPosition(const sf::Vector2i &pos) {
     this->setPosition(sf::Vector2f(static_cast<float>(pos.x * Constants::GRID_SIZE), static_cast<float>(pos.y * Constants::GRID_SIZE)));
+}
+
+void Entity::setTexture(std::shared_ptr<sf::Texture> tex) {
+    texture = std::move(tex);
 }
