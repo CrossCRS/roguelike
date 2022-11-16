@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Constants.h"
+#include "Entities/Character.h"
 #include "Map/Tiles/BaseTile.h"
 #include "Map/Tiles/DoorTile.h"
 #include "Map/Tiles/FloorTile.h"
@@ -28,7 +29,7 @@ public:
     unsigned int getHeight() const { return height; }
     size_t getVerticesCount() const { return vertices.getVertexCount(); }
 
-    EntityManager &getEntityManager() const { return *entityManager; }
+    EntityManager<Character> &getCharacterManager() const { return *characterManager; }
     BaseTile &getTile(sf::Vector2i pos) const;
 
 private:
@@ -41,7 +42,7 @@ private:
     std::shared_ptr<sf::Texture> tileset;
     std::vector<std::unique_ptr<BaseTile>> tiles;
 
-    std::unique_ptr<EntityManager> entityManager;
+    std::unique_ptr<EntityManager<Character>> characterManager;
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 };

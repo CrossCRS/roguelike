@@ -17,9 +17,9 @@ void GameScene::onLoad() {
     text_debug.setPosition(10, 10);
     text_debug.setString("Test test test!");
 
-    tilemap->getEntityManager().insertEntity(std::make_shared<Player>(0, resourceManager.getTexture("player"), *tilemap));
+    tilemap->getCharacterManager().insertEntity(std::make_shared<Player>(0, resourceManager.getTexture("player"), *tilemap));
 
-    player = std::dynamic_pointer_cast<Player>(tilemap->getEntityManager().getEntity(0));
+    player = std::dynamic_pointer_cast<Player>(tilemap->getCharacterManager().getEntity(0));
     player->setGridPosition(tilemap->getPlayerSpawnPoint());
 }
 
@@ -62,7 +62,7 @@ void GameScene::update(float delta, float) {
     text_debug.setString(fmt::format("POS: [x={:.1f}, y={:.1f}] [gx={:d}, gy={:d}]\nENT: {:d}\nMAP: {:d}x{:d} [V={:d}]\nTIM: {:.3f}s",
         player->getPosition().x, player->getPosition().y,
         player->getGridPosition().x, player->getGridPosition().y,
-        tilemap->getEntityManager().count(),
+        tilemap->getCharacterManager().count(),
         tilemap->getWidth(), tilemap->getHeight(), tilemap->getVerticesCount(),
         delta));
 }

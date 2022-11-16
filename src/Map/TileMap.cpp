@@ -3,7 +3,7 @@
 using json = nlohmann::json;
 
 TileMap::TileMap(std::shared_ptr<sf::Texture> tileset) : tileset(std::move(tileset)) {
-    this->entityManager = std::make_unique<EntityManager>();
+    this->characterManager = std::make_unique<EntityManager<Character>>();
 }
 
 // Load a simple map from char array (for testing)
@@ -119,7 +119,7 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(vertices, states);
 
     // Draw entities
-    for (auto const &element : entityManager->getAllEntities()) {
+    for (auto const &element : characterManager->getAllEntities()) {
         target.draw(*element.second);
     }
 }
