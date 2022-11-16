@@ -8,6 +8,7 @@
 #include "System/SceneManager.h"
 
 #include <SFML/Graphics.hpp>
+#include <fmt/core.h>
 
 class GameScene : public Scene {
 public:
@@ -32,7 +33,6 @@ private:
 
 	std::unique_ptr<TileMap> tilemap;
 	std::shared_ptr<Player> player;
-
-	char text_test_buff[255];
-	sf::Text text_test;
+	
+	sf::Text text_debug;
 };

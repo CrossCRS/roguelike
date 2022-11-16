@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 project(Bread)
 
 find_package(SFML COMPONENTS system graphics window audio CONFIG REQUIRED)
+find_package(fmt REQUIRED)
 
 set(sources
         src/Actions/MoveAction.cpp
@@ -40,4 +41,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
         sfml-system
         sfml-graphics
         sfml-window
-        sfml-audio)
+        sfml-audio
+        fmt::fmt)
