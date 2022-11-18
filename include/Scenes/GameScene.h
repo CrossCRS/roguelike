@@ -6,6 +6,7 @@
 #include "Map/TileMap.h"
 #include "System/ResourceManager.h"
 #include "System/SceneManager.h"
+#include "Actions/ActionQueue.h"
 
 #include <SFML/Graphics.hpp>
 #include <fmt/core.h>
@@ -15,10 +16,13 @@ public:
 	GameScene(SceneManager &/*sceneManager*/, ResourceManager &resourceManager, sf::RenderWindow &window) :
 		/*sceneManager(sceneManager),*/
 		resourceManager(resourceManager),
-		window(window) {}
+		window(window),
+        turnCount(0) {}
 
 	void onLoad() override;
 	void onUnload() override;
+
+    void processTurn();
 
 	void handleInput(sf::Keyboard::Key key) override;
 	void update(float delta, float elapsed) override;
@@ -31,8 +35,11 @@ private:
 
 	sf::View worldView;
 
+    std::unique_ptr<ActionQueue> actionQueue;
 	std::unique_ptr<TileMap> tilemap;
 	std::shared_ptr<Player> player;
+
+    unsigned long turnCount;
 	
 	sf::Text text_debug;
 };

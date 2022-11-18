@@ -14,7 +14,7 @@ public:
         return isClosed ? textureIdClosed : textureIdOpen;
     }
 
-    void interact(Entity &/*entity*/) override {
+    void interact(Character &/*character*/) override {
         if (isClosed) isClosed = false;
     }
 

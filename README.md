@@ -45,6 +45,12 @@ $ cmake -G Ninja -B build -S . -DCMAKE_TOOLCHAIN_FILE=extern/vcpkg/scripts/build
 $ cmake --build build/
 ```
 
+## Kamienie Milowe
+* ~~**Milestone-1**~~ - Ekran wczytywania zasobów, wczytywanie testowej mapy z pliku, kolizje z polami, interaktywne pola (np. drzwi), kolejka akcji
+* **Milestone-2** - "Wałęsające się" NPC, wczytywanie NPC z plików(?), statystyki
+* ...
+* **Milestone-???** - Shadery żeby chlebek na ekranie wczytywania ładnie migał
+
 ## Licencje
 Fonty:
 - [Alagard by Pix3M](https://www.deviantart.com/pix3m/art/Bitmap-font-Alagard-381110713) - CC BY 3.0  
