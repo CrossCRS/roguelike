@@ -8,6 +8,7 @@ TileMap::TileMap(std::shared_ptr<sf::Texture> tileset) : tileset(std::move(tiles
 
 // Load a simple map from char array (for testing)
 void TileMap::loadFromArray(const char *map, unsigned int _width, unsigned int _height) {
+    spdlog::debug("Loading {}x{} tilemap from array", _width, _height);
     this->width = _width;
     this->height = _height;
 
@@ -37,22 +38,28 @@ void TileMap::loadFromArray(const char *map, unsigned int _width, unsigned int _
 }
 
 void TileMap::loadFromFile(const std::string &mapName) {
-    std::ifstream mapConfig("data/maps/" + mapName + ".json");
+    const auto path = "data/maps/" + mapName + ".json";
+
+    spdlog::debug("Loading tilemap from {}", path);
+    std::ifstream mapConfig(path);
 
     if (!mapConfig.good()) {
-        printf("Couldn't load %s.json\n", mapName.c_str());
-        throw std::invalid_argument("Invalid map name");
+        const auto message = "Couldn't load tilemap from " + path;
+        spdlog::error(message);
+        throw std::invalid_argument(message);
     }
 
     json configData = json::parse(mapConfig);
 
     unsigned int mapWidth = configData["width"].get<unsigned int>();
     unsigned int mapHeight = configData["height"].get<unsigned int>();
+
     std::ifstream mapTiles("data/maps/" + configData["tiles"].get<std::string>());
 
     if (!mapTiles.good()) {
-        printf("Couldn't load map data file\n");
-        throw std::invalid_argument("Couldn't load map data file");
+        const auto message = "Couldn't load map data file";
+        spdlog::error(message);
+        throw std::invalid_argument(message);
     }
 
     // Remove all new lines
@@ -104,10 +111,14 @@ void TileMap::updateVertexArray() {
 
 BaseTile &TileMap::getTile(sf::Vector2i pos) const {
     if (pos.x < 0 || pos.y < 0 || static_cast<unsigned int>(pos.x) > width - 1 || static_cast<unsigned int>(pos.y) > height - 1) {
-        throw std::invalid_argument("Map position out of bounds");
+        const auto message = "Map position out of bounds";
+        spdlog::error(message);
+        throw std::invalid_argument(message);
     }
     if (tiles[pos.x + pos.y * width] == nullptr) {
-        throw std::invalid_argument("Map position is empty");
+        const auto message = "Map position is empty";
+        spdlog::error(message);
+        throw std::invalid_argument(message);
     }
     return *tiles[pos.x + pos.y * width];
 }
@@ -125,5 +136,6 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 }
 
 void TileMap::setPlayerSpawnPoint(const sf::Vector2i &spawnPoint) {
+    spdlog::debug("Setting player spawn point to [{}, {}]", spawnPoint.x, spawnPoint.y);
     playerSpawnPoint = spawnPoint;
 }

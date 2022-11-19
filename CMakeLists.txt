@@ -4,6 +4,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 project(Bread)
 
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DBREAD_DEBUG")
+
 find_package(SFML COMPONENTS system graphics window audio CONFIG REQUIRED)
 find_package(fmt REQUIRED)
 

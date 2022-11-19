@@ -13,14 +13,19 @@ void SceneManager::draw() {
 }
 
 void SceneManager::addScene(unsigned int sceneId, std::shared_ptr<Scene> scene) {
+	spdlog::debug("Adding scene {}", sceneId);
 	scenes.emplace(sceneId, std::move(scene)).first->second->onCreate();
 }
 
 void SceneManager::switchScene(unsigned int sceneId) {
 	auto it = scenes.find(sceneId);
 
+	spdlog::debug("Switching to scene {}", sceneId);
+
 	if (it == scenes.end()) {
-		throw std::invalid_argument("Scene '" + std::to_string(sceneId) + "' does not exist");
+		const auto message = "Scene '" + std::to_string(sceneId) + "' does not exist";
+		spdlog::error(message);
+		throw std::invalid_argument(message);
 	}
 
 	if (currentScene) currentScene->onUnload(); // Unload current scene

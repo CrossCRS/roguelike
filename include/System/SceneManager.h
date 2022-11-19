@@ -2,6 +2,7 @@
 
 #include "Scenes/Scene.h"
 
+#include <spdlog/spdlog.h>
 #include <memory>
 #include <unordered_map>
 

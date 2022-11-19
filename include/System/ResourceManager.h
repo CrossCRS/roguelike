@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <nlohmann/json.hpp>
 #include <SFML/Graphics.hpp>
+#include <spdlog/spdlog.h>
 
 class ResourceManager {
 public:

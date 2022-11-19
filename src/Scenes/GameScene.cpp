@@ -18,7 +18,7 @@ void GameScene::onLoad() {
     text_debug.setCharacterSize(15);
     text_debug.setFillColor(sf::Color::White);
     text_debug.setPosition(10, 10);
-    text_debug.setString("Test test test!");
+    text_debug.setString("");
 
     tilemap->getCharacterManager().insertEntity(std::make_shared<Player>(0, resourceManager.getTexture("player"), *tilemap));
 
@@ -69,18 +69,24 @@ void GameScene::handleInput(sf::Keyboard::Key key) {
     processTurn();
 }
 
+#ifdef BREAD_DEBUG
 void GameScene::update(float delta, float) {
+#else
+void GameScene::update(float, float) {
+#endif
     // Center camera on player
     worldView.setCenter(sf::Vector2f(player->getPosition().x + (Constants::GRID_SIZE / 2),
         player->getPosition().y + (Constants::GRID_SIZE / 2)));
 
     // Show testing stuff
+#ifdef BREAD_DEBUG
     text_debug.setString(fmt::format("POS: [x={:.1f}, y={:.1f}] [gx={:d}, gy={:d}]\nENT: {:d}\nMAP: {:d}x{:d} [V={:d}]\nTIM: {:.3f}s\nTRN: {:d}",
         player->getPosition().x, player->getPosition().y,
         player->getGridPosition().x, player->getGridPosition().y,
         tilemap->getCharacterManager().count(),
         tilemap->getWidth(), tilemap->getHeight(), tilemap->getVerticesCount(),
         delta, turnCount));
+#endif
 }
 
 void GameScene::draw() {

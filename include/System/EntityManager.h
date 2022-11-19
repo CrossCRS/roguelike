@@ -3,6 +3,7 @@
 #include "Entities/Entity.h"
 
 #include <unordered_map>
+#include <spdlog/spdlog.h>
 
 template<typename T>
 class EntityManager {
@@ -12,8 +13,12 @@ public:
     void insertEntity(std::shared_ptr<T> entity) {
         auto it = entities.find(entity->getId());
 
+        spdlog::debug("Adding entity {}", entity->getId());
+
         if (it != entities.end()) {
-            throw std::invalid_argument("Entity with given id already exists");
+            const auto message = "Entity with id " + std::to_string(it->first) + " already exists";
+            spdlog::error(message);
+            throw std::invalid_argument(message);
         }
 
         entities.emplace(entity->getId(), std::move(entity));
@@ -23,7 +28,7 @@ public:
         auto it = entities.find(id);
 
         if (it == entities.end()) {
-            throw std::invalid_argument("Entity with given id doesn't exist");
+            return nullptr;
         }
 
         return it->second;
@@ -37,7 +42,9 @@ public:
         auto it = entities.find(id);
 
         if (it == entities.end()) {
-            throw std::invalid_argument("Entity with given id doesn't exist");
+            const auto message = "Entity with id " + std::to_string(id) + " doesn't exist";
+            spdlog::error(message);
+            throw std::invalid_argument(message);
         }
 
         entities.erase(id);

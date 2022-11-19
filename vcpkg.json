@@ -1,9 +1,10 @@
 {
-  "name": "roguelike",
-  "version-string": "0.0.1",
+  "name": "bread",
+  "version-string": "dev",
   "dependencies": [
     "sfml",
     "nlohmann-json",
-    "fmt"
+    "fmt",
+    "spdlog"
   ]
 }

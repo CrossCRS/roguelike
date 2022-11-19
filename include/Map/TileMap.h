@@ -12,6 +12,7 @@
 #include <memory>
 #include <nlohmann/json.hpp>
 #include <SFML/Graphics.hpp>
+#include <spdlog/spdlog.h>
 
 class TileMap : public sf::Drawable, public sf::Transformable {
 public:
