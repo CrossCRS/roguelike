@@ -18,11 +18,9 @@ void ResourceManager::loadResources() {
 
 // FONTS
 bool ResourceManager::addFont(const std::string &name, const std::string &filename) {
-    auto font = std::make_shared<sf::Font>();
+    if (fonts.contains(name)) return false;
 
-    if (fonts.find(name) != fonts.end()) {
-        return false;
-    }
+    auto font = std::make_shared<sf::Font>();
 
     if (font->loadFromFile(dataDir + "/fonts/" + filename)) {
         fonts.emplace(name, std::move(font));
@@ -50,24 +48,20 @@ void ResourceManager::loadFonts() {
 }
 
 std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string &name) const {
-    auto it = fonts.find(name);
-
-    if (it == fonts.end()) {
+    if (!fonts.contains(name)) {
         const auto message = "Font '" + name + "' is not loaded";
         spdlog::error(message);
         throw std::invalid_argument(message);
     }
 
-    return it->second;
+    return fonts.find(name)->second;
 }
 
 // TEXTURES
 bool ResourceManager::addTexture(const std::string &name, const std::string &path) {
-    auto texture = std::make_shared<sf::Texture>();
+    if (textures.contains(name)) return false;
 
-    if (textures.find(name) != textures.end()) {
-        return false;
-    }
+    auto texture = std::make_shared<sf::Texture>();
 
     if (texture->loadFromFile(path)) {
         textures.emplace(name, std::move(texture));
@@ -89,13 +83,11 @@ void ResourceManager::loadTextures() {
 }
 
 std::shared_ptr<sf::Texture> ResourceManager::getTexture(const std::string &name) const {
-    auto it = textures.find(name);
-
-    if (it == textures.end()) {
+    if (!textures.contains(name)) {
         const auto message = "Texture '" + name + "' is not loaded";
         spdlog::error(message);
         throw std::invalid_argument(message);
     }
 
-    return it->second;
+    return textures.find(name)->second;
 }

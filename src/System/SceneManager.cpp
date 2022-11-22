@@ -18,17 +18,15 @@ void SceneManager::addScene(unsigned int sceneId, std::shared_ptr<Scene> scene) 
 }
 
 void SceneManager::switchScene(unsigned int sceneId) {
-	auto it = scenes.find(sceneId);
-
 	spdlog::debug("Switching to scene {}", sceneId);
 
-	if (it == scenes.end()) {
+	if (!scenes.contains(sceneId)) {
 		const auto message = "Scene '" + std::to_string(sceneId) + "' does not exist";
 		spdlog::error(message);
 		throw std::invalid_argument(message);
 	}
 
 	if (currentScene) currentScene->onUnload(); // Unload current scene
-	currentScene = it->second; // Change current scene
+	currentScene = scenes.find(sceneId)->second; // Change current scene
 	currentScene->onLoad(); // Load new scene
 }

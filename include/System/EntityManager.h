@@ -12,12 +12,10 @@ public:
     EntityManager() = default;
 
     void insertEntity(std::shared_ptr<T> entity) {
-        auto it = entities.find(entity->getId());
-
         spdlog::debug("Adding entity {}", entity->getId());
 
-        if (it != entities.end()) {
-            const auto message = "Entity with id " + std::to_string(it->first) + " already exists";
+        if (entities.contains(entity->getId())) {
+            const auto message = "Entity with id " + std::to_string(entity->getId()) + " already exists";
             spdlog::error(message);
             throw std::invalid_argument(message);
         }
@@ -26,13 +24,9 @@ public:
     }
 
     std::shared_ptr<T> getEntity(int id) const {
-        auto it = entities.find(id);
-
-        if (it == entities.end()) {
-            return nullptr;
-        }
-
-        return it->second;
+        if (!entities.contains(id)) return nullptr;
+        
+        return entities.find(id)->second;
     }
 
     void removeEntity(const std::shared_ptr<T> &entity) {
@@ -40,9 +34,7 @@ public:
     }
 
     void removeEntity(int id) {
-        auto it = entities.find(id);
-
-        if (it == entities.end()) {
+        if (!entities.contains(id)) {
             const auto message = "Entity with id " + std::to_string(id) + " doesn't exist";
             spdlog::error(message);
             throw std::invalid_argument(message);
