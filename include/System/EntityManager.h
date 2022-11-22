@@ -2,10 +2,11 @@
 
 #include "Entities/Entity.h"
 
+#include <concepts>
 #include <unordered_map>
 #include <spdlog/spdlog.h>
 
-template<typename T>
+template<std::derived_from<Entity> T>
 class EntityManager {
 public:
     EntityManager() = default;
