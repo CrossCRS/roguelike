@@ -2,12 +2,12 @@
 
 void MoveAction::execute() {
     // TODO: Better collision detection
-    sf::Vector2i newPos = character->getGridPosition() + moveDirection;
-    auto &newTile = character->getTileMap().getTile(newPos);
+    sf::Vector2i newPos = character.getGridPosition() + moveDirection;
+    auto &newTile = character.getTileMap().getTile(newPos);
 
     if (!newTile.isImpenetrable()) {
-        character->setGridPosition(newPos);
+        character.setGridPosition(newPos);
     }
 
-    newTile.interact(*character);
+    newTile.interact(character);
 }

@@ -13,7 +13,7 @@
 
 class SplashScene : public Scene {
 public:
-	SplashScene(SceneManager& sceneManager, ResourceManager& resourceManager, sf::RenderWindow& window);
+	SplashScene(SceneManager &sceneManager, ResourceManager &resourceManager, sf::RenderWindow &window);
 
 	void onLoad() override;
 
@@ -22,9 +22,9 @@ public:
 	void draw() override;
 
 private:
-	SceneManager& sceneManager;
-	ResourceManager& resourceManager;
-	sf::RenderWindow& window;
+	SceneManager &sceneManager;
+	ResourceManager &resourceManager;
+	sf::RenderWindow &window;
 
 	void centerText(sf::Text &text);
 

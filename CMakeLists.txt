@@ -14,9 +14,10 @@ set(sources
         src/Actions/MoveAction.cpp
         src/Entities/Character.cpp
         src/Entities/Entity.cpp
+        src/Map/World.cpp
         src/Scenes/GameScene.cpp
         src/Scenes/SplashScene.cpp
-        "src/System/Resources/ResourceManager.cpp"
+        src/System/Resources/ResourceManager.cpp
         src/System/SceneManager.cpp
         src/Map/TileMap.cpp
         src/Game.cpp

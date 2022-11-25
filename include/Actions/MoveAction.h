@@ -8,15 +8,15 @@
 
 class MoveAction : public Action {
 public:
-    MoveAction(std::shared_ptr<Character> character, sf::Vector2i moveDirection) :
-        character(std::move(character)),
+    MoveAction(Character &character, sf::Vector2i moveDirection) :
+        character(character),
         moveDirection(moveDirection) {}
 
     void execute() override;
 
-    std::shared_ptr<Character> getPerformer() override { return character; }
+    float getSpeed() override { return character.getSpeed(); }
 
 private:
-    std::shared_ptr<Character> character;
+    Character &character;
     sf::Vector2i moveDirection;
 };

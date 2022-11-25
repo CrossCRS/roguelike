@@ -8,16 +8,16 @@
 
 class SceneManager {
 public:
-	SceneManager() = default;
+	SceneManager() : currentScene(nullptr) {}
 
 	void handleInput(sf::Keyboard::Key key);
 	void update(float delta, float elapsed);
 	void draw();
 
-	void addScene(unsigned int sceneId, std::shared_ptr<Scene> scene);
+	void addScene(unsigned int sceneId, std::unique_ptr<Scene> scene);
 	void switchScene(unsigned int sceneId);
 
 private:
-	std::unordered_map<unsigned int, std::shared_ptr<Scene>> scenes;
-	std::shared_ptr<Scene> currentScene;
+	std::unordered_map<unsigned int, std::unique_ptr<Scene>> scenes;
+	Scene *currentScene;
 };

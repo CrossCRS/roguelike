@@ -3,7 +3,7 @@
 #include "Scene.h"
 #include "Actions/MoveAction.h"
 #include "Entities/Player.h"
-#include "Map/TileMap.h"
+#include "Map/World.h"
 #include "System/Resources/ResourceManager.h"
 #include "System/SceneManager.h"
 #include "Actions/ActionQueue.h"
@@ -36,8 +36,7 @@ private:
 	sf::View worldView;
 
     std::unique_ptr<ActionQueue> actionQueue;
-	std::unique_ptr<TileMap> tilemap;
-	std::shared_ptr<Player> player;
+	std::unique_ptr<World> world;
 
     unsigned long turnCount;
 	

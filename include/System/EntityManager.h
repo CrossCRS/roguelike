@@ -11,7 +11,7 @@ class EntityManager {
 public:
     EntityManager() = default;
 
-    void insertEntity(std::shared_ptr<T> entity) {
+    void insertEntity(std::unique_ptr<T> entity) {
         spdlog::debug("Adding entity {}", entity->getId());
 
         if (entities.contains(entity->getId())) {
@@ -23,14 +23,14 @@ public:
         entities.emplace(entity->getId(), std::move(entity));
     }
 
-    std::shared_ptr<T> getEntity(int id) const {
+    T &getEntity(int id) const {
         if (!entities.contains(id)) return nullptr;
         
-        return entities.find(id)->second;
+        return *(entities.find(id)->second);
     }
 
-    void removeEntity(const std::shared_ptr<T> &entity) {
-        removeEntity(entity->getId());
+    void removeEntity(const T &entity) {
+        removeEntity(entity.getId());
     }
 
     void removeEntity(int id) {
@@ -43,7 +43,7 @@ public:
         entities.erase(id);
     }
 
-    const std::unordered_map<int, std::shared_ptr<T>> &getAllEntities() const {
+    const std::unordered_map<int, std::unique_ptr<T>> &getAllEntities() const {
         return entities;
     }
     size_t count() const {
@@ -51,5 +51,5 @@ public:
     }
 
 private:
-    std::unordered_map<int, std::shared_ptr<T>> entities;
+    std::unordered_map<int, std::unique_ptr<T>> entities;
 };

@@ -13,7 +13,7 @@ void ActionQueue::processActions() {
         auto action = std::move(queue.front());
         queue.pop();
 
-        float speed = (action->getPerformer() == nullptr) ? 1.f : action->getPerformer()->getSpeed();
+        float speed = action->getSpeed();
         int actions = static_cast<int>(speed);
         float chanceForExtraAction = speed - actions;
 

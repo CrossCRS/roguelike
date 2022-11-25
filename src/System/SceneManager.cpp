@@ -12,7 +12,7 @@ void SceneManager::draw() {
 	if (currentScene) currentScene->draw();
 }
 
-void SceneManager::addScene(unsigned int sceneId, std::shared_ptr<Scene> scene) {
+void SceneManager::addScene(unsigned int sceneId, std::unique_ptr<Scene> scene) {
 	spdlog::debug("Adding scene {}", sceneId);
 	scenes.emplace(sceneId, std::move(scene)).first->second->onCreate();
 }
@@ -27,6 +27,6 @@ void SceneManager::switchScene(unsigned int sceneId) {
 	}
 
 	if (currentScene) currentScene->onUnload(); // Unload current scene
-	currentScene = scenes.find(sceneId)->second; // Change current scene
+	currentScene = (scenes.find(sceneId)->second).get(); // Change current scene
 	currentScene->onLoad(); // Load new scene
 }

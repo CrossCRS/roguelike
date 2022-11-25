@@ -2,10 +2,6 @@
 
 using json = nlohmann::json;
 
-TileMap::TileMap(std::shared_ptr<sf::Texture> tileset) : tileset(std::move(tileset)) {
-    this->characterManager = std::make_unique<EntityManager<Character>>();
-}
-
 // Load a simple map from char array (for testing)
 void TileMap::loadFromArray(const char *map, unsigned int _width, unsigned int _height) {
     spdlog::debug("Loading {}x{} tilemap from array", _width, _height);
@@ -110,6 +106,11 @@ void TileMap::updateVertexArray() {
     }
 }
 
+void TileMap::setTileset(std::shared_ptr<sf::Texture> _tileset) {
+    tileset = std::move(_tileset);
+}
+
+
 BaseTile &TileMap::getTile(sf::Vector2i pos) const {
     if (pos.x < 0 || pos.y < 0 || static_cast<unsigned int>(pos.x) > width - 1 || static_cast<unsigned int>(pos.y) > height - 1) {
         const auto message = "Map position out of bounds";
@@ -129,11 +130,6 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     states.transform *= getTransform();
     states.texture = tileset.get();
     target.draw(vertices, states);
-
-    // Draw entities
-    for (auto const &element : characterManager->getAllEntities()) {
-        target.draw(*element.second);
-    }
 }
 
 void TileMap::setPlayerSpawnPoint(const sf::Vector2i &spawnPoint) {
