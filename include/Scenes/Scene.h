@@ -4,6 +4,11 @@
 
 class Scene {
 public:
+	enum Index {
+		SPLASH,
+		GAME
+	};
+
 	virtual ~Scene() = default;
 
 	virtual void onCreate() {}; // One time only

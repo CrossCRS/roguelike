@@ -1,22 +1,32 @@
 #include "Entities/Character.h"
 
-int Character::getMaxHealth() const {
-    return maxHealth;
+int Character::getCurrentAttribute(Attribute::Index index) const {
+    if (index >= Attribute::LAST)
+        throw std::invalid_argument("Invalid attribute index '" + std::to_string(index) + "'");
+
+    return attributes[index].getCurrent();
 }
 
-void Character::setMaxHealth(int newMaxHealth) {
-    maxHealth = newMaxHealth;
-    if (health > maxHealth) {
-        health = maxHealth;
-    }
+int Character::getBaseAttribute(Attribute::Index index) const {
+    if (index >= Attribute::LAST)
+        throw std::invalid_argument("Invalid attribute index '" + std::to_string(index) + "'");
+
+    return attributes[index].getBase();
 }
 
-int Character::getHealth() const {
-    return health;
+void Character::setCurrentAttribute(Attribute::Index index, int value) {
+    if (index >= Attribute::LAST)
+        throw std::invalid_argument("Invalid attribute index '" + std::to_string(index) + "'");
+
+    attributes[index].setCurrent(value);
+    // TODO: Health checks
 }
 
-void Character::setHealth(int newHealth) {
-    health = (newHealth <= maxHealth ? newHealth : maxHealth);
+void Character::setBaseAttribute(Attribute::Index index, int value) {
+    if (index >= Attribute::LAST)
+        throw std::invalid_argument("Invalid attribute index '" + std::to_string(index) + "'");
+
+    attributes[index].setBase(value);
 }
 
 float Character::getSpeed() const {
@@ -24,8 +34,8 @@ float Character::getSpeed() const {
 }
 
 void Character::setSpeed(float newSpeed) {
-    if (newSpeed < 0) {
+    if (newSpeed < 0)
         throw std::invalid_argument("Character speed cannot be less than 0");
-    }
+
     speed = newSpeed;
 }

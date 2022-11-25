@@ -3,6 +3,7 @@
 #include "Action.h"
 #include "Entities/Character.h"
 #include "Map/TileMap.h"
+#include "Map/World.h"
 
 #include <SFML/Graphics.hpp>
 

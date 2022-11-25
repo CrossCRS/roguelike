@@ -1,7 +1,7 @@
 #include "Entities/Entity.h"
 
-Entity::Entity(int id, std::shared_ptr<sf::Texture> texture, TileMap &tilemap)
-        : id(id), tilemap(tilemap), texture(std::move(texture)) {
+Entity::Entity(int id, std::shared_ptr<sf::Texture> texture, World &world)
+        : id(id), world(world), texture(std::move(texture)) {
     vertices.setPrimitiveType(sf::Triangles);
     vertices.resize(6);
 

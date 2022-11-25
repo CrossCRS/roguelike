@@ -14,10 +14,10 @@ public:
 	void update(float delta, float elapsed);
 	void draw();
 
-	void addScene(unsigned int sceneId, std::unique_ptr<Scene> scene);
-	void switchScene(unsigned int sceneId);
+	void addScene(Scene::Index sceneId, std::unique_ptr<Scene> scene);
+	void switchScene(Scene::Index sceneId);
 
 private:
-	std::unordered_map<unsigned int, std::unique_ptr<Scene>> scenes;
+	std::unordered_map<Scene::Index, std::unique_ptr<Scene>> scenes;
 	Scene *currentScene;
 };

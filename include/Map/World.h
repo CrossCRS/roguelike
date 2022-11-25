@@ -24,5 +24,5 @@ private:
 	std::unique_ptr<Player> player;
 	std::unique_ptr<EntityManager<Character>> characterManager;
 
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 };

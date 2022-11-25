@@ -20,6 +20,7 @@ set(sources
         src/System/Resources/ResourceManager.cpp
         src/System/SceneManager.cpp
         src/Map/TileMap.cpp
+        src/Attribute.cpp
         src/Game.cpp
         src/main.cpp)
 

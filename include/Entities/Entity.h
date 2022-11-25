@@ -5,14 +5,14 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-class TileMap; // Forward declaration
+class World; // Forward declaration
 
 class Entity : public sf::Drawable, public sf::Transformable {
 public:
-    Entity(int id, std::shared_ptr<sf::Texture> texture, TileMap &tilemap);
+    Entity(int id, std::shared_ptr<sf::Texture> texture, World &world);
 
     int getId() const { return id; }
-    TileMap &getTileMap() const { return tilemap; }
+    World &getWorld() const { return world; }
 
     sf::Vector2i getGridPosition() const;
     void setGridPosition(const sf::Vector2i &pos);
@@ -24,7 +24,7 @@ public:
 protected:
     int id;
 
-    TileMap &tilemap;
+    World &world;
     sf::VertexArray vertices;
     std::shared_ptr<sf::Texture> texture;
 };

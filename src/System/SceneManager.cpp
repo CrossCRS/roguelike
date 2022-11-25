@@ -12,12 +12,12 @@ void SceneManager::draw() {
 	if (currentScene) currentScene->draw();
 }
 
-void SceneManager::addScene(unsigned int sceneId, std::unique_ptr<Scene> scene) {
+void SceneManager::addScene(Scene::Index sceneId, std::unique_ptr<Scene> scene) {
 	spdlog::debug("Adding scene {}", sceneId);
 	scenes.emplace(sceneId, std::move(scene)).first->second->onCreate();
 }
 
-void SceneManager::switchScene(unsigned int sceneId) {
+void SceneManager::switchScene(Scene::Index sceneId) {
 	spdlog::debug("Switching to scene {}", sceneId);
 
 	if (!scenes.contains(sceneId)) {

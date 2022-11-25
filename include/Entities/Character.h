@@ -1,27 +1,24 @@
 #pragma once
 
-#include "Entity.h"
+#include "Attribute.h"
+#include "Entities/Entity.h"
 
 class Character : public Entity {
 public:
-    Character(int id, std::shared_ptr<sf::Texture> texture, TileMap &tilemap) :
-        Entity(id, std::move(texture), tilemap),
-        maxHealth(100),
-        health(100),
+    Character(int id, std::shared_ptr<sf::Texture> texture, World &world) :
+        Entity(id, std::move(texture), world),
         speed(1.f) {}
 
-    int getMaxHealth() const;
-    void setMaxHealth(int newMaxHealth);
+    int getCurrentAttribute(Attribute::Index index) const;
+    int getBaseAttribute(Attribute::Index index) const;
 
-    int getHealth() const;
-    void setHealth(int newHealth);
+    void setCurrentAttribute(Attribute::Index index, int value);
+    void setBaseAttribute(Attribute::Index index, int value);
 
     float getSpeed() const;
     void setSpeed(float newSpeed);
 private:
-    // TODO: Attributes class?
-    int maxHealth;
-    int health;
+    Attribute attributes[Attribute::LAST];
 
     float speed;
 };
