@@ -4,7 +4,7 @@
 #include "Actions/MoveAction.h"
 #include "Entities/Player.h"
 #include "Map/TileMap.h"
-#include "System/ResourceManager.h"
+#include "System/Resources/ResourceManager.h"
 #include "System/SceneManager.h"
 #include "Actions/ActionQueue.h"
 

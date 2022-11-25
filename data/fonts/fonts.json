@@ -1,10 +1,16 @@
-[
-  {
-    "name": "default",
-    "filename": "alagard_by_pix3m.ttf"
-  },
-  {
-    "name": "mono",
-    "filename": "IBMPlexMono-Medium.ttf"
-  }
-]
+{
+  "loadAll": false,
+  "extension": ".ttf",
+  "essentialResources": [
+    {
+      "name": "default",
+      "path": "alagard_by_pix3m.ttf"
+    }
+  ],
+  "resources": [
+    {
+      "name": "mono",
+      "path": "IBMPlexMono-Medium.ttf"
+    }
+  ]
+}

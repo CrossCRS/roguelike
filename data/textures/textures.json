@@ -1,0 +1,11 @@
+{
+  "loadAll": true,
+  "extension": ".png",
+  "essentialResources": [
+    {
+      "name": "splash_logo",
+      "path": "splash_logo.png"
+    }
+  ],
+  "resources": []
+}

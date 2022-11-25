@@ -11,8 +11,6 @@ void SplashScene::loadResourcesThreadFunc() {
 void SplashScene::onLoad() {
 	window.setView(window.getDefaultView());
 
-	resourceManager.loadEssentialResources();
-
 	splash_logo.setTexture(*resourceManager.getTexture("splash_logo"));
 	splash_logo.setOrigin(splash_logo.getGlobalBounds().width / 2, splash_logo.getGlobalBounds().height / 2);
 	splash_logo.setPosition(window.getSize().x / 2.f, window.getSize().y / 2.f);

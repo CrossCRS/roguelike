@@ -16,7 +16,7 @@ set(sources
         src/Entities/Entity.cpp
         src/Scenes/GameScene.cpp
         src/Scenes/SplashScene.cpp
-        src/System/ResourceManager.cpp
+        "src/System/Resources/ResourceManager.cpp"
         src/System/SceneManager.cpp
         src/Map/TileMap.cpp
         src/Game.cpp
