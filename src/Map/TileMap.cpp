@@ -12,6 +12,7 @@ void TileMap::loadFromArray(const char *map, unsigned int _width, unsigned int _
     this->width = _width;
     this->height = _height;
 
+    tiles.clear();
     tiles.resize(width * height);
 
     for (unsigned int i = 0; i < width; ++i) {
