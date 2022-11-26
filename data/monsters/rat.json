@@ -1,0 +1,11 @@
+{
+  "name": "Rat",
+  "description": "A slightly harmful vermin",
+  "texture": "rat",
+  "level": 1,
+  "experience": 5,
+  "attributes": {
+    "HEALTH": 1,
+    "STRENGTH": 1
+  }
+}

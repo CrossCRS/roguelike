@@ -1,4 +1,4 @@
-#include "Game.h"
+﻿#include "Game.h"
 #include <spdlog/spdlog.h>
 
 int main() {

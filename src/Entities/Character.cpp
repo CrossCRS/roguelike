@@ -39,3 +39,11 @@ void Character::setSpeed(float newSpeed) {
 
     speed = newSpeed;
 }
+
+const std::string &Character::getName() const {
+    return name;
+}
+
+void Character::setName(const std::string &_name) {
+    name = _name;
+}

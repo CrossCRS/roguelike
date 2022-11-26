@@ -29,8 +29,12 @@ void GameScene::onUnload() {}
 void GameScene::processTurn() {
     // Process player turn
     if (actionQueue->processPlayerAction()) {
-        // TODO: "Think" on all npc characters
-        // Process npc characters' turn
+        // "Think" on every NPC and add it's action
+        for (const auto &[id, monster] : world->getMonsterManager().getAllEntities()) {
+            actionQueue->addAction(monster->think());
+        }
+
+        // Process NPC turn
         actionQueue->processActions();
 
         // Update map vertices in case any texture changed
@@ -76,10 +80,10 @@ void GameScene::update(float, float) {
 
     // Show testing stuff
 #ifdef BREAD_DEBUG
-    text_debug.setString(fmt::format("POS: [x={:.1f}, y={:.1f}] [gx={:d}, gy={:d}]\nENT: {:d}\nMAP: {:d}x{:d} [V={:d}]\nTIM: {:.3f}s\nTRN: {:d}",
+    text_debug.setString(fmt::format("POS: [x={:.1f}, y={:.1f}] [gx={:d}, gy={:d}]\nMON: {:d}\nMAP: {:d}x{:d} [V={:d}]\nTIM: {:.3f}s\nTRN: {:d}",
         world->getPlayer().getPosition().x, world->getPlayer().getPosition().y,
         world->getPlayer().getGridPosition().x, world->getPlayer().getGridPosition().y,
-        world->getCharacterManager().count(),
+        world->getMonsterManager().count(),
         world->getMap().getWidth(), world->getMap().getHeight(), world->getMap().getVerticesCount(),
         delta, turnCount));
 #endif

@@ -13,6 +13,10 @@ void ResourceManager::loadResources() {
     loaded += textureStore->loadResources();
 
     spdlog::info("Loaded {} resources", loaded);
+
+    spdlog::debug("Loading monster definitions");
+    loaded = MonsterFactory::loadDefinitions(std::string(Constants::GAME_DATA_DIR) + "/monsters/");
+    spdlog::info("Loaded {} monster definitions", loaded);
 }
 
 std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string &name) const {

@@ -2,7 +2,7 @@
 
 World::World(ResourceManager &resourceManager) : resourceManager(resourceManager) {
 	tilemap = std::make_unique<TileMap>(nullptr);
-	characterManager = std::make_unique<EntityManager<Character>>();
+	monsterManager = std::make_unique<EntityManager<Monster>>();
 }
 
 void World::spawnPlayer() {
@@ -15,8 +15,8 @@ void World::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	// Draw map
 	target.draw(*tilemap, states);
 
-	// Draw entities
-	for (auto const &element : characterManager->getAllEntities()) {
+	// Draw monsters
+	for (auto const &element : monsterManager->getAllEntities()) {
 		target.draw(*element.second, states);
 	}
 
