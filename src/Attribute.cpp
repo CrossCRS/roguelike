@@ -1,7 +1,7 @@
 #include "Attribute.h"
 
 Attribute::Attribute(int _current, int _base) : current(_current), base(_base) {}
-Attribute::Attribute() : Attribute(10, 10) {}
+Attribute::Attribute() : Attribute(1, 1) {}
 
 int Attribute::getCurrent() const {
     return current;

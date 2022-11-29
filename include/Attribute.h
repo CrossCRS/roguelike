@@ -4,7 +4,8 @@ class Attribute {
 public:
     enum Index {
         HEALTH,
-        STRENGTH,
+        STRENGTH, // Damage, ability to wield some items(?)
+        DEXTERITY, // Dodge chance, hit chance(?)
         LAST // Enum size marker
     };
 

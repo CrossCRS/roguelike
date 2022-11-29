@@ -4,10 +4,11 @@
   "texture": "rat",
   "level": 1,
   "experience": 5,
-  "speed": 1,
+  "speed": 1.0,
   "canInteractWithObjects": false,
   "attributes": {
     "HEALTH": 1,
-    "STRENGTH": 1
+    "STRENGTH": 1,
+    "DEXTERITY": 10
   }
 }
