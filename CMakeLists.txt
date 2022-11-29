@@ -16,13 +16,13 @@ set(sources
         src/Entities/Entity.cpp
         src/Entities/Monster.cpp
         src/Entities/Player.cpp
+        src/Map/TileMap.cpp
         src/Map/World.cpp
-        src/Scenes/GameScene.cpp
-        src/Scenes/SplashScene.cpp
         src/System/Factories/MonsterFactory.cpp
         src/System/Resources/ResourceManager.cpp
         src/System/SceneManager.cpp
-        src/Map/TileMap.cpp
+        src/Scenes/GameScene.cpp
+        src/Scenes/SplashScene.cpp
         src/Attribute.cpp
         src/Game.cpp
         src/main.cpp)
