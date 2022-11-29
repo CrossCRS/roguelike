@@ -13,6 +13,7 @@ set(sources
         src/Actions/ActionQueue.cpp
         src/Actions/MoveAction.cpp
         src/Entities/Character.cpp
+        src/Entities/Monster.cpp
         src/Entities/Entity.cpp
         src/Map/World.cpp
         src/Scenes/GameScene.cpp
