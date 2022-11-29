@@ -28,6 +28,7 @@ void GameScene::onLoad() {
     world->spawnMonster("rat", { 41, 5 });
     world->spawnMonster("rat", { 35, 3 });
     world->spawnMonster("rat", { 38, 6 });
+    world->spawnMonster("goblin", { 23, 1 });
 }
 
 void GameScene::onUnload() {}

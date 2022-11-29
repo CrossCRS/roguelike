@@ -47,7 +47,9 @@ $ cmake --build build/
 
 ## Kamienie Milowe
 * ~~**Milestone-1**~~ - Ekran wczytywania zasobów, wczytywanie testowej mapy z pliku, kolizje z polami, interaktywne pola (np. drzwi), kolejka akcji
-* **Milestone-2** - "Wałęsające się" NPC, wczytywanie NPC z plików(?), statystyki
+* ~~**Milestone-2**~~ - "Wałęsające się" NPC, wczytywanie NPC z plików(?), statystyki
+* **Milestone-3** - Przedmioty wczytywanie z plików, ekwipunek, plecak, przedmioty na ziemi
+* **Milestone-4** - Prosty interfejs
 * ...
 * **Milestone-???** - Shadery żeby chlebek na ekranie wczytywania ładnie migał
 
