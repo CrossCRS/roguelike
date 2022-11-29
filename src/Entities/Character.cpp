@@ -40,6 +40,14 @@ void Character::setSpeed(float newSpeed) {
     speed = newSpeed;
 }
 
+bool Character::canInteractWithObjects() const {
+    return bcanInteractWithObjects;
+}
+
+void Character::setCanInteractWithObjects(bool value) {
+    bcanInteractWithObjects = value;
+}
+
 const std::string &Character::getName() const {
     return name;
 }

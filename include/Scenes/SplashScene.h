@@ -35,5 +35,6 @@ private:
 	
 	sf::Text text_splash;
 	sf::Text text_gamename;
+    sf::Text text_copy;
 	sf::Sprite splash_logo;
 };

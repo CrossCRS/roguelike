@@ -14,5 +14,7 @@ void MoveAction::execute() {
         }
     }
 
-    newTile.interact(character);
+    if (character.canInteractWithObjects()) {
+        newTile.interact(character);
+    }
 }

@@ -27,6 +27,8 @@ std::unique_ptr<Monster> MonsterFactory::instantiate(const std::string &monsterN
     // Set basic fields
     monster->setName(monsterDef["name"].get<std::string>());
     monster->setTexture(world.getResourceManager().getTexture(monsterDef["texture"].get<std::string>()));
+    monster->setSpeed(monsterDef["speed"].get<float>());
+    monster->setCanInteractWithObjects(monsterDef["canInteractWithObjects"].get<bool>());
 
     // Set attributes
     for (int i = 0; i < Attribute::LAST; i++) {

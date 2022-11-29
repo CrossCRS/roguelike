@@ -28,6 +28,12 @@ void SplashScene::onLoad() {
 	text_splash.setFillColor(sf::Color::White);
 	text_splash.setString("Loading stuff...");
 	centerText(text_splash);
+
+    text_copy.setFont(*resourceManager.getFont("default"));
+    text_copy.setCharacterSize(16);
+    text_copy.setFillColor(sf::Color(64, 64, 64));
+    text_copy.setString("(c) Norbert Budzynski 2022");
+    text_copy.setPosition(6.f, Constants::GAME_HEIGHT - text_copy.getGlobalBounds().height - 10.f);
 	
 	loadResourcesThread = std::thread([this] { this->loadResourcesThreadFunc(); });
 }
@@ -66,6 +72,7 @@ void SplashScene::draw() {
 
 	window.draw(text_gamename);
 	window.draw(text_splash);
+    window.draw(text_copy);
 	window.draw(splash_logo);
 }
 
