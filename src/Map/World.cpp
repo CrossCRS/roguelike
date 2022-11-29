@@ -8,6 +8,14 @@ World::World(ResourceManager &resourceManager) : resourceManager(resourceManager
 void World::spawnPlayer() {
 	player = std::make_unique<Player>(0, resourceManager.getTexture("player"), *this);
 	player->setGridPosition(tilemap->getPlayerSpawnPoint());
+    player->setSpeed(1.0f);
+    player->setCanInteractWithObjects(true);
+
+    // TODO: Rebalance attributes?
+    player->setBaseAttribute(Attribute::HEALTH, 10);
+    player->setCurrentAttribute(Attribute::HEALTH, 10);
+    player->setBaseAttribute(Attribute::STRENGTH, 10);
+    player->setCurrentAttribute(Attribute::STRENGTH, 10);
 }
 
 Monster &World::spawnMonster(const std::string &name, const sf::Vector2i &pos) {
