@@ -14,6 +14,10 @@ public:
 	World(ResourceManager &resourceManager);
 
 	void spawnPlayer();
+    Monster &spawnMonster(const std::string &name, const sf::Vector2i &pos);
+
+    BaseTile &getTile(const sf::Vector2i &pos) const;
+    Monster *getMonsterOnPos(const sf::Vector2i &pos) const;
 
 	EntityManager<Monster> &getMonsterManager() const { return *monsterManager; }
 	TileMap &getMap() const { return *tilemap; }

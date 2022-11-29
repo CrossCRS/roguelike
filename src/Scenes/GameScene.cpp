@@ -22,6 +22,10 @@ void GameScene::onLoad() {
     text_debug.setString("");
 
     world->spawnPlayer();
+
+    // Spawn some test monsters
+    world->spawnMonster("rat", { 36, 2 });
+    world->spawnMonster("rat", { 41, 5 });
 }
 
 void GameScene::onUnload() {}
@@ -29,7 +33,7 @@ void GameScene::onUnload() {}
 void GameScene::processTurn() {
     // Process player turn
     if (actionQueue->processPlayerAction()) {
-        // "Think" on every NPC and add it's action
+        // "Think" on every NPC and add its action
         for (const auto &[id, monster] : world->getMonsterManager().getAllEntities()) {
             actionQueue->addAction(monster->think());
         }

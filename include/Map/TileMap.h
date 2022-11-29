@@ -32,7 +32,7 @@ public:
     unsigned int getHeight() const { return height; }
     size_t getVerticesCount() const { return vertices.getVertexCount(); }
     
-    BaseTile &getTile(sf::Vector2i pos) const;
+    BaseTile &getTile(const sf::Vector2i &pos) const;
 
 private:
     unsigned int width;

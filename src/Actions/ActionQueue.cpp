@@ -13,18 +13,20 @@ void ActionQueue::processActions() {
         auto action = std::move(queue.front());
         queue.pop();
 
-        float speed = action->getSpeed();
-        int actions = static_cast<int>(speed);
-        float chanceForExtraAction = speed - actions;
+        if (action != nullptr) {
+            float speed = action->getSpeed();
+            int actions = static_cast<int>(speed);
+            float chanceForExtraAction = speed - actions;
 
-        // Execute the guaranteed actions
-        for (int j = 0; j < actions; j++) {
-            action->execute();
-        }
+            // Execute the guaranteed actions
+            for (int j = 0; j < actions; j++) {
+                action->execute();
+            }
 
-        // Execute the extra action
-        if (distribution(gen) < chanceForExtraAction) {
-            action->execute();
+            // Execute the extra action
+            if (distribution(gen) < chanceForExtraAction) {
+                action->execute();
+            }
         }
     }
 }

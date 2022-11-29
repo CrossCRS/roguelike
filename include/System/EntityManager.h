@@ -24,7 +24,11 @@ public:
     }
 
     T &getEntity(int id) const {
-        if (!entities.contains(id)) return nullptr;
+        if (!entities.contains(id)) {
+            const auto message = "Entity with id " + std::to_string(id) + " doesn't exist";
+            spdlog::error(message);
+            throw std::invalid_argument(message);
+        }
         
         return *(entities.find(id)->second);
     }

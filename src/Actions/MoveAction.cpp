@@ -6,7 +6,11 @@ void MoveAction::execute() {
     auto &newTile = character.getWorld().getMap().getTile(newPos);
 
     if (!newTile.isImpenetrable()) {
-        character.setGridPosition(newPos);
+        if (character.getWorld().getMonsterOnPos(newPos) == nullptr) {
+            character.setGridPosition(newPos);
+        } else {
+            // TODO: Execute attack action instead?
+        }
     }
 
     newTile.interact(character);
