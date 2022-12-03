@@ -1,18 +1,10 @@
 #pragma once
 
-#include "Constants.h"
-#include "Entities/Character.h"
-#include "Map/Tiles/BaseTile.h"
-#include "Map/Tiles/DoorTile.h"
-#include "Map/Tiles/FloorTile.h"
-#include "Map/Tiles/WallTile.h"
-#include "System/EntityManager.h"
+#include "Tiles/BaseTile.h"
 
-#include <fstream>
 #include <memory>
 #include <nlohmann/json.hpp>
 #include <SFML/Graphics.hpp>
-#include <spdlog/spdlog.h>
 
 class TileMap : public sf::Drawable, public sf::Transformable {
 public:

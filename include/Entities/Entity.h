@@ -1,11 +1,9 @@
 #pragma once
 
-#include "Constants.h"
-
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-class World; // Forward declaration
+class World;
 
 class Entity : public sf::Drawable, public sf::Transformable {
 public:

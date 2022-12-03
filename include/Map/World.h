@@ -1,13 +1,14 @@
 #pragma once
 
 #include "Entities/Monster.h"
-#include "Entities/Player.h"
-#include "Map/TileMap.h"
 #include "System/EntityManager.h"
-#include "System/Factories/MonsterFactory.h"
-#include "System/Resources/ResourceManager.h"
 
 #include <SFML/Graphics.hpp>
+
+class BaseTile;
+class Player;
+class ResourceManager;
+class TileMap;
 
 class World : public sf::Drawable {
 public:

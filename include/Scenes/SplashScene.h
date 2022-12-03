@@ -1,14 +1,13 @@
 #pragma once
 
-#include "Constants.h"
 #include "Scene.h"
-#include "System/Resources/ResourceManager.h"
-#include "System/SceneManager.h"
 
 #include <atomic>
-#include <cmath>
 #include <thread>
 #include <SFML/Graphics.hpp>
+
+class SceneManager;
+class ResourceManager;
 
 class SplashScene : public Scene {
 public:

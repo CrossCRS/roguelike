@@ -1,17 +1,10 @@
 #pragma once
 
-#include "Actions/Action.h"
-#include "Entities/Character.h"
-#include "Entities/Player.h"
+#include "Action.h"
 
 #include <random>
 #include <queue>
 
-// PREDKOSC GRACZA ZAWSZE 1
-// Predkosc 1 - gwarantowany 1 ruch na ture
-// Predkosc 2 - gwarantowane 2 ruchy na ture
-// Predkosc 1.75 - gwarantowany 1 ruch, 75% szans na drugi
-// Predkosc 0.75 - 75% szans na 1 ruch
 class ActionQueue {
 public:
     ActionQueue() : playerAction(nullptr), rd(), gen(rd()), distribution(0, 1) {}

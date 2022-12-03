@@ -1,5 +1,9 @@
 #include "Game.h"
 
+#include "Constants.h"
+#include "Scenes/GameScene.h"
+#include "Scenes/SplashScene.h"
+
 Game::Game() : window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEIGHT), Constants::GAME_NAME, sf::Style::Titlebar | sf::Style::Close) {
     window.setFramerateLimit(60);
 

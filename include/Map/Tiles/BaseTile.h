@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entities/Entity.h"
+class Character;
 
 class BaseTile {
 public:

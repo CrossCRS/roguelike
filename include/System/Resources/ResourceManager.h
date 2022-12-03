@@ -1,12 +1,10 @@
 #pragma once
 
-#include "System/Factories/MonsterFactory.h"
 #include "System/Resources/ResourceStore.h"
 
 #include <memory>
 #include <string>
 #include <SFML/Graphics.hpp>
-#include <spdlog/spdlog.h>
 
 class ResourceManager {
 public:

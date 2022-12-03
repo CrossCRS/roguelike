@@ -1,8 +1,5 @@
 #pragma once
 
-#include <memory>
-#include "Entities/Character.h"
-
 class Action {
 public:
     virtual ~Action() = default;

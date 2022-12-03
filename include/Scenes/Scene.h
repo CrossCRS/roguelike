@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Window/Keyboard.hpp>
 
 class Scene {
 public:

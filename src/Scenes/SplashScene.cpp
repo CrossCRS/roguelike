@@ -1,5 +1,9 @@
 #include "Scenes/SplashScene.h"
 
+#include "Constants.h"
+#include "System/Resources/ResourceManager.h"
+#include "System/SceneManager.h"
+
 SplashScene::SplashScene(SceneManager &sceneManager, ResourceManager &resourceManager, sf::RenderWindow &window) :
 	sceneManager(sceneManager), resourceManager(resourceManager), window(window), loadResourcesThreadFinished(false), loaded(false) { }
 

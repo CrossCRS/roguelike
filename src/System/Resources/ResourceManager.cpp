@@ -1,5 +1,10 @@
 #include "System/Resources/ResourceManager.h"
 
+#include "Constants.h"
+#include "System/Factories/MonsterFactory.h"
+
+#include <spdlog/spdlog.h>
+
 ResourceManager::ResourceManager(std::string _dataDir) : dataDir(std::move(_dataDir)) {
     fontStore = std::make_unique<ResourceStore<sf::Font>>(dataDir + "/fonts/", "fonts.json");
     textureStore = std::make_unique<ResourceStore<sf::Texture>>(dataDir + "/textures/", "textures.json");

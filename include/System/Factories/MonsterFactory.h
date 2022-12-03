@@ -1,14 +1,9 @@
 #pragma once
 
-#include "Entities/Monster.h"
-#include "System/Resources/ResourceManager.h"
-
-#include <filesystem>
-#include <fstream>
-#include <magic_enum.hpp>
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
 
+class Monster;
 class World;
 
 class MonsterFactory {

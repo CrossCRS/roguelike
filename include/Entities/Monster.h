@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Actions/Action.h"
 #include "Character.h"
 
 #include <random>
+
+class Action;
 
 class Monster : public Character {
 public:

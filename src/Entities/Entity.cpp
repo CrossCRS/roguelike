@@ -1,5 +1,7 @@
 #include "Entities/Entity.h"
 
+#include "Constants.h"
+
 Entity::Entity(int id, std::shared_ptr<sf::Texture> texture, World &world)
         : id(id), world(world), texture(std::move(texture)) {
     vertices.setPrimitiveType(sf::Triangles);

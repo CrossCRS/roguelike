@@ -1,5 +1,14 @@
 #include "Scenes/GameScene.h"
 
+#include "Constants.h"
+#include "Actions/MoveAction.h"
+#include "Entities/Player.h"
+#include "System/Resources/ResourceManager.h"
+#include "System/SceneManager.h"
+#include "Map/TileMap.h"
+
+#include <fmt/core.h>
+
 void GameScene::onLoad() {
     // Setup action queue
     actionQueue = std::make_unique<ActionQueue>();

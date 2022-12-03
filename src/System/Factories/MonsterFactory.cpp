@@ -1,5 +1,12 @@
 #include "System/Factories/MonsterFactory.h"
+
 #include "Map/World.h"
+#include "Entities/Monster.h"
+#include "System/Resources/ResourceManager.h"
+
+#include <filesystem>
+#include <fstream>
+#include <magic_enum.hpp>
 
 size_t MonsterFactory::loadDefinitions(const std::string &dataDir) {
     size_t loaded = 0;

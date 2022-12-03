@@ -1,5 +1,10 @@
 #include "Actions/MoveAction.h"
 
+#include "Entities/Player.h"
+#include "Map/TileMap.h"
+#include "Map/World.h"
+#include "Map/Tiles/BaseTile.h"
+
 void MoveAction::execute() {
     // TODO: Better collision detection
     sf::Vector2i newPos = character.getGridPosition() + moveDirection;

@@ -1,5 +1,12 @@
 #include "Map/World.h"
 
+#include "Entities/Monster.h"
+#include "Entities/Player.h"
+#include "Map/TileMap.h"
+#include "System/EntityManager.h"
+#include "System/Factories/MonsterFactory.h"
+#include "System/Resources/ResourceManager.h"
+
 World::World(ResourceManager &resourceManager) : resourceManager(resourceManager) {
 	tilemap = std::make_unique<TileMap>(nullptr);
 	monsterManager = std::make_unique<EntityManager<Monster>>();

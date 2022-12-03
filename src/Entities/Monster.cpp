@@ -1,5 +1,6 @@
 #include "Entities/Monster.h"
 
+#include "Actions/Action.h"
 #include "Actions/MoveAction.h"
 
 std::unique_ptr<Action> Monster::think() {

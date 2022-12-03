@@ -1,15 +1,13 @@
 #pragma once
 
 #include "Scene.h"
-#include "Actions/MoveAction.h"
-#include "Entities/Player.h"
-#include "Map/World.h"
-#include "System/Resources/ResourceManager.h"
-#include "System/SceneManager.h"
 #include "Actions/ActionQueue.h"
+#include "Map/World.h"
 
 #include <SFML/Graphics.hpp>
-#include <fmt/core.h>
+
+class SceneManager;
+class ResourceManager;
 
 class GameScene : public Scene {
 public:

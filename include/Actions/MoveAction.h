@@ -2,10 +2,8 @@
 
 #include "Action.h"
 #include "Entities/Character.h"
-#include "Map/TileMap.h"
-#include "Map/World.h"
 
-#include <SFML/Graphics.hpp>
+#include <SFML/System/Vector2.hpp>
 
 class MoveAction : public Action {
 public:

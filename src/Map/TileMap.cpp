@@ -1,5 +1,15 @@
 #include "Map/TileMap.h"
 
+#include "Constants.h"
+#include "Map/Tiles/BaseTile.h"
+#include "Map/Tiles/DoorTile.h"
+#include "Map/Tiles/FloorTile.h"
+#include "Map/Tiles/WallTile.h"
+#include "System/EntityManager.h"
+
+#include <fstream>
+#include <spdlog/spdlog.h>
+
 using json = nlohmann::json;
 
 // Load a simple map from char array (for testing)
