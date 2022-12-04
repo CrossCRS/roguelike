@@ -38,13 +38,9 @@ std::unique_ptr<Monster> MonsterFactory::instantiate(const std::string &monsterN
     monster->setCanInteractWithObjects(monsterDef["canInteractWithObjects"].get<bool>());
 
     // Set attributes
-    for (int i = 0; i < Attribute::LAST; i++) {
-        auto attr = magic_enum::enum_cast<Attribute::Index>(i);
-        if (!attr.has_value()) continue;
-
-        auto attrString = magic_enum::enum_name(attr.value());
-        monster->setBaseAttribute(attr.value(), monsterDef["attributes"][attrString].get<int>());
-        monster->setCurrentAttribute(attr.value(), monsterDef["attributes"][attrString].get<int>());
+    for (auto const &[attr, attrString] : magic_enum::enum_entries<AttributeIndex>()) {
+        monster->setBaseAttribute(attr, monsterDef["attributes"][attrString].get<int>());
+        monster->setCurrentAttribute(attr, monsterDef["attributes"][attrString].get<int>());
     }
 
     // TODO: Set level, experience...

@@ -2,13 +2,13 @@
 
 #include <SFML/Window/Keyboard.hpp>
 
+enum class SceneIndex {
+	SPLASH,
+	GAME
+};
+
 class Scene {
 public:
-	enum Index {
-		SPLASH,
-		GAME
-	};
-
 	virtual ~Scene() = default;
 
 	virtual void onCreate() {}; // One time only

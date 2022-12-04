@@ -10,10 +10,10 @@ Game::Game() : window(sf::VideoMode(Constants::GAME_WIDTH, Constants::GAME_HEIGH
     resourceManager = std::make_unique<ResourceManager>(Constants::GAME_DATA_DIR);
 
     sceneManager = std::make_unique<SceneManager>();
-    sceneManager->addScene(Scene::SPLASH, std::make_unique<SplashScene>(*sceneManager, *resourceManager, window));
-    sceneManager->addScene(Scene::GAME, std::make_unique<GameScene>(*sceneManager, *resourceManager, window));
+    sceneManager->addScene(SceneIndex::SPLASH, std::make_unique<SplashScene>(*sceneManager, *resourceManager, window));
+    sceneManager->addScene(SceneIndex::GAME, std::make_unique<GameScene>(*sceneManager, *resourceManager, window));
 
-    sceneManager->switchScene(Scene::SPLASH);
+    sceneManager->switchScene(SceneIndex::SPLASH);
 }
 
 void Game::run() {

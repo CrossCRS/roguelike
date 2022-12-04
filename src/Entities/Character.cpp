@@ -1,32 +1,20 @@
 #include "Entities/Character.h"
 
-int Character::getCurrentAttribute(Attribute::Index index) const {
-    if (index >= Attribute::LAST)
-        throw std::invalid_argument("Invalid attribute index '" + std::to_string(index) + "'");
-
-    return attributes[index].getCurrent();
+int Character::getCurrentAttribute(AttributeIndex index) const {
+    return attributes[static_cast<int>(index)].getCurrent();
 }
 
-int Character::getBaseAttribute(Attribute::Index index) const {
-    if (index >= Attribute::LAST)
-        throw std::invalid_argument("Invalid attribute index '" + std::to_string(index) + "'");
-
-    return attributes[index].getBase();
+int Character::getBaseAttribute(AttributeIndex index) const {
+    return attributes[static_cast<int>(index)].getBase();
 }
 
-void Character::setCurrentAttribute(Attribute::Index index, int value) {
-    if (index >= Attribute::LAST)
-        throw std::invalid_argument("Invalid attribute index '" + std::to_string(index) + "'");
-
-    attributes[index].setCurrent(value);
+void Character::setCurrentAttribute(AttributeIndex index, int value) {
+    attributes[static_cast<int>(index)].setCurrent(value);
     // TODO: Health checks
 }
 
-void Character::setBaseAttribute(Attribute::Index index, int value) {
-    if (index >= Attribute::LAST)
-        throw std::invalid_argument("Invalid attribute index '" + std::to_string(index) + "'");
-
-    attributes[index].setBase(value);
+void Character::setBaseAttribute(AttributeIndex index, int value) {
+    attributes[static_cast<int>(index)].setBase(value);
 }
 
 float Character::getSpeed() const {

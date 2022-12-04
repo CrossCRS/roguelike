@@ -45,7 +45,7 @@ void SplashScene::onLoad() {
 void SplashScene::handleInput(sf::Keyboard::Key key) {
 	switch (key) {
 		case sf::Keyboard::Enter:
-			if (loaded) sceneManager.switchScene(Scene::GAME);
+			if (loaded) sceneManager.switchScene(SceneIndex::GAME);
 			break;
 		case sf::Keyboard::Escape:
 			window.close();
