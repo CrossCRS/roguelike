@@ -11,6 +11,7 @@ World::World(ResourceManager &resourceManager) : resourceManager(resourceManager
 	tilemap = std::make_unique<TileMap>(nullptr);
 	monsterManager = std::make_unique<EntityManager<Monster>>();
 }
+World::~World() = default;
 
 void World::spawnPlayer() {
 	player = std::make_unique<Player>(0, resourceManager.getTexture("player"), *this);

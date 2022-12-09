@@ -13,6 +13,7 @@ class TileMap;
 class World : public sf::Drawable {
 public:
 	World(ResourceManager &resourceManager);
+    ~World() override;
 
 	void spawnPlayer();
     Monster &spawnMonster(const std::string &name, const sf::Vector2i &pos);
