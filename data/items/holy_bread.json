@@ -1,0 +1,10 @@
+{
+  "name": "The Holy Bread",
+  "description": "One of the legendary Necessary Goods",
+  "texture": "holy_bread",
+  "quality": "LEGENDARY",
+  "flags": [
+    ""
+  ],
+  "slot": "NONE"
+}
