@@ -2,6 +2,7 @@
 
 #include "Action.h"
 
+#include <memory>
 #include <random>
 #include <queue>
 
