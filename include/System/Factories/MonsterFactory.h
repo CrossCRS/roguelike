@@ -1,7 +1,6 @@
 #pragma once
 
 #include <nlohmann/json.hpp>
-#include <spdlog/spdlog.h>
 
 class Monster;
 class World;
