@@ -35,7 +35,7 @@ public:
     int getId() const;
     const std::string &getName() const;
     const std::string &getDescription() const;
-    sf::Texture &getTexture() const;
+    std::shared_ptr<sf::Texture> getTexture() const;
     const ItemQuality &getQuality() const;
     const ItemFlag &getFlag() const;
     const ItemSlot &getSlot() const;

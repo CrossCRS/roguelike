@@ -28,8 +28,8 @@ const std::string &Item::getDescription() const {
     return description;
 }
 
-sf::Texture &Item::getTexture() const {
-    return *texture;
+std::shared_ptr<sf::Texture> Item::getTexture() const {
+    return texture;
 }
 
 const ItemQuality &Item::getQuality() const {

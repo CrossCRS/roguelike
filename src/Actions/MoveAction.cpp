@@ -1,5 +1,6 @@
 #include "Actions/MoveAction.h"
 
+#include "Entities/GroundItem.h"
 #include "Entities/Player.h"
 #include "Map/TileMap.h"
 #include "Map/World.h"
@@ -14,8 +15,14 @@ void MoveAction::execute() {
         if (character.getWorld().getMonsterOnPos(newPos) == nullptr
             && character.getWorld().getPlayer().getGridPosition() != newPos) {
             character.setGridPosition(newPos);
-        } else {
+        } else if (character.getWorld().getMonsterOnPos(newPos) != nullptr) {
             // TODO: Execute attack action instead?
+        }
+
+        // TODO: Item pickup, GUI later?
+        auto item = dynamic_cast<GroundItem*>(character.getWorld().getEntityOnPos(newPos));
+        if (item != nullptr) {
+
         }
     }
 

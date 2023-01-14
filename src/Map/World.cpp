@@ -4,12 +4,14 @@
 #include "Entities/Player.h"
 #include "Map/TileMap.h"
 #include "System/EntityManager.h"
+#include "System/Factories/ItemFactory.h"
 #include "System/Factories/MonsterFactory.h"
 #include "System/Resources/ResourceManager.h"
 
 World::World(ResourceManager &resourceManager) : resourceManager(resourceManager) {
 	tilemap = std::make_unique<TileMap>(nullptr);
 	monsterManager = std::make_unique<EntityManager<Monster>>();
+    entityManager = std::make_unique<EntityManager<Entity>>();
 }
 World::~World() = default;
 
@@ -27,6 +29,17 @@ Monster &World::spawnMonster(const std::string &name, const sf::Vector2i &pos) {
     return monsterManager->getEntity(id);
 }
 
+GroundItem &World::spawnGroundItem(const std::string &name, const sf::Vector2i &pos) {
+    auto item = ItemFactory::instantiate(name, *this);
+    int id = item->getId();
+
+    std::unique_ptr<GroundItem> groundItem = std::make_unique<GroundItem>(id, std::move(item), *this);
+    groundItem->setGridPosition(pos);
+    entityManager->insertEntity(std::move(groundItem));
+
+    return dynamic_cast<GroundItem&>(entityManager->getEntity(id));
+}
+
 BaseTile &World::getTile(const sf::Vector2i &pos) const {
     return tilemap->getTile(pos);
 }
@@ -41,12 +54,27 @@ Monster *World::getMonsterOnPos(const sf::Vector2i &pos) const {
     return monster;
 }
 
+Entity *World::getEntityOnPos(const sf::Vector2i &pos) const {
+    Entity *entity = nullptr;
+    for (const auto &[id, e] : getEntityManager().getAllEntities()) {
+        if (e->getGridPosition() == pos) {
+            entity = e.get();
+        }
+    }
+    return entity;
+}
+
 void World::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	// Draw map
 	target.draw(*tilemap, states);
 
+    // Draw entities
+    for (auto const &element : getEntityManager().getAllEntities()) {
+        target.draw(*element.second, states);
+    }
+
 	// Draw monsters
-	for (auto const &element : monsterManager->getAllEntities()) {
+	for (auto const &element : getMonsterManager().getAllEntities()) {
 		target.draw(*element.second, states);
 	}
 
