@@ -23,6 +23,7 @@ set(sources
         src/System/SceneManager.cpp
         src/Scenes/GameScene.cpp
         src/Scenes/SplashScene.cpp
+        src/Utils/RichText.cpp
         src/Attribute.cpp
         src/Game.cpp
         src/main.cpp)
