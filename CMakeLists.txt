@@ -21,6 +21,7 @@ set(sources
         src/System/Factories/ItemFactory.cpp
         src/System/Factories/MonsterFactory.cpp
         src/System/Resources/ResourceManager.cpp
+        src/System/Inventory.cpp
         src/System/SceneManager.cpp
         src/Scenes/GameScene.cpp
         src/Scenes/SplashScene.cpp

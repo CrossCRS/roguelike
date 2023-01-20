@@ -19,10 +19,11 @@ void MoveAction::execute() {
             // TODO: Execute attack action instead?
         }
 
-        // TODO: Item pickup, GUI later?
-        auto item = dynamic_cast<GroundItem*>(character.getWorld().getEntityOnPos(newPos));
-        if (item != nullptr) {
-
+        // TODO: Item pickup GUI?
+        auto groundItem = dynamic_cast<GroundItem*>(character.getWorld().getEntityOnPos(newPos));
+        if (groundItem != nullptr) {
+            character.getInventory().addItem(std::move(groundItem->item));
+            character.getWorld().getEntityManager().removeEntity(*groundItem);
         }
     }
 

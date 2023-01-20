@@ -18,6 +18,9 @@ World::~World() = default;
 void World::spawnPlayer() {
 	player = std::make_unique<Player>(0, resourceManager.getTexture("player"), *this);
 	player->setGridPosition(tilemap->getPlayerSpawnPoint());
+
+    // TODO: Remove after testing
+    spawnGroundItem("holy_bread", tilemap->getPlayerSpawnPoint() + sf::Vector2i(2, 0));
 }
 
 Monster &World::spawnMonster(const std::string &name, const sf::Vector2i &pos) {

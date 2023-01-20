@@ -43,3 +43,7 @@ const std::string &Character::getName() const {
 void Character::setName(const std::string &_name) {
     name = _name;
 }
+
+Inventory &Character::getInventory() {
+    return inventory;
+}

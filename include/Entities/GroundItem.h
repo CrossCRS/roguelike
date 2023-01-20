@@ -9,6 +9,5 @@ public:
             Entity(id, _item->getTexture(), world),
             item(std::move(_item)) {}
 
-private:
     std::unique_ptr<Item> item;
 };

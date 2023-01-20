@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "Actions/ActionQueue.h"
 #include "Map/World.h"
+#include "Utils/RichText.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -39,4 +40,6 @@ private:
     unsigned long turnCount;
 	
 	sf::Text text_debug;
+
+    sfe::RichText text_inventory; // TODO: Replace with proper UI
 };

@@ -30,6 +30,9 @@ void GameScene::onLoad() {
     text_debug.setPosition(10, 10);
     text_debug.setString("");
 
+    text_inventory.setFont(*resourceManager.getFont("default"));
+    text_inventory.setCharacterSize(15);
+
     world->spawnPlayer();
 
     // Spawn some test monsters
@@ -90,9 +93,20 @@ void GameScene::update(float delta, float) {
 #else
 void GameScene::update(float, float) {
 #endif
+    Player &player = world->getPlayer();
+
     // Center camera on player
-    worldView.setCenter(sf::Vector2f(world->getPlayer().getPosition().x + (Constants::GRID_SIZE / 2),
-        world->getPlayer().getPosition().y + (Constants::GRID_SIZE / 2)));
+    worldView.setCenter(sf::Vector2f(player.getPosition().x + (Constants::GRID_SIZE / 2),
+        player.getPosition().y + (Constants::GRID_SIZE / 2)));
+
+    // Draw inventory
+    // TODO: Move to another class and make interactable
+    text_inventory.clear();
+    for (size_t i = 0; i < player.getInventory().getItemCount(); i++) {
+        Item &item = player.getInventory().getItem(i);
+        text_inventory << sf::Text::Bold << item.getName() << "\n";
+    }
+    text_inventory.setPosition(Constants::GAME_WIDTH - text_inventory.getLocalBounds().width - 10, 10);
 
     // Show testing stuff
 #ifdef BREAD_DEBUG
@@ -115,4 +129,5 @@ void GameScene::draw() {
     // GUI
     window.setView(window.getDefaultView());
     window.draw(text_debug);
+    window.draw(text_inventory);
 }
