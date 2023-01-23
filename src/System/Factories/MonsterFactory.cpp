@@ -7,6 +7,7 @@
 #include <filesystem>
 #include <fstream>
 #include <magic_enum.hpp>
+#include <spdlog/spdlog.h>
 
 size_t MonsterFactory::loadDefinitions(const std::string &dataDir) {
     size_t loaded = 0;

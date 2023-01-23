@@ -2,14 +2,18 @@
 
 #include "Attribute.h"
 #include "Entities/Entity.h"
+#include "System/Inventory.h"
 
 #include <magic_enum.hpp>
+
+#define INVENTORY_SLOTS 24
 
 class Character : public Entity {
 public:
     Character(int id, std::shared_ptr<sf::Texture> texture, World &world) :
         Entity(id, std::move(texture), world),
         name("Unknown"),
+        inventory(*this, INVENTORY_SLOTS),
         speed(1.f),
         bcanInteractWithObjects(true) {}
 
@@ -28,10 +32,13 @@ public:
     const std::string &getName() const;
     void setName(const std::string& _name);
 
+    Inventory &getInventory();
+
 private:
     std::string name;
     
     Attribute attributes[magic_enum::enum_count<AttributeIndex>()];
+    Inventory inventory;
 
     float speed;
     bool bcanInteractWithObjects;

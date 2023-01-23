@@ -18,14 +18,17 @@ set(sources
         src/Entities/Player.cpp
         src/Map/TileMap.cpp
         src/Map/World.cpp
+        src/System/Factories/ItemFactory.cpp
         src/System/Factories/MonsterFactory.cpp
         src/System/Resources/ResourceManager.cpp
+        src/System/Inventory.cpp
         src/System/SceneManager.cpp
         src/Scenes/GameScene.cpp
         src/Scenes/SplashScene.cpp
         src/Utils/RichText.cpp
         src/Attribute.cpp
         src/Game.cpp
+        src/Item.cpp
         src/main.cpp)
 
 if(MSVC)

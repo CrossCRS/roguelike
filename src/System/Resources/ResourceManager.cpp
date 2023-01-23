@@ -1,6 +1,7 @@
 #include "System/Resources/ResourceManager.h"
 
 #include "Constants.h"
+#include "System/Factories/ItemFactory.h"
 #include "System/Factories/MonsterFactory.h"
 
 #include <spdlog/spdlog.h>
@@ -19,9 +20,15 @@ void ResourceManager::loadResources() {
 
     spdlog::info("Loaded {} resources", loaded);
 
+    // Monsters
     spdlog::debug("Loading monster definitions");
     loaded = MonsterFactory::loadDefinitions(std::string(Constants::GAME_DATA_DIR) + "/monsters/");
     spdlog::info("Loaded {} monster definitions", loaded);
+
+    // Items
+    spdlog::debug("Loading item definitions");
+    loaded = ItemFactory::loadDefinitions(std::string(Constants::GAME_DATA_DIR) + "/items/");
+    spdlog::info("Loaded {} item definitions", loaded);
 }
 
 std::shared_ptr<sf::Font> ResourceManager::getFont(const std::string &name) const {
