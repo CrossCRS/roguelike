@@ -6,7 +6,7 @@ class Character;
 
 class Inventory {
 public:
-    Inventory(Character &_owner, ushort _size) : owner(_owner), size(_size) {}
+    Inventory(Character &_owner, size_t _size) : owner(_owner), size(_size) {}
 
     size_t getItemCount() const;
 
