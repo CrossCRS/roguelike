@@ -2,8 +2,8 @@
 
 #include "Scene.h"
 #include "Actions/ActionQueue.h"
+#include "GUI/GUIInventory.h"
 #include "Map/World.h"
-#include "Utils/RichText.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -41,5 +41,6 @@ private:
 	
 	sf::Text text_debug;
 
-    sfe::RichText text_inventory; // TODO: Replace with proper UI
+	// Simple UI :(
+	std::unique_ptr<GUIInventory> guiInventory;
 };

@@ -30,10 +30,9 @@ void GameScene::onLoad() {
     text_debug.setPosition(10, 10);
     text_debug.setString("");
 
-    text_inventory.setFont(*resourceManager.getFont("default"));
-    text_inventory.setCharacterSize(15);
-
     world->spawnPlayer();
+
+    guiInventory = std::make_unique<GUIInventory>(resourceManager, world->getPlayer().getInventory());
 
     // Spawn some test monsters
     world->spawnMonster("rat", { 36, 2 });
@@ -41,6 +40,11 @@ void GameScene::onLoad() {
     world->spawnMonster("rat", { 35, 3 });
     world->spawnMonster("rat", { 38, 6 });
     world->spawnMonster("goblin", { 23, 1 });
+
+    // Spawn some test items
+    world->spawnGroundItem("holy_bread", { 10, 4 });
+    world->spawnGroundItem("holy_bread", { 10, 3 });
+    world->spawnGroundItem("holy_bread", { 10, 2 });
 }
 
 void GameScene::onUnload() {}
@@ -65,6 +69,11 @@ void GameScene::processTurn() {
 
 void GameScene::handleInput(sf::Keyboard::Key key) {
     // TODO: Input manager?
+    if (guiInventory->isOpened()) {
+        guiInventory->handleInput(key);
+        return;
+    }
+
     switch (key) {
         case sf::Keyboard::Escape:
             window.close();
@@ -80,6 +89,9 @@ void GameScene::handleInput(sf::Keyboard::Key key) {
             break;
         case sf::Keyboard::Left:
             actionQueue->setPlayerAction(std::make_unique<MoveAction>(world->getPlayer(), sf::Vector2i(-1, 0)));
+            break;
+        case sf::Keyboard::I:
+            guiInventory->open();
             break;
         default:
             break;
@@ -99,14 +111,8 @@ void GameScene::update(float, float) {
     worldView.setCenter(sf::Vector2f(player.getPosition().x + (Constants::GRID_SIZE / 2),
         player.getPosition().y + (Constants::GRID_SIZE / 2)));
 
-    // Draw inventory
-    // TODO: Move to another class and make interactable
-    text_inventory.clear();
-    for (size_t i = 0; i < player.getInventory().getItemCount(); i++) {
-        Item &item = player.getInventory().getItem(i);
-        text_inventory << sf::Text::Bold << item.getName() << "\n";
-    }
-    text_inventory.setPosition(Constants::GAME_WIDTH - text_inventory.getLocalBounds().width - 10, 10);
+    // Inventory
+    guiInventory->update();
 
     // Show testing stuff
 #ifdef BREAD_DEBUG
@@ -129,5 +135,5 @@ void GameScene::draw() {
     // GUI
     window.setView(window.getDefaultView());
     window.draw(text_debug);
-    window.draw(text_inventory);
+    window.draw(*guiInventory);
 }
