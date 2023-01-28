@@ -1,14 +1,16 @@
 #include "GUI/GUIInventory.h"
 
 #include "Constants.h"
+#include "Entities/Player.h"
+#include "Map/World.h"
 #include "System/Inventory.h"
 #include "System/Resources/ResourceManager.h"
 
-GUIInventory::GUIInventory(ResourceManager &resourceManager, Inventory &_inventory) : inventory(_inventory), opened(false), selected(0) {
-    title.setFont(*resourceManager.getFont("default"));
-    title.setCharacterSize(24);
+GUIInventory::GUIInventory(World &_world, Inventory &_inventory) : world(_world), inventory(_inventory), opened(false), selected(0) {
+    title.setFont(*world.getResourceManager().getFont("default"));
+    title.setCharacterSize(32);
 
-    text.setFont(*resourceManager.getFont("default"));
+    text.setFont(*world.getResourceManager().getFont("default"));
     text.setCharacterSize(16);
 }
 
@@ -29,7 +31,7 @@ void GUIInventory::handleInput(sf::Keyboard::Key key) {
             }
             break;
         case sf::Keyboard::Enter:
-            // USE
+            inventory.getItem(selected).use(world.getPlayer(), world.getPlayer());
             break;
         case sf::Keyboard::D:
             // DROP?
@@ -54,20 +56,27 @@ bool GUIInventory::isOpened() {
 void GUIInventory::update() {
     if (opened) {
         title.clear();
-        title << sf::Text::Bold << "INVENTORY [" << std::to_string(inventory.getItemCount()) << "/" << std::to_string(inventory.getSize()) << "]";
-        title.setPosition((Constants::GAME_WIDTH / 2) - (title.getLocalBounds().width / 2), 64);
+        title << "INVENTORY [" << std::to_string(inventory.getItemCount()) << "/" << std::to_string(inventory.getSize()) << "]";
+        title.setPosition((Constants::GAME_WIDTH / 2.f) - (title.getLocalBounds().width / 2.f), 64.f);
 
         text.clear();
         for (size_t i = 0; i < inventory.getItemCount(); i++) {
             Item &item = inventory.getItem(i);
             if (i == selected) {
-                text << sf::Color(255, 255, 255) << sf::Text::Bold;
+                text << sf::Color(255, 255, 255);
             } else {
-                text << sf::Color(180, 180, 180) << sf::Text::Regular;
+                text << sf::Color(150, 150, 150);
             }
-            text << item.getName() << "\n";
+
+            // Item text
+            text << item.getName();
+
+            if (item.isEquipped())
+                text << " -E-";
+
+            text << "\n";
         }
-        text.setPosition((Constants::GAME_WIDTH / 2) - (text.getLocalBounds().width / 2), 100);
+        text.setPosition((Constants::GAME_WIDTH / 2.f) - (text.getLocalBounds().width / 2.f), 100.f);
     }
 }
 

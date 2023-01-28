@@ -5,11 +5,11 @@
 #include <SFML/Graphics.hpp>
 
 class Inventory;
-class ResourceManager;
+class World;
 
 class GUIInventory : public sf::Drawable {
 public:
-    GUIInventory(ResourceManager &resourceManager, Inventory &_inventory);
+    GUIInventory(World &_world, Inventory &_inventory);
 
     void handleInput(sf::Keyboard::Key key);
     void open();
@@ -19,6 +19,7 @@ public:
     void update();
 
 private:
+    World &world;
     Inventory &inventory;
 
     bool opened;

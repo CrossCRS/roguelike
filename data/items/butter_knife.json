@@ -1,0 +1,13 @@
+{
+  "name": "Butter Knife",
+  "description": "Could do some damage I guess",
+  "texture": "knife",
+  "quality": "COMMON",
+  "flags": [
+    "EQUIPABLE"
+  ],
+  "slot": "RIGHT_HAND",
+  "properties": {
+    "DAMAGE": 1
+  }
+}

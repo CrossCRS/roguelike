@@ -32,7 +32,7 @@ void GameScene::onLoad() {
 
     world->spawnPlayer();
 
-    guiInventory = std::make_unique<GUIInventory>(resourceManager, world->getPlayer().getInventory());
+    guiInventory = std::make_unique<GUIInventory>(*world, world->getPlayer().getInventory());
 
     // Spawn some test monsters
     world->spawnMonster("rat", { 36, 2 });
@@ -44,7 +44,7 @@ void GameScene::onLoad() {
     // Spawn some test items
     world->spawnGroundItem("holy_bread", { 10, 4 });
     world->spawnGroundItem("holy_bread", { 10, 3 });
-    world->spawnGroundItem("holy_bread", { 10, 2 });
+    world->spawnGroundItem("butter_knife", { 10, 2 });
 }
 
 void GameScene::onUnload() {}

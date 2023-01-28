@@ -1,25 +1,32 @@
 #pragma once
 
+#include "magic_enum.hpp"
+
 #include <string>
-#include <type_traits>
 #include <SFML/Graphics/Texture.hpp>
 #include <memory>
+
+class Character;
 
 enum class ItemQuality {
     COMMON,
     RARE,
-    LEGENDARY,
-    LAST
+    LEGENDARY
 };
 
 enum class ItemSlot {
     NONE,
-    LAST
+    RIGHT_HAND
 };
 
 enum class ItemFlag {
+    NONE      = 0,
     EQUIPABLE = 1,
-    USEABLE   = 1 << 1,
+    USEABLE   = 1 << 1
+};
+
+enum class ItemProperty {
+    DAMAGE
 };
 
 ItemFlag operator|(ItemFlag lhs, ItemFlag rhs);
@@ -27,7 +34,7 @@ ItemFlag operator&(ItemFlag lhs, ItemFlag rhs);
 
 class Item {
 public:
-    explicit Item(int _id) : id(_id), texture(nullptr) {}
+    explicit Item(int _id) : id(_id), texture(nullptr), equipped(false), flag(ItemFlag::NONE) {}
 
     bool isEquipable() const;
     bool isUsable() const;
@@ -36,9 +43,11 @@ public:
     const std::string &getName() const;
     const std::string &getDescription() const;
     std::shared_ptr<sf::Texture> getTexture() const;
+    bool isEquipped() const;
     const ItemQuality &getQuality() const;
     const ItemFlag &getFlag() const;
     const ItemSlot &getSlot() const;
+    int getProperty(ItemProperty property) const;
 
     void setName(const std::string &_name);
     void setDescription(const std::string &_description);
@@ -46,6 +55,9 @@ public:
     void setQuality(ItemQuality _quality);
     void setFlag(ItemFlag _flag);
     void setSlot(ItemSlot _slot);
+    void setProperty(ItemProperty property, int value);
+
+    void use(Character &user, Character &target);
 
 private:
     int id;
@@ -53,7 +65,10 @@ private:
     std::string description;
     std::shared_ptr<sf::Texture> texture;
 
+    bool equipped;
+
     ItemQuality quality;
     ItemFlag flag;
     ItemSlot slot;
+    int properties[magic_enum::enum_count<ItemProperty>()];
 };

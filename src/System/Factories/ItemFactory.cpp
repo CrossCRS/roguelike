@@ -46,6 +46,15 @@ std::unique_ptr<Item> ItemFactory::instantiate(const std::string &itemName, Worl
         }
     }
 
+    // Load properties
+    for (auto const &[prop, propString] : magic_enum::enum_entries<ItemProperty>()) {
+        if (itemDef["properties"].contains(propString)) {
+            item->setProperty(prop, itemDef["properties"][propString].get<int>());
+        } else {
+            item->setProperty(prop, -1);
+        }
+    }
+
     return item;
 }
 

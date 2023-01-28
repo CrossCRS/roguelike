@@ -1,5 +1,7 @@
 #include "Item.h"
 
+#include "Entities/Character.h"
+
 ItemFlag operator|(ItemFlag lhs, ItemFlag rhs) {
     return static_cast<ItemFlag>(static_cast<std::underlying_type_t<ItemFlag>>(lhs) | static_cast<std::underlying_type_t<ItemFlag>>(rhs));
 }
@@ -9,39 +11,47 @@ ItemFlag operator&(ItemFlag lhs, ItemFlag rhs) {
 }
 
 bool Item::isEquipable() const {
-    return (flag & ItemFlag::EQUIPABLE) == ItemFlag::EQUIPABLE;
+    return (this->flag & ItemFlag::EQUIPABLE) == ItemFlag::EQUIPABLE;
 }
 
 bool Item::isUsable() const {
-    return (flag & ItemFlag::USEABLE) == ItemFlag::USEABLE;
+    return (this->flag & ItemFlag::USEABLE) == ItemFlag::USEABLE;
 }
 
 int Item::getId() const {
-    return id;
+    return this->id;
 }
 
 const std::string &Item::getName() const {
-    return name;
+    return this->name;
 }
 
 const std::string &Item::getDescription() const {
-    return description;
+    return this->description;
 }
 
 std::shared_ptr<sf::Texture> Item::getTexture() const {
-    return texture;
+    return this->texture;
+}
+
+bool Item::isEquipped() const {
+    return this->equipped;
 }
 
 const ItemQuality &Item::getQuality() const {
-    return quality;
+    return this->quality;
 }
 
 const ItemFlag &Item::getFlag() const {
-    return flag;
+    return this->flag;
 }
 
 const ItemSlot &Item::getSlot() const {
-    return slot;
+    return this->slot;
+}
+
+int Item::getProperty(ItemProperty property) const {
+    return this->properties[static_cast<int>(property)];
 }
 
 void Item::setName(const std::string &_name) {
@@ -66,4 +76,21 @@ void Item::setFlag(ItemFlag _flag) {
 
 void Item::setSlot(ItemSlot _slot) {
     this->slot = _slot;
+}
+
+void Item::setProperty(ItemProperty property, int value) {
+    this->properties[static_cast<int>(property)] = value;
+}
+
+void Item::use(Character &user, Character &target) {
+    // Equipping
+    if (this->isEquipable() && user.getId() == target.getId()) {
+        if (this->isEquipped()) {
+            if (target.getInventory().unequip(this->getId()))
+                this->equipped = false;
+        } else {
+            if (target.getInventory().equip(this->getId()))
+                this->equipped = true;
+        }
+    }
 }
