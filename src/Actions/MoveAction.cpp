@@ -1,5 +1,6 @@
 #include "Actions/MoveAction.h"
 
+#include "Actions/AttackAction.h"
 #include "Entities/GroundItem.h"
 #include "Entities/Player.h"
 #include "Map/TileMap.h"
@@ -15,8 +16,8 @@ void MoveAction::execute() {
         if (character.getWorld().getMonsterOnPos(newPos) == nullptr
             && character.getWorld().getPlayer().getGridPosition() != newPos) {
             character.setGridPosition(newPos);
-        } else if (character.getWorld().getMonsterOnPos(newPos) != nullptr) {
-            // TODO: Execute attack action instead?
+        } else if (character.getWorld().getMonsterOnPos(newPos) != nullptr && character.isPlayer()) { // Monsters must attack explicitly!
+            AttackAction(character, *character.getWorld().getMonsterOnPos(newPos)).execute();
         }
 
         // TODO: Item pickup GUI?

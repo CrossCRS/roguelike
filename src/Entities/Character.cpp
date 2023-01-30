@@ -1,5 +1,9 @@
 #include "Entities/Character.h"
 
+bool Character::isPlayer() {
+    return false;
+}
+
 int Character::getCurrentAttribute(AttributeIndex index) const {
     return attributes[static_cast<int>(index)].getCurrent();
 }

@@ -17,6 +17,8 @@ public:
         speed(1.f),
         bcanInteractWithObjects(true) {}
 
+    virtual bool isPlayer();
+
     int getCurrentAttribute(AttributeIndex index) const;
     int getBaseAttribute(AttributeIndex index) const;
 

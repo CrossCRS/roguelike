@@ -8,9 +8,13 @@ Player::Player(int id, std::shared_ptr<sf::Texture> texture, World &world) : Cha
     setBaseAttribute(AttributeIndex::HEALTH, 10);
     setCurrentAttribute(AttributeIndex::HEALTH, 10);
 
-    setBaseAttribute(AttributeIndex::STRENGTH, 10);
-    setCurrentAttribute(AttributeIndex::STRENGTH, 10);
+    setBaseAttribute(AttributeIndex::STRENGTH, 1);
+    setCurrentAttribute(AttributeIndex::STRENGTH, 1);
 
-    setBaseAttribute(AttributeIndex::DEXTERITY, 10);
-    setCurrentAttribute(AttributeIndex::DEXTERITY, 10);
+    setBaseAttribute(AttributeIndex::DEXTERITY, 1);
+    setCurrentAttribute(AttributeIndex::DEXTERITY, 1);
+}
+
+bool Player::isPlayer() {
+    return true;
 }
