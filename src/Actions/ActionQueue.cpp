@@ -1,5 +1,9 @@
 #include "Actions/ActionQueue.h"
 
+#include "effolkronium/random.hpp"
+
+using Random = effolkronium::random_static;
+
 void ActionQueue::addAction(std::unique_ptr<Action> action) {
     queue.push(std::move(action));
 }
@@ -14,9 +18,9 @@ void ActionQueue::processActions() {
         queue.pop();
 
         if (action != nullptr) {
-            float speed = action->getSpeed();
-            int actions = static_cast<int>(speed);
-            float chanceForExtraAction = speed - actions;
+            const float speed = action->getSpeed();
+            const int actions = static_cast<int>(speed);
+            const float chanceForExtraAction = speed - actions;
 
             // Execute the guaranteed actions
             for (int j = 0; j < actions; j++) {
@@ -24,7 +28,7 @@ void ActionQueue::processActions() {
             }
 
             // Execute the extra action
-            if (distribution(gen) < chanceForExtraAction) {
+            if (Random::get(0.f, 1.f) < chanceForExtraAction) {
                 action->execute();
             }
         }

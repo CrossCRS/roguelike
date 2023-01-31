@@ -3,12 +3,15 @@
 #include "Actions/Action.h"
 #include "Actions/MoveAction.h"
 
+#include "effolkronium/random.hpp"
+
+using Random = effolkronium::random_static;
+
 std::unique_ptr<Action> Monster::think() {
     // TODO: Proper AI
     sf::Vector2i direction;
 
-    int dir = distribution(gen);
-    switch (dir) {
+    switch (Random::get(0, 3)) {
         case 0:
             direction = sf::Vector2i(0, -1);
             break;
