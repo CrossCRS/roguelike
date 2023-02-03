@@ -19,6 +19,7 @@ public:
 	void spawnPlayer();
     Monster &spawnMonster(const std::string &name, const sf::Vector2i &pos);
     GroundItem &spawnGroundItem(const std::string &name, const sf::Vector2i &pos);
+	void removeMonster(int id);
 
     BaseTile &getTile(const sf::Vector2i &pos) const;
     Monster *getMonsterOnPos(const sf::Vector2i &pos) const;

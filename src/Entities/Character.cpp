@@ -1,5 +1,7 @@
 #include "Entities/Character.h"
 
+#include "Map/World.h"
+
 bool Character::isPlayer() {
     return false;
 }
@@ -50,4 +52,18 @@ void Character::setName(const std::string &_name) {
 
 Inventory &Character::getInventory() {
     return inventory;
+}
+
+void Character::onDamageTaken(Entity */*source*/, int damage) {
+    // auto character = dynamic_cast<Character*>(source);
+    if (damage >= getCurrentAttribute(AttributeIndex::HEALTH)) {
+        onDeath();
+    } else {
+        setCurrentAttribute(AttributeIndex::HEALTH, getCurrentAttribute(AttributeIndex::HEALTH) - damage);
+    }
+}
+
+void Character::onDeath() {
+    // TODO: Drop some item?
+    getWorld().removeMonster(getId());
 }

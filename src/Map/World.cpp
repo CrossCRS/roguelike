@@ -40,6 +40,10 @@ GroundItem &World::spawnGroundItem(const std::string &name, const sf::Vector2i &
     return dynamic_cast<GroundItem&>(entityManager->getEntity(id));
 }
 
+void World::removeMonster(int id) {
+    monsterManager->removeEntity(id);
+}
+
 BaseTile &World::getTile(const sf::Vector2i &pos) const {
     return tilemap->getTile(pos);
 }

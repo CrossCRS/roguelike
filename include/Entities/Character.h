@@ -36,6 +36,9 @@ public:
 
     Inventory &getInventory();
 
+    virtual void onDamageTaken(Entity *source, int damage);
+    virtual void onDeath();
+
 private:
     std::string name;
     
