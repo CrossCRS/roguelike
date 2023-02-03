@@ -82,7 +82,7 @@ void GUIInventory::update() {
 
             text << "\n";
         }
-        text.setPosition((Constants::GAME_WIDTH / 2.f) - (text.getLocalBounds().width / 2.f), 100.f);
+        text.setPosition(static_cast<int>((Constants::GAME_WIDTH / 2.f) - (text.getLocalBounds().width / 2.f)), 100);
 
         background.setPosition(title.getPosition() - sf::Vector2(20.f, 10.f));
         float bg_width = std::max(text.getLocalBounds().width + 40.f, title.getLocalBounds().width + 40.f);

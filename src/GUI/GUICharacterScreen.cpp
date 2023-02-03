@@ -47,15 +47,14 @@ void GUICharacterScreen::update() {
         text << "\n";
 
         // TODO: :)
-        text << sf::Color(255, 255, 255) << "LEVEL: 1\nEXP: 0/X\n\n";
+        text << sf::Color(255, 255, 255) << "LEVEL: 1\nEXP: 0/123456789\nATTR POINTS: 0\n\n";
 
         text << sf::Color(255, 255, 255) << "ATTRIBUTES\n";
         for (auto const &[attr, attrString] : magic_enum::enum_entries<AttributeIndex>()) {
             text << sf::Color(150, 150, 150) << "  " << std::string(attrString) << ": " << std::to_string(player.getCurrentAttribute(attr)) << "/" << std::to_string(player.getBaseAttribute(attr)) << "\n";
         }
-        text << sf::Color(150, 150, 150) << "FREE ATTR POINTS: 0\n"; // TODO
 
-        text.setPosition((Constants::GAME_WIDTH / 2.f) - (text.getLocalBounds().width / 2.f), 100.f);
+        text.setPosition(static_cast<int>((Constants::GAME_WIDTH / 2.f) - (text.getLocalBounds().width / 2.f)), 100);
 
         background.setPosition(title.getPosition() - sf::Vector2(20.f, 10.f));
         float bg_width = std::max(text.getLocalBounds().width + 40.f, title.getLocalBounds().width + 40.f);
