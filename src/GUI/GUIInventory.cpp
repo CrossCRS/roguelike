@@ -6,8 +6,10 @@
 #include "System/Inventory.h"
 #include "System/Resources/ResourceManager.h"
 
-GUIInventory::GUIInventory(World &_world, Inventory &_inventory) : world(_world), inventory(_inventory), opened(false), selected(0),
-                                                                   background() {
+#pragma warning(disable : 4244)
+
+// TODO: Base GUI Panel class
+GUIInventory::GUIInventory(World &_world, Inventory &_inventory) : world(_world), inventory(_inventory), opened(false), selected(0) {
     title.setFont(*world.getResourceManager().getFont("default"));
     title.setCharacterSize(32);
 
@@ -15,7 +17,7 @@ GUIInventory::GUIInventory(World &_world, Inventory &_inventory) : world(_world)
     text.setCharacterSize(16);
 
     background.setFillColor(sf::Color::Black);
-    background.setOutlineColor({ 64, 64, 64 });
+    background.setOutlineColor({ 150, 150, 150 });
     background.setOutlineThickness(1.0f);
 }
 

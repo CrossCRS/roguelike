@@ -34,7 +34,11 @@ ItemFlag operator&(ItemFlag lhs, ItemFlag rhs);
 
 class Item {
 public:
-    explicit Item(int _id) : id(_id), texture(nullptr), equipped(false), flag(ItemFlag::NONE) {}
+    explicit Item(int _id) :
+        id(_id),
+        texture(nullptr),
+        equipped(false),
+        flag(ItemFlag::NONE) {}
 
     bool isEquipable() const;
     bool isUsable() const;
@@ -57,7 +61,7 @@ public:
     void setSlot(ItemSlot _slot);
     void setProperty(ItemProperty property, int value);
 
-    void use(Character &user, Character &target);
+    void use(Character *user, Character *target);
 
 private:
     int id;

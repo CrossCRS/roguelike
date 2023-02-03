@@ -27,7 +27,7 @@ public:
 	EntityManager<Monster> &getMonsterManager() const { return *monsterManager; }
     EntityManager<Entity> &getEntityManager() const { return *entityManager; }
 	TileMap &getMap() const { return *tilemap; }
-	Player &getPlayer() const { return *player; }
+	Player *getPlayer() const { return player.get(); }
 	ResourceManager &getResourceManager() const { return resourceManager; }
 
 private:

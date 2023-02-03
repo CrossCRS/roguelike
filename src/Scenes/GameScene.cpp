@@ -32,8 +32,8 @@ void GameScene::onLoad() {
 
     world->spawnPlayer();
 
-    guiInventory = std::make_unique<GUIInventory>(*world, world->getPlayer().getInventory());
-    guiCharacter = std::make_unique<GUICharacterScreen>(*world, world->getPlayer());
+    guiInventory = std::make_unique<GUIInventory>(*world, world->getPlayer()->getInventory());
+    guiCharacter = std::make_unique<GUICharacterScreen>(*world, *world->getPlayer());
 
     // Spawn some test monsters
     world->spawnMonster("rat", { 36, 2 });
@@ -113,11 +113,11 @@ void GameScene::update(float delta, float) {
 #else
 void GameScene::update(float, float) {
 #endif
-    Player &player = world->getPlayer();
+    Player *player = world->getPlayer();
 
     // Center camera on player
-    worldView.setCenter(sf::Vector2f(player.getPosition().x + (Constants::GRID_SIZE / 2),
-        player.getPosition().y + (Constants::GRID_SIZE / 2)));
+    worldView.setCenter(sf::Vector2f(player->getPosition().x + (Constants::GRID_SIZE / 2),
+        player->getPosition().y + (Constants::GRID_SIZE / 2)));
 
     // Inventory
     guiInventory->update();
@@ -126,8 +126,8 @@ void GameScene::update(float, float) {
     // Show testing stuff
 #ifdef BREAD_DEBUG
     text_debug.setString(fmt::format("POS: [x={:.1f}, y={:.1f}] [gx={:d}, gy={:d}]\nMON: {:d}\nMAP: {:d}x{:d} [V={:d}]\nTIM: {:.3f}s\nTRN: {:d}",
-        world->getPlayer().getPosition().x, world->getPlayer().getPosition().y,
-        world->getPlayer().getGridPosition().x, world->getPlayer().getGridPosition().y,
+        player->getPosition().x, player->getPosition().y,
+        player->getGridPosition().x, player->getGridPosition().y,
         world->getMonsterManager().count(),
         world->getMap().getWidth(), world->getMap().getHeight(), world->getMap().getVerticesCount(),
         delta, turnCount));

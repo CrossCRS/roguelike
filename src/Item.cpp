@@ -82,14 +82,14 @@ void Item::setProperty(ItemProperty property, int value) {
     this->properties[static_cast<int>(property)] = value;
 }
 
-void Item::use(Character &user, Character &target) {
+void Item::use(Character *user, Character *target) {
     // Equipping
-    if (this->isEquipable() && user.getId() == target.getId()) {
+    if (this->isEquipable() && user->getId() == target->getId()) {
         if (this->isEquipped()) {
-            if (target.getInventory().unequip(this->getId()))
+            if (target->getInventory().unequip(this->getId()))
                 this->equipped = false;
         } else {
-            if (target.getInventory().equip(this->getId()))
+            if (target->getInventory().equip(this->getId()))
                 this->equipped = true;
         }
     }

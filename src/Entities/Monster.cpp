@@ -28,5 +28,5 @@ std::unique_ptr<Action> Monster::think() {
             break;
     }
 
-    return std::make_unique<MoveAction>(*this, direction);
+    return std::make_unique<MoveAction>(this, direction);
 }

@@ -5,8 +5,9 @@
 #include "Map/World.h"
 #include "System/Resources/ResourceManager.h"
 
-GUICharacterScreen::GUICharacterScreen(World &_world, Player &_player) : world(_world), player(_player), opened(false),
-                                                                         background() {
+#pragma warning(disable : 4244)
+
+GUICharacterScreen::GUICharacterScreen(World &_world, Player &_player) : world(_world), player(_player), opened(false) {
     title.setFont(*world.getResourceManager().getFont("default"));
     title.setCharacterSize(32);
 
@@ -14,7 +15,7 @@ GUICharacterScreen::GUICharacterScreen(World &_world, Player &_player) : world(_
     text.setCharacterSize(16);
 
     background.setFillColor(sf::Color::Black);
-    background.setOutlineColor({ 64, 64, 64 });
+    background.setOutlineColor({ 150, 150, 150 });
     background.setOutlineThickness(1.0f);
 }
 

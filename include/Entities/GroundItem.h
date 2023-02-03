@@ -6,8 +6,8 @@
 class GroundItem : public Entity {
 public:
     GroundItem(int id, std::unique_ptr<Item> _item, World &world) :
-            Entity(id, _item->getTexture(), world),
-            item(std::move(_item)) {}
+        Entity(id, _item->getTexture(), world),
+        item(std::move(_item)) {}
 
     std::unique_ptr<Item> item;
 };

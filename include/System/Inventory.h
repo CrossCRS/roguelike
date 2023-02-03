@@ -6,7 +6,7 @@ class Character;
 
 class Inventory {
 public:
-    Inventory(Character &_owner, size_t _size) : owner(_owner), size(_size) {
+    Inventory(Character *owner, size_t _size) : owner(owner), size(_size) {
         for (auto &i : equipped) {
             i = nullptr;
         }
@@ -24,7 +24,7 @@ public:
     void addItem(std::unique_ptr<Item> item);
 
 private:
-    Character &owner;
+    Character *owner;
 
     std::vector<std::unique_ptr<Item>> items;
     Item *equipped[magic_enum::enum_count<ItemSlot>()];

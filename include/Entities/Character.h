@@ -13,7 +13,7 @@ public:
     Character(int id, std::shared_ptr<sf::Texture> texture, World &world) :
         Entity(id, std::move(texture), world),
         name("Unknown"),
-        inventory(*this, INVENTORY_SLOTS),
+        inventory(this, INVENTORY_SLOTS),
         speed(1.f),
         bcanInteractWithObjects(true) {}
 
