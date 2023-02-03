@@ -18,6 +18,7 @@ public:
     void setTexture(std::shared_ptr<sf::Texture> tex);
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+    virtual void update() {}
 
 protected:
     int id;

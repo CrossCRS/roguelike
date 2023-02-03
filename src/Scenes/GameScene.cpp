@@ -34,6 +34,8 @@ void GameScene::onLoad() {
 
     guiInventory = std::make_unique<GUIInventory>(*world, world->getPlayer()->getInventory());
     guiCharacter = std::make_unique<GUICharacterScreen>(*world, *world->getPlayer());
+    guiHealthBar = std::make_unique<GUIHealthBar>(*world->getPlayer(), false);
+    guiHealthBar->setPosition(Constants::GAME_WIDTH / 2 - guiHealthBar->getSize().x / 2, Constants::GAME_HEIGHT - guiHealthBar->getSize().y - 6);
 
     // Spawn some test monsters
     world->spawnMonster("rat", { 36, 2 });
@@ -101,6 +103,9 @@ void GameScene::handleInput(sf::Keyboard::Key key) {
         case sf::Keyboard::C:
             guiCharacter->open();
             break;
+        case sf::Keyboard::X:
+            world->getPlayer()->setCurrentAttribute(AttributeIndex::HEALTH, world->getPlayer()->getCurrentAttribute(AttributeIndex::HEALTH) - 1);
+            break;
         default:
             break;
     }
@@ -119,9 +124,12 @@ void GameScene::update(float, float) {
     worldView.setCenter(sf::Vector2f(player->getPosition().x + (Constants::GRID_SIZE / 2),
         player->getPosition().y + (Constants::GRID_SIZE / 2)));
 
-    // Inventory
+    // GUI
     guiInventory->update();
     guiCharacter->update();
+    guiHealthBar->update();
+
+    world->update();
 
     // Show testing stuff
 #ifdef BREAD_DEBUG
@@ -146,4 +154,5 @@ void GameScene::draw() {
     window.draw(text_debug);
     window.draw(*guiInventory);
     window.draw(*guiCharacter);
+    window.draw(*guiHealthBar);
 }

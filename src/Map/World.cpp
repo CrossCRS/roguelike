@@ -85,3 +85,15 @@ void World::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	// Draw player
 	target.draw(*player, states);
 }
+
+void World::update() {
+    for (auto const &element : getEntityManager().getAllEntities()) {
+        element.second->update();
+    }
+
+    for (auto const &element : getMonsterManager().getAllEntities()) {
+        element.second->update();
+    }
+
+    player->update();
+}

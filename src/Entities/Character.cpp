@@ -2,7 +2,9 @@
 
 #include "Map/World.h"
 
-bool Character::isPlayer() {
+#pragma warning(disable : 4244)
+
+bool Character::isPlayer() const {
     return false;
 }
 
@@ -66,4 +68,18 @@ void Character::onDamageTaken(Entity */*source*/, int damage) {
 void Character::onDeath() {
     // TODO: Drop some item?
     getWorld().removeMonster(getId());
+}
+
+void Character::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    states.transform *= getTransform();
+    states.texture = texture.get();
+    target.draw(vertices, states);
+
+    if (!isPlayer())
+        target.draw(*guiHealthBar, states);
+}
+
+void Character::update() {
+    if (!isPlayer())
+        guiHealthBar->update();
 }

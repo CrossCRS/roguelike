@@ -2,6 +2,7 @@
 
 #include "Attribute.h"
 #include "Entities/Entity.h"
+#include "GUI/GUIHealthBar.h"
 #include "System/Inventory.h"
 
 #include <magic_enum.hpp>
@@ -14,10 +15,11 @@ public:
         Entity(id, std::move(texture), world),
         name("Unknown"),
         inventory(this, INVENTORY_SLOTS),
+        guiHealthBar(std::make_unique<GUIHealthBar>(*this, true)),
         speed(1.f),
         bcanInteractWithObjects(true) {}
 
-    virtual bool isPlayer();
+    virtual bool isPlayer() const;
 
     int getCurrentAttribute(AttributeIndex index) const;
     int getBaseAttribute(AttributeIndex index) const;
@@ -39,11 +41,16 @@ public:
     virtual void onDamageTaken(Entity *source, int damage);
     virtual void onDeath();
 
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+    void update() override;
+
 private:
     std::string name;
     
     Attribute attributes[magic_enum::enum_count<AttributeIndex>()];
     Inventory inventory;
+
+    std::unique_ptr<GUIHealthBar> guiHealthBar;
 
     float speed;
     bool bcanInteractWithObjects;

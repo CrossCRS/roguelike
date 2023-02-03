@@ -15,6 +15,6 @@ Player::Player(int id, std::shared_ptr<sf::Texture> texture, World &world) : Cha
     setCurrentAttribute(AttributeIndex::DEXTERITY, 1);
 }
 
-bool Player::isPlayer() {
+bool Player::isPlayer() const {
     return true;
 }

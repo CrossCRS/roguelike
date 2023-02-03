@@ -31,6 +31,8 @@ public:
 	Player *getPlayer() const { return player.get(); }
 	ResourceManager &getResourceManager() const { return resourceManager; }
 
+	void update();
+
 private:
 	ResourceManager &resourceManager;
 
