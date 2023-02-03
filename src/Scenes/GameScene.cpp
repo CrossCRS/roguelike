@@ -103,9 +103,6 @@ void GameScene::handleInput(sf::Keyboard::Key key) {
         case sf::Keyboard::C:
             guiCharacter->open();
             break;
-        case sf::Keyboard::X:
-            world->getPlayer()->setCurrentAttribute(AttributeIndex::HEALTH, world->getPlayer()->getCurrentAttribute(AttributeIndex::HEALTH) - 1);
-            break;
         default:
             break;
     }

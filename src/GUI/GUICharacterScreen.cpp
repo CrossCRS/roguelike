@@ -46,9 +46,10 @@ void GUICharacterScreen::update() {
 
         text.clear();
         text << "\n";
-
-        // TODO: :)
-        text << sf::Color(255, 255, 255) << "Level: 1\nExp.: 0/123456789\nAttr. points: 0\n\n";
+        
+        text << sf::Color(255, 255, 255) << "Level: " << std::to_string(player.getLevel()) << "\n";
+        text << "Exp.: " << std::to_string(player.getExperience()) << "/" << std::to_string(player.getExperienceForNextLevel()) << "\n";
+        text << "Attr. points: " << std::to_string(player.getAttributePoints()) << "\n\n";
 
         text << sf::Color(255, 255, 255) << "ATTRIBUTES\n";
         for (auto const &[attr, attrString] : magic_enum::enum_entries<AttributeIndex>()) {

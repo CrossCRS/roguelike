@@ -3,7 +3,7 @@
   "description": "A slightly harmful vermin",
   "texture": "rat",
   "level": 1,
-  "experience": 5,
+  "experience": 10,
   "speed": 1.0,
   "canInteractWithObjects": false,
   "attributes": {

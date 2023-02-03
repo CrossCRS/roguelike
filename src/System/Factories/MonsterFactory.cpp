@@ -35,6 +35,8 @@ std::unique_ptr<Monster> MonsterFactory::instantiate(const std::string &monsterN
     // Set basic fields
     monster->setName(monsterDef["name"].get<std::string>());
     monster->setTexture(world.getResourceManager().getTexture(monsterDef["texture"].get<std::string>()));
+    monster->setLevel(monsterDef["level"].get<int>());
+    monster->setExperienceForKill(monsterDef["experience"].get<int>());
     monster->setSpeed(monsterDef["speed"].get<float>());
     monster->setCanInteractWithObjects(monsterDef["canInteractWithObjects"].get<bool>());
 
@@ -43,8 +45,6 @@ std::unique_ptr<Monster> MonsterFactory::instantiate(const std::string &monsterN
         monster->setBaseAttribute(attr, monsterDef["attributes"][attrString].get<int>());
         monster->setCurrentAttribute(attr, monsterDef["attributes"][attrString].get<int>());
     }
-
-    // TODO: Set level, experience...
 
     return monster;
 }

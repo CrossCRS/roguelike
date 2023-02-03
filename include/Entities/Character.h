@@ -14,6 +14,10 @@ public:
     Character(int id, std::shared_ptr<sf::Texture> texture, World &world) :
         Entity(id, std::move(texture), world),
         name("Unknown"),
+        level(1),
+        experience(0),
+        experienceForKill(0),
+        attributePoints(0),
         inventory(this, INVENTORY_SLOTS),
         guiHealthBar(std::make_unique<GUIHealthBar>(*this, true)),
         speed(1.f),
@@ -41,12 +45,28 @@ public:
     virtual void onDamageTaken(Entity *source, int damage);
     virtual void onDeath();
 
+    void setLevel(int _level);
+    void setExperienceForKill(int exp);
+
+    int getLevel() const;
+    int getExperience() const;
+    int getExperienceForKill() const;
+    int getExperienceForNextLevel() const;
+    int getAttributePoints() const;
+
+    void addExperience(int exp);
+    void levelUp();
+
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     void update() override;
 
 private:
     std::string name;
-    
+
+    int level;
+    int experience;
+    int experienceForKill;
+    int attributePoints;
     Attribute attributes[magic_enum::enum_count<AttributeIndex>()];
     Inventory inventory;
 

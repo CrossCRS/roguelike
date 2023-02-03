@@ -18,8 +18,8 @@ GUIHealthBar::GUIHealthBar(Character &_character, bool _mini) : character(_chara
     background.setOutlineColor({ 150, 150, 150 });
     background.setOutlineThickness(1.0f);
     background.setSize(size);
-    bar.setSize(background.getSize() - sf::Vector2f(2.f, 2.f));
 
+    bar.setSize(background.getSize() - sf::Vector2f(2.f, 2.f));
     bar.setFillColor(sf::Color(220, 50, 30));
 }
 
@@ -28,8 +28,7 @@ void GUIHealthBar::update() {
     bar.setPosition(this->getPosition() + sf::Vector2f(1.f, 1.f));
 
     const float healthPercentage = (static_cast<float>(character.getCurrentAttribute(AttributeIndex::HEALTH)) / static_cast<float>(character.getBaseAttribute(AttributeIndex::HEALTH)));
-    bar.setSize(sf::Vector2f((background.getSize().x - 2.f) * healthPercentage,
-        background.getSize().y - 2.f));
+    bar.setSize(sf::Vector2f((background.getSize().x - 2.f) * healthPercentage, background.getSize().y - 2.f));
 
     if (!mini) {
         text.clear();

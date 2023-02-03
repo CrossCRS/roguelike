@@ -56,9 +56,12 @@ Inventory &Character::getInventory() {
     return inventory;
 }
 
-void Character::onDamageTaken(Entity */*source*/, int damage) {
-    // auto character = dynamic_cast<Character*>(source);
+void Character::onDamageTaken(Entity *source, int damage) {
+    auto character = dynamic_cast<Character*>(source);
     if (damage >= getCurrentAttribute(AttributeIndex::HEALTH)) {
+        if (character != nullptr) {
+            character->addExperience(experienceForKill);
+        }
         onDeath();
     } else {
         setCurrentAttribute(AttributeIndex::HEALTH, getCurrentAttribute(AttributeIndex::HEALTH) - damage);
@@ -68,6 +71,59 @@ void Character::onDamageTaken(Entity */*source*/, int damage) {
 void Character::onDeath() {
     // TODO: Drop some item?
     getWorld().removeMonster(getId());
+}
+
+void Character::setLevel(int _level) {
+    if (_level > 1) {
+        level = _level - 1;
+        experience = getExperienceForNextLevel() + 1;
+        level = _level;
+    } else {
+        level = _level;
+        experience = 0;
+    }
+}
+
+void Character::setExperienceForKill(int exp) {
+    experienceForKill = exp;
+}
+
+int Character::getLevel() const {
+    return level;
+}
+
+int Character::getExperience() const {
+    return experience;
+}
+
+int Character::getAttributePoints() const {
+    return attributePoints;
+}
+
+int Character::getExperienceForKill() const {
+    return experienceForKill;
+}
+
+int Character::getExperienceForNextLevel() const {
+    return 15 * level * (level + 1);
+}
+
+void Character::addExperience(int exp) {
+    experience += exp;
+    while (experience >= getExperienceForNextLevel()) {
+        levelUp();
+    }
+}
+
+void Character::levelUp() {
+    attributePoints++;
+    level++;
+
+    // Gain 10 HP every 5 levels
+    if (level % 5 == 0) {
+        setBaseAttribute(AttributeIndex::HEALTH, getBaseAttribute(AttributeIndex::HEALTH) + 10);
+        setCurrentAttribute(AttributeIndex::HEALTH, getBaseAttribute(AttributeIndex::HEALTH));
+    }
 }
 
 void Character::draw(sf::RenderTarget &target, sf::RenderStates states) const {
