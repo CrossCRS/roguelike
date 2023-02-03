@@ -47,11 +47,14 @@ void GUICharacterScreen::update() {
         text << "\n";
 
         // TODO: :)
-        text << sf::Color(255, 255, 255) << "LEVEL: 1\nEXP: 0/123456789\nATTR POINTS: 0\n\n";
+        text << sf::Color(255, 255, 255) << "Level: 1\nExp.: 0/123456789\nAttr. points: 0\n\n";
 
         text << sf::Color(255, 255, 255) << "ATTRIBUTES\n";
         for (auto const &[attr, attrString] : magic_enum::enum_entries<AttributeIndex>()) {
-            text << sf::Color(150, 150, 150) << "  " << std::string(attrString) << ": " << std::to_string(player.getCurrentAttribute(attr)) << "/" << std::to_string(player.getBaseAttribute(attr)) << "\n";
+            auto name = std::string(attrString);
+            for (auto &c : name) c = tolower(c);
+            name[0] = toupper(name[0]);
+            text << sf::Color(150, 150, 150) << "  " << name << ": " << std::to_string(player.getCurrentAttribute(attr)) << "/" << std::to_string(player.getBaseAttribute(attr)) << "\n";
         }
 
         text.setPosition(static_cast<int>((Constants::GAME_WIDTH / 2.f) - (text.getLocalBounds().width / 2.f)), 100);
