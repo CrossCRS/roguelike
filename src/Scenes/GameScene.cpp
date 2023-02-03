@@ -33,6 +33,7 @@ void GameScene::onLoad() {
     world->spawnPlayer();
 
     guiInventory = std::make_unique<GUIInventory>(*world, world->getPlayer().getInventory());
+    guiCharacter = std::make_unique<GUICharacterScreen>(*world, world->getPlayer());
 
     // Spawn some test monsters
     world->spawnMonster("rat", { 36, 2 });
@@ -73,6 +74,10 @@ void GameScene::handleInput(sf::Keyboard::Key key) {
         guiInventory->handleInput(key);
         return;
     }
+    if (guiCharacter->isOpened()) {
+        guiCharacter->handleInput(key);
+        return;
+    }
 
     switch (key) {
         case sf::Keyboard::Escape:
@@ -92,6 +97,9 @@ void GameScene::handleInput(sf::Keyboard::Key key) {
             break;
         case sf::Keyboard::I:
             guiInventory->open();
+            break;
+        case sf::Keyboard::C:
+            guiCharacter->open();
             break;
         default:
             break;
@@ -113,6 +121,7 @@ void GameScene::update(float, float) {
 
     // Inventory
     guiInventory->update();
+    guiCharacter->update();
 
     // Show testing stuff
 #ifdef BREAD_DEBUG
@@ -136,4 +145,5 @@ void GameScene::draw() {
     window.setView(window.getDefaultView());
     window.draw(text_debug);
     window.draw(*guiInventory);
+    window.draw(*guiCharacter);
 }

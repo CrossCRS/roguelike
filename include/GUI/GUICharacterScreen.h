@@ -4,12 +4,12 @@
 
 #include <SFML/Graphics.hpp>
 
-class Inventory;
+class Player;
 class World;
 
-class GUIInventory : public sf::Drawable {
+class GUICharacterScreen : public sf::Drawable {
 public:
-    GUIInventory(World &_world, Inventory &_inventory);
+    GUICharacterScreen(World &_world, Player &_player);
 
     void handleInput(sf::Keyboard::Key key);
     void open();
@@ -20,10 +20,9 @@ public:
 
 private:
     World &world;
-    Inventory &inventory;
+    Player &player;
 
     bool opened;
-    size_t selected;
 
     sf::RectangleShape background;
     sfe::RichText title;

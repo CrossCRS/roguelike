@@ -6,12 +6,17 @@
 #include "System/Inventory.h"
 #include "System/Resources/ResourceManager.h"
 
-GUIInventory::GUIInventory(World &_world, Inventory &_inventory) : world(_world), inventory(_inventory), opened(false), selected(0) {
+GUIInventory::GUIInventory(World &_world, Inventory &_inventory) : world(_world), inventory(_inventory), opened(false), selected(0),
+                                                                   background() {
     title.setFont(*world.getResourceManager().getFont("default"));
     title.setCharacterSize(32);
 
     text.setFont(*world.getResourceManager().getFont("default"));
     text.setCharacterSize(16);
+
+    background.setFillColor(sf::Color::Black);
+    background.setOutlineColor({ 64, 64, 64 });
+    background.setOutlineThickness(1.0f);
 }
 
 void GUIInventory::handleInput(sf::Keyboard::Key key) {
@@ -60,6 +65,7 @@ void GUIInventory::update() {
         title.setPosition((Constants::GAME_WIDTH / 2.f) - (title.getLocalBounds().width / 2.f), 64.f);
 
         text.clear();
+        text << "\n";
         for (size_t i = 0; i < inventory.getItemCount(); i++) {
             Item &item = inventory.getItem(i);
             if (i == selected) {
@@ -77,11 +83,17 @@ void GUIInventory::update() {
             text << "\n";
         }
         text.setPosition((Constants::GAME_WIDTH / 2.f) - (text.getLocalBounds().width / 2.f), 100.f);
+
+        background.setPosition(title.getPosition() - sf::Vector2(20.f, 10.f));
+        float bg_width = std::max(text.getLocalBounds().width + 40.f, title.getLocalBounds().width + 40.f);
+        float bg_height = std::max(128.f, text.getLocalBounds().height + title.getLocalBounds().height + 20.f);
+        background.setSize(sf::Vector2f(bg_width, bg_height));
     }
 }
 
 void GUIInventory::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     if (opened) {
+        target.draw(background, states);
         target.draw(title, states);
         target.draw(text, states);
     }

@@ -17,6 +17,7 @@ set(sources
         src/Entities/Entity.cpp
         src/Entities/Monster.cpp
         src/Entities/Player.cpp
+        src/GUI/GUICharacterScreen.cpp
         src/GUI/GUIInventory.cpp
         src/Map/TileMap.cpp
         src/Map/World.cpp

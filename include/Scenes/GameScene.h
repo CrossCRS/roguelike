@@ -2,6 +2,7 @@
 
 #include "Scene.h"
 #include "Actions/ActionQueue.h"
+#include "GUI/GUICharacterScreen.h"
 #include "GUI/GUIInventory.h"
 #include "Map/World.h"
 
@@ -43,4 +44,5 @@ private:
 
 	// Simple UI :(
 	std::unique_ptr<GUIInventory> guiInventory;
+    std::unique_ptr<GUICharacterScreen> guiCharacter;
 };
