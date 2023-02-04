@@ -22,6 +22,7 @@ set(sources
         src/GUI/GUIInventory.cpp
         src/Map/TileMap.cpp
         src/Map/World.cpp
+        src/Map/MapGenerator.cpp
         src/System/Factories/ItemFactory.cpp
         src/System/Factories/MonsterFactory.cpp
         src/System/Resources/ResourceManager.cpp

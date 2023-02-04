@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 class BaseTile;
+class MapGenerator;
 class Player;
 class ResourceManager;
 class TileMap;
@@ -15,6 +16,8 @@ class World : public sf::Drawable {
 public:
 	World(ResourceManager &resourceManager);
     ~World() override;
+
+	void generateFloor(unsigned int level);
 
 	void spawnPlayer();
     Monster &spawnMonster(const std::string &name, const sf::Vector2i &pos);
@@ -40,6 +43,7 @@ private:
 	std::unique_ptr<Player> player;
 	std::unique_ptr<EntityManager<Monster>> monsterManager; // Monster entities
     std::unique_ptr<EntityManager<Entity>> entityManager; // Other drawable entities
+	std::unique_ptr<MapGenerator> mapGenerator;
 
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 };

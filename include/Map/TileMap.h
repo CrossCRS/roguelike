@@ -25,6 +25,7 @@ public:
     size_t getVerticesCount() const { return vertices.getVertexCount(); }
     
     BaseTile &getTile(const sf::Vector2i &pos) const;
+    BaseTile *getTile(unsigned int x, unsigned int y) const;
 
 private:
     unsigned int width;

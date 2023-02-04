@@ -16,7 +16,8 @@ void GameScene::onLoad() {
     // Setup world and map
     world = std::make_unique<World>(resourceManager);
     world->getMap().setTileset(resourceManager.getTexture("tilemap0"));
-    world->getMap().loadFromFile("sample_map");
+    //world->getMap().loadFromFile("sample_map");
+    world->generateFloor(currentLevel);
     world->getMap().updateVertexArray();
 
     // Setup world camera
@@ -37,7 +38,7 @@ void GameScene::onLoad() {
     guiHealthBar = std::make_unique<GUIHealthBar>(*world->getPlayer(), false);
     guiHealthBar->setPosition(Constants::GAME_WIDTH / 2 - guiHealthBar->getSize().x / 2, Constants::GAME_HEIGHT - guiHealthBar->getSize().y - 6);
 
-    // Spawn some test monsters
+    /*// Spawn some test monsters
     world->spawnMonster("rat", { 36, 2 });
     world->spawnMonster("rat", { 41, 5 });
     world->spawnMonster("rat", { 35, 3 });
@@ -47,7 +48,7 @@ void GameScene::onLoad() {
     // Spawn some test items
     world->spawnGroundItem("holy_bread", { 10, 4 });
     world->spawnGroundItem("holy_bread", { 10, 3 });
-    world->spawnGroundItem("butter_knife", { 10, 2 });
+    world->spawnGroundItem("butter_knife", { 10, 2 });*/
 }
 
 void GameScene::onUnload() {}

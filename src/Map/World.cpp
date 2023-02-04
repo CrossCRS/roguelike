@@ -3,17 +3,44 @@
 #include "Entities/Monster.h"
 #include "Entities/Player.h"
 #include "Map/TileMap.h"
+#include "Map/MapGenerator.h"
 #include "System/EntityManager.h"
 #include "System/Factories/ItemFactory.h"
 #include "System/Factories/MonsterFactory.h"
 #include "System/Resources/ResourceManager.h"
 
+#include <effolkronium/random.hpp>
+
+using Random = effolkronium::random_static;
+
 World::World(ResourceManager &resourceManager) : resourceManager(resourceManager) {
 	tilemap = std::make_unique<TileMap>(nullptr);
 	monsterManager = std::make_unique<EntityManager<Monster>>();
     entityManager = std::make_unique<EntityManager<Entity>>();
+    mapGenerator = std::make_unique<MapGenerator>();
 }
 World::~World() = default;
+
+void World::generateFloor(unsigned /*level*/) {
+    const auto [map, w, h] = mapGenerator->generate();
+    tilemap->loadFromArray(map.data(), w, h);
+    /*std::vector<char> vec = {'#', '#', '#', '#', '#', '#',
+                              '#', '-', '-', '-', '-', '#',
+                              '#', '-', '-', '-', '-', '#',
+                              '#', '#', '#', '#', '#', '#' };
+    unsigned int w = 6;
+    unsigned int h = 4;
+    tilemap->loadFromArray(vec.data(), w, h);*/
+
+    // Generate player spawn point
+    unsigned int x, y;
+    do {
+        x = Random::get<unsigned int>(0, w - 1);
+        y = Random::get<unsigned int>(0, h - 1);
+
+    } while (tilemap->getTile(x, y) == nullptr || tilemap->getTile(x, y)->isImpenetrable());
+    tilemap->setPlayerSpawnPoint({ static_cast<int>(x), static_cast<int>(y) });
+}
 
 void World::spawnPlayer() {
 	player = std::make_unique<Player>(0, resourceManager.getTexture("player"), *this);

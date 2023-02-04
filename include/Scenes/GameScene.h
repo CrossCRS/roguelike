@@ -18,7 +18,8 @@ public:
 		/*sceneManager(sceneManager),*/
 		resourceManager(resourceManager),
 		window(window),
-        turnCount(0) {}
+        turnCount(0),
+		currentLevel(1) {}
 
 	void onLoad() override;
 	void onUnload() override;
@@ -40,6 +41,7 @@ private:
 	std::unique_ptr<World> world;
 
     unsigned long turnCount;
+	unsigned int currentLevel;
 	
 	sf::Text text_debug;
 

@@ -120,6 +120,7 @@ void TileMap::setTileset(std::shared_ptr<sf::Texture> _tileset) {
     tileset = std::move(_tileset);
 }
 
+// TODO: Return pointer instead of reference?
 BaseTile &TileMap::getTile(const sf::Vector2i &pos) const {
     if (pos.x < 0 || pos.y < 0 || static_cast<unsigned int>(pos.x) > width - 1 || static_cast<unsigned int>(pos.y) > height - 1) {
         const auto message = "Map position out of bounds";
@@ -132,6 +133,15 @@ BaseTile &TileMap::getTile(const sf::Vector2i &pos) const {
         throw std::invalid_argument(message);
     }
     return *tiles[pos.x + pos.y * width];
+}
+
+BaseTile *TileMap::getTile(unsigned x, unsigned y) const {
+    if (x < 0 || y < 0 || x > width - 1 || y > height - 1) {
+        const auto message = "Map position out of bounds";
+        spdlog::error(message);
+        throw std::invalid_argument(message);
+    }
+    return tiles[x + y * width].get();
 }
 
 void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
