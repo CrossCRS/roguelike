@@ -46,4 +46,6 @@ private:
 	std::unique_ptr<MapGenerator> mapGenerator;
 
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+
+	sf::Vector2i getRandomWalkablePos();
 };

@@ -22,24 +22,25 @@ World::World(ResourceManager &resourceManager) : resourceManager(resourceManager
 World::~World() = default;
 
 void World::generateFloor(unsigned /*level*/) {
-    const auto [map, w, h] = mapGenerator->generate();
+    const auto [map, w, h, spawnPos] = mapGenerator->generate();
     tilemap->loadFromArray(map.data(), w, h);
-    /*std::vector<char> vec = {'#', '#', '#', '#', '#', '#',
-                              '#', '-', '-', '-', '-', '#',
-                              '#', '-', '-', '-', '-', '#',
-                              '#', '#', '#', '#', '#', '#' };
-    unsigned int w = 6;
-    unsigned int h = 4;
-    tilemap->loadFromArray(vec.data(), w, h);*/
 
-    // Generate player spawn point
-    unsigned int x, y;
-    do {
-        x = Random::get<unsigned int>(0, w - 1);
-        y = Random::get<unsigned int>(0, h - 1);
+    // TODO: Spawn exit
 
-    } while (tilemap->getTile(x, y) == nullptr || tilemap->getTile(x, y)->isImpenetrable());
-    tilemap->setPlayerSpawnPoint({ static_cast<int>(x), static_cast<int>(y) });
+    // Monsters (TODO: diffrent monsters depending on level)
+    auto monsterCount = Random::get<int>(15, 35);
+    for (int i = 0; i < monsterCount; i++) {
+        // TODO: Rewrite!!!
+        spawnMonster(Random::get({ "rat", "rat", "rat", "rat", "rat", "goblin" }), getRandomWalkablePos());
+    }
+
+    // Items
+    auto itemCount = Random::get<int>(2, 6);
+    for (int i = 0; i < itemCount; i++) {
+        spawnGroundItem("butter_knife", getRandomWalkablePos());
+    }
+    
+    tilemap->setPlayerSpawnPoint(spawnPos);
 }
 
 void World::spawnPlayer() {
@@ -123,4 +124,13 @@ void World::update() {
     }
 
     player->update();
+}
+
+sf::Vector2i World::getRandomWalkablePos() {
+    int x, y;
+    do {
+        x = Random::get<int>(0, tilemap->getWidth() - 1);
+        y = Random::get<int>(0, tilemap->getHeight() - 1);
+    } while (tilemap->getTile(x, y)->isImpenetrable());
+    return { x, y };
 }
