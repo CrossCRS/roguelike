@@ -2,7 +2,9 @@
 
 #include "Map/World.h"
 
+#ifdef _MSC_VER
 #pragma warning(disable : 4244)
+#endif
 
 bool Character::isPlayer() const {
     return false;

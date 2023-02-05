@@ -5,7 +5,9 @@
 #include "Map/World.h"
 #include "System/Resources/ResourceManager.h"
 
+#ifdef _MSC_VER
 #pragma warning(disable : 4244)
+#endif
 
 GUICharacterScreen::GUICharacterScreen(World &_world, Player &_player) : world(_world), player(_player), opened(false) {
     title.setFont(*world.getResourceManager().getFont("default"));

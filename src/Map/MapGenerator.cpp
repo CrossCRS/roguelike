@@ -1,6 +1,7 @@
 #include "Map/MapGenerator.h"
 
 #include <effolkronium/random.hpp>
+#include <tuple>
 #include <queue>
 
 using Random = effolkronium::random_static;
@@ -61,7 +62,7 @@ std::tuple<std::vector<char>, unsigned int, unsigned int, sf::Vector2i> MapGener
         spawnPos = { static_cast<int>(x), static_cast<int>(y) };
 
         walkable = calculateWalkablePercent(map, width, height, spawnPos);
-    } while (walkable < 0.50f || walkable > 0.75f);
+    } while (walkable < 0.40f || walkable > 0.65f);
 
     return { map, width, height, spawnPos };
 }
@@ -107,7 +108,7 @@ float MapGenerator::calculateWalkablePercent(const std::vector<char> &map, unsig
         q.pop();
         if ((curPos.x < static_cast<int>(mapWidth) - 1 && curPos.y < static_cast<int>(mapHeight) - 1) &&
                 (curPos.x >= 0 && curPos.y >= 0) &&
-                mapCopy[curPos.x + curPos.y * mapWidth] == TILE_FLOOR || mapCopy[curPos.x + curPos.y * mapWidth] == TILE_DOOR) {
+                (mapCopy[curPos.x + curPos.y * mapWidth] == TILE_FLOOR || mapCopy[curPos.x + curPos.y * mapWidth] == TILE_DOOR)) {
             walkable++;
             mapCopy[curPos.x + curPos.y * mapWidth] = TILE_WALL;
             q.push(curPos + sf::Vector2i(-1, 0));

@@ -6,7 +6,9 @@
 #include "System/Inventory.h"
 #include "System/Resources/ResourceManager.h"
 
+#ifdef _MSC_VER
 #pragma warning(disable : 4244)
+#endif
 
 // TODO: Base GUI Panel class
 GUIInventory::GUIInventory(World &_world, Inventory &_inventory) : world(_world), inventory(_inventory), opened(false), selected(0) {

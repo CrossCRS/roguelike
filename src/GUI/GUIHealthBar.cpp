@@ -4,7 +4,9 @@
 #include "Map/World.h"
 #include "System/Resources/ResourceManager.h"
 
+#ifdef _MSC_VER
 #pragma warning(disable : 4244)
+#endif
 
 GUIHealthBar::GUIHealthBar(Character &_character, bool _mini) : character(_character), size({ 128, 16 }), mini(_mini) {
     text.setFont(*character.getWorld().getResourceManager().getFont("default"));
