@@ -136,7 +136,7 @@ BaseTile &TileMap::getTile(const sf::Vector2i &pos) const {
 }
 
 BaseTile *TileMap::getTile(unsigned x, unsigned y) const {
-    if (x < 0 || y < 0 || x > width - 1 || y > height - 1) {
+    if (x > width - 1 || y > height - 1) {
         const auto message = "Map position out of bounds";
         spdlog::error(message);
         throw std::invalid_argument(message);
